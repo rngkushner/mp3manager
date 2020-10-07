@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Abyx2Kkh2uBbEp9dqf4me4lvRY7ZhEYl2t/CE0QT35d9pW0xHzbfOpE+Tm0Bsrv2eBdZNwR6DLKJBAOdKWITPA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\rngku\\source\\repos\\MP3Manager\\MP3Manager.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\rngku\\.nuget\\packages\\taglibsharp\\2.2.0\\taglibsharp.2.2.0.nupkg.sha512"
+  ],
+  "logs": []
+}
