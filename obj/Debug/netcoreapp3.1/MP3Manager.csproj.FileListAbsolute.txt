@@ -15,3 +15,4 @@ C:\Users\rngku\source\repos\MP3Manager\obj\Debug\netcoreapp3.1\MP3Manager.csproj
 C:\Users\rngku\source\repos\MP3Manager\obj\Debug\netcoreapp3.1\MP3Manager.dll
 C:\Users\rngku\source\repos\MP3Manager\obj\Debug\netcoreapp3.1\MP3Manager.pdb
 C:\Users\rngku\source\repos\MP3Manager\obj\Debug\netcoreapp3.1\MP3Manager.genruntimeconfig.cache
+C:\Users\rngku\source\repos\MP3Manager\obj\Debug\netcoreapp3.1\MP3Manager.FormUpdate.resources

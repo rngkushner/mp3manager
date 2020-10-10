@@ -32,7 +32,9 @@ namespace MP3Manager
             if(startingPath != String.Empty)
             {
                 crawler.Crawl(startingPath);
-            }      
+            }
+            textBoxMessages.Text = $"Found {crawler.GetFiles().Count.ToString()} music files.";
+            
         }
 
         private void btnMP3Tag_Click(object sender, EventArgs e)
@@ -47,9 +49,6 @@ namespace MP3Manager
                     SetGridDataDelegate d = new SetGridDataDelegate(SetGridData);
                     this.Invoke(d, new object[] { list });
                 });
-
-               
-                //songGrid.Columns.Add(new DataGridViewColumn { DataPropertyName = "FileName", CellTemplate = new DataGridViewTextBoxCell() });
 
             }
         }
@@ -68,14 +67,25 @@ namespace MP3Manager
 
             int i = 0;
             songGrid.Columns[i].Name = "Key";
-            songGrid.Columns[i].Visible = false;
+            songGrid.Columns[i].Visible = false;           
 
             songGrid.Columns[++i].Name = "Title";
+            songGrid.Columns[i].ReadOnly = true;
+
             songGrid.Columns[++i].Name = "Artist";
+            songGrid.Columns[i].ReadOnly = true;
+
             songGrid.Columns[++i].Name = "Album";
+            songGrid.Columns[i].ReadOnly = true;
+
             songGrid.Columns[++i].Name = "Genre";
+            songGrid.Columns[i].ReadOnly = true;
+
             songGrid.Columns[++i].Name = "Count";
+            songGrid.Columns[i].ReadOnly = true;
+
             songGrid.Columns[++i].Name = "FileName";
+            songGrid.Columns[i].ReadOnly = true;
         }
         private void SetGridData(Dictionary<string, File> list)
         {
@@ -91,7 +101,66 @@ namespace MP3Manager
                 list[key].MatchCount.ToString(),
                 list[key].FileName
                 });
-            }  
+            }
+
+            crawler.GetFiles().Clear();
         }
+
+        private void contextMenuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            if(e.ClickedItem.Name == "toolStripMenuItemEdit")
+            {
+                var modal = new FormUpdate();
+                var result = modal.ShowDialog();
+
+                if (result.Equals(DialogResult.OK))
+                {
+                    var rows = songGrid.SelectedRows;
+
+                    foreach(DataGridViewRow row in rows)
+                    {
+                        bool isDirty = false;
+
+                        if ((modal.Title == "" && !modal.IgnoreBlanks) || !String.IsNullOrEmpty(modal.Title))
+                        {
+                            row.Cells["Title"].Value = modal.Title;
+                            isDirty = true;
+                        }
+                        if ((modal.Artist == "" && !modal.IgnoreBlanks) || !String.IsNullOrEmpty(modal.Artist))
+                        {
+                            row.Cells["Artist"].Value = modal.Artist;
+                            isDirty = true;
+                        }
+                        if ((modal.Album == "" && !modal.IgnoreBlanks) || !String.IsNullOrEmpty(modal.Album))
+                        {
+                            row.Cells["Album"].Value = modal.Album;
+                            isDirty = true;
+                        }
+                        if ((modal.Genre == "" && !modal.IgnoreBlanks) || !String.IsNullOrEmpty(modal.Genre))
+                        {
+                            row.Cells["Genre"].Value = modal.Genre;
+                            isDirty = true;
+                        }
+
+                        if(isDirty)
+                        {
+                            //mark for save
+                            row.DefaultCellStyle.BackColor = Color.Beige;
+                        }
+
+                    }
+                }
+            }
+        }
+
+        private void buttonSaveChanges_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("This will apply your changes to your MP3s. Continue?", "Save Changes",
+                MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+            {
+                //do save of beige lines
+            }
+        }
+        
     }
 }

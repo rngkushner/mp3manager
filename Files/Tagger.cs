@@ -10,6 +10,8 @@ namespace MP3Manager.Files
 {
     public class Tagger
     {
+        public List<string> Exceptions { get; set; }
+
         private Dictionary<string, File> musicList;
 
         public delegate void JobDoneDelegate(Dictionary<string, File> completeList);
@@ -19,6 +21,7 @@ namespace MP3Manager.Files
         public Tagger(Dictionary<string, File> MP3List)
         {
             musicList = MP3List;
+            Exceptions = new List<string>();
         }
         public void RunTagJob(List<string> paths, JobDoneDelegate jobDone)
         {
@@ -61,31 +64,36 @@ namespace MP3Manager.Files
 
         private void SetMP3Properties(string filePath)
         {
-            var mp3 = TagLib.File.Create(filePath);
-
-           
-            var fileNameOnly = Path.GetFileName(filePath);
-
-            if(musicList.ContainsKey(fileNameOnly))
+            try
             {
-                (musicList[fileNameOnly] as MP3Manager.Files.File).Paths.Add(filePath);
-            }
-            else
-            {
-                File file = new MP3Manager.Files.File
+                var mp3 = TagLib.File.Create(filePath);
+
+
+                var fileNameOnly = Path.GetFileName(filePath);
+
+                if (musicList.ContainsKey(fileNameOnly))
                 {
-                    FileName = fileNameOnly
-                };
-                file.Paths.Add(filePath);
-                file.Title = mp3.Tag.Title ?? fileNameOnly;
-                file.Album = mp3.Tag.Album;
-                file.Artist = mp3.Tag.FirstAlbumArtist;
-                file.Genre = mp3.Tag.FirstGenre;
+                    (musicList[fileNameOnly] as MP3Manager.Files.File).Paths.Add(filePath);
+                }
+                else
+                {
+                    File file = new MP3Manager.Files.File
+                    {
+                        FileName = fileNameOnly
+                    };
+                    file.Paths.Add(filePath);
+                    file.Title = mp3.Tag.Title ?? fileNameOnly;
+                    file.Album = mp3.Tag.Album;
+                    file.Artist = mp3.Tag.FirstAlbumArtist;
+                    file.Genre = mp3.Tag.FirstGenre;
 
-                musicList.Add(fileNameOnly, file);
+                    musicList.Add(fileNameOnly, file);
+                }
             }
-          
+            catch(Exception e)
+            {
+                Exceptions.Add(e.Message);
+            }          
         }
-
     }
 }   
