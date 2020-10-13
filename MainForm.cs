@@ -17,11 +17,11 @@ namespace MP3Manager
         private Crawler crawler = new Crawler();       
         private Tagger tagger = null;
         private delegate void SetGridDataDelegate(Dictionary<string, File> completeList);
+        private Dictionary<string, File> completeList = null;
 
         public MainForm()
         {
             InitializeComponent();
-            InitGrid();
         }
 
         private void btnCrawl_Click(object sender, EventArgs e)
@@ -41,6 +41,8 @@ namespace MP3Manager
         {
             if (crawler != null && crawler.GetFiles() != null)
             {
+                textBoxMessages.Text = "Tagging all the files. Hang on.";
+
                 var resultFiles = new Dictionary<string, File>();
 
                 tagger = new Tagger(resultFiles);
@@ -67,29 +69,35 @@ namespace MP3Manager
 
             int i = 0;
             songGrid.Columns[i].Name = "Key";
-            songGrid.Columns[i].Visible = false;           
+            songGrid.Columns[i].Visible = false;
 
             songGrid.Columns[++i].Name = "Title";
             songGrid.Columns[i].ReadOnly = true;
+            songGrid.Columns[i].SortMode = DataGridViewColumnSortMode.Automatic;
 
             songGrid.Columns[++i].Name = "Artist";
             songGrid.Columns[i].ReadOnly = true;
+            songGrid.Columns[i].SortMode = DataGridViewColumnSortMode.Automatic;
 
             songGrid.Columns[++i].Name = "Album";
             songGrid.Columns[i].ReadOnly = true;
+            songGrid.Columns[i].SortMode = DataGridViewColumnSortMode.Automatic;
 
             songGrid.Columns[++i].Name = "Genre";
             songGrid.Columns[i].ReadOnly = true;
+            songGrid.Columns[i].SortMode = DataGridViewColumnSortMode.Automatic;
 
             songGrid.Columns[++i].Name = "Count";
             songGrid.Columns[i].ReadOnly = true;
+            songGrid.Columns[i].SortMode = DataGridViewColumnSortMode.Automatic;
 
             songGrid.Columns[++i].Name = "FileName";
             songGrid.Columns[i].ReadOnly = true;
         }
         private void SetGridData(Dictionary<string, File> list)
         {
-            List<string> dataSource = new List<string>();
+            songGrid.Rows.Clear();
+
             foreach(var key in list.Keys)
             {
                 songGrid.Rows.Add(new object[]{
@@ -104,18 +112,39 @@ namespace MP3Manager
             }
 
             crawler.GetFiles().Clear();
+            completeList = list;
+            textBoxMessages.Text = $"All done crawling. {completeList.Count.ToString()} songs found.";
         }
 
         private void contextMenuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             if(e.ClickedItem.Name == "toolStripMenuItemEdit")
             {
-                var modal = new FormUpdate();
-                var result = modal.ShowDialog();
+                FormUpdate modal = null;
+                
+                //new FormUpdate();
+                var rows = songGrid.SelectedRows;
+
+                if (rows.Count == 1)
+                {
+                    modal = new FormUpdate(
+                        rows[0].Cells["Title"].Value?.ToString(),
+                        rows[0].Cells["Artist"].Value?.ToString(),
+                        rows[0].Cells["Album"].Value?.ToString(),
+                        rows[0].Cells["Genre"].Value?.ToString()
+                    );
+                }
+                else
+                {
+                    modal = new FormUpdate();
+                }
+
+                DialogResult result;
+
+                result = modal.ShowDialog();
 
                 if (result.Equals(DialogResult.OK))
-                {
-                    var rows = songGrid.SelectedRows;
+                {                    
 
                     foreach(DataGridViewRow row in rows)
                     {
@@ -158,9 +187,51 @@ namespace MP3Manager
             if (MessageBox.Show("This will apply your changes to your MP3s. Continue?", "Save Changes",
                 MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
             {
-                //do save of beige lines
+                if(completeList != null)
+                {
+                    //do save of beige lines
+                    foreach (DataGridViewRow row in songGrid.Rows)
+                    {
+                        if (row.DefaultCellStyle.BackColor == Color.Beige)
+                        {
+                            var file = completeList[row.Cells["key"].Value.ToString()];
+                            WriteMP3PropertiesToFile(file, row);
+                        }
+                    }
+                }
             }
         }
-        
+
+
+        private void WriteMP3PropertiesToFile(File fileData, DataGridViewRow row)
+        {
+            fileData.Album = row.Cells["Album"].Value == null ? null : row.Cells["Album"].Value.ToString(); 
+            fileData.Artist = row.Cells["Artist"].Value == null ? null : row.Cells["Artist"].Value.ToString();
+            fileData.Title = row.Cells["Title"].Value == null ? null : row.Cells["Title"].Value.ToString();
+            fileData.Genre = row.Cells["Genre"].Value == null ? null : row.Cells["Genre"].Value.ToString();
+
+
+                
+            var mp3File = TagLib.File.Create(fileData.Paths[0]);
+
+            mp3File.Tag.Album = fileData.Album;
+
+            mp3File.Tag.Performers = new[] { fileData.Artist ?? String.Empty };
+            mp3File.Tag.AlbumArtists = mp3File.Tag.Performers;
+            mp3File.Tag.Title = fileData.Title;
+            mp3File.Tag.Genres = new[] { fileData.Genre ?? String.Empty };
+
+            mp3File.Save();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            InitGrid();
+        }
+
+        private void buttonDone_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

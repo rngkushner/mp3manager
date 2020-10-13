@@ -323,6 +323,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "FormUpdate";
             this.Text = "Set Properties For Selected Items";
+            this.Load += new System.EventHandler(this.FormUpdate_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

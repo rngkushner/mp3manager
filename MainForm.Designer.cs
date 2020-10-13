@@ -64,6 +64,8 @@
             // 
             // songGrid
             // 
+            this.songGrid.AllowUserToAddRows = false;
+            this.songGrid.AllowUserToDeleteRows = false;
             this.songGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -112,6 +114,7 @@
             this.buttonDone.TabIndex = 5;
             this.buttonDone.Text = "I\'m &Done";
             this.buttonDone.UseVisualStyleBackColor = true;
+            this.buttonDone.Click += new System.EventHandler(this.buttonDone_Click);
             // 
             // textBoxMessages
             // 
@@ -133,6 +136,7 @@
             this.Controls.Add(this.btnMP3Tag);
             this.Name = "MainForm";
             this.Text = "MP3 Main Panel";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.songGrid)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);

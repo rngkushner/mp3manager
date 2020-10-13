@@ -9,10 +9,10 @@ C:\Users\rngku\source\repos\MP3Manager\bin\Debug\netcoreapp3.1\MP3Manager.runtim
 C:\Users\rngku\source\repos\MP3Manager\bin\Debug\netcoreapp3.1\MP3Manager.runtimeconfig.dev.json
 C:\Users\rngku\source\repos\MP3Manager\bin\Debug\netcoreapp3.1\MP3Manager.dll
 C:\Users\rngku\source\repos\MP3Manager\bin\Debug\netcoreapp3.1\MP3Manager.pdb
-C:\Users\rngku\source\repos\MP3Manager\bin\Debug\netcoreapp3.1\TagLibSharp.dll
-C:\Users\rngku\source\repos\MP3Manager\obj\Debug\netcoreapp3.1\MP3Manager.csproj.CoreCompileInputs.cache
-C:\Users\rngku\source\repos\MP3Manager\obj\Debug\netcoreapp3.1\MP3Manager.csproj.CopyComplete
 C:\Users\rngku\source\repos\MP3Manager\obj\Debug\netcoreapp3.1\MP3Manager.dll
 C:\Users\rngku\source\repos\MP3Manager\obj\Debug\netcoreapp3.1\MP3Manager.pdb
 C:\Users\rngku\source\repos\MP3Manager\obj\Debug\netcoreapp3.1\MP3Manager.genruntimeconfig.cache
 C:\Users\rngku\source\repos\MP3Manager\obj\Debug\netcoreapp3.1\MP3Manager.FormUpdate.resources
+C:\Users\rngku\source\repos\MP3Manager\bin\Debug\netcoreapp3.1\TagLibSharp.dll
+C:\Users\rngku\source\repos\MP3Manager\obj\Debug\netcoreapp3.1\MP3Manager.csproj.CoreCompileInputs.cache
+C:\Users\rngku\source\repos\MP3Manager\obj\Debug\netcoreapp3.1\MP3Manager.csproj.CopyComplete

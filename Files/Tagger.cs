@@ -94,6 +94,6 @@ namespace MP3Manager.Files
             {
                 Exceptions.Add(e.Message);
             }          
-        }
+        }   
     }
 }   
