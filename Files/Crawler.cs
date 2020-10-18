@@ -17,6 +17,8 @@ namespace MP3Manager.Files
         }
         public void Crawl(string startingDirectory)
         {
+            FileList.Clear();
+
             foreach (string dir in Directory.GetFiles(startingDirectory, "*.mp3", SearchOption.AllDirectories))
             {               
                 FileList.Add(dir);                

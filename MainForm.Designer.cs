@@ -35,11 +35,15 @@
             this.songGrid = new System.Windows.Forms.DataGridView();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItemEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemFileLocs = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonSaveChanges = new System.Windows.Forms.Button();
             this.buttonDone = new System.Windows.Forms.Button();
             this.textBoxMessages = new System.Windows.Forms.TextBox();
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
+            this.toolStripMenuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.songGrid)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
+            this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnMP3Tag
@@ -48,7 +52,7 @@
             this.btnMP3Tag.Name = "btnMP3Tag";
             this.btnMP3Tag.Size = new System.Drawing.Size(209, 29);
             this.btnMP3Tag.TabIndex = 1;
-            this.btnMP3Tag.Text = "Tag";
+            this.btnMP3Tag.Text = "&Tag";
             this.btnMP3Tag.UseVisualStyleBackColor = true;
             this.btnMP3Tag.Click += new System.EventHandler(this.btnMP3Tag_Click);
             // 
@@ -58,7 +62,7 @@
             this.btnCrawl.Name = "btnCrawl";
             this.btnCrawl.Size = new System.Drawing.Size(209, 29);
             this.btnCrawl.TabIndex = 0;
-            this.btnCrawl.Text = "Crawl Directory";
+            this.btnCrawl.Text = "Crawl &Directory";
             this.btnCrawl.UseVisualStyleBackColor = true;
             this.btnCrawl.Click += new System.EventHandler(this.btnCrawl_Click);
             // 
@@ -83,16 +87,23 @@
             // 
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemEdit});
+            this.toolStripMenuItemEdit,
+            this.toolStripMenuItemFileLocs});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(105, 28);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(186, 52);
             this.contextMenuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuStrip1_ItemClicked);
             // 
             // toolStripMenuItemEdit
             // 
             this.toolStripMenuItemEdit.Name = "toolStripMenuItemEdit";
-            this.toolStripMenuItemEdit.Size = new System.Drawing.Size(104, 24);
+            this.toolStripMenuItemEdit.Size = new System.Drawing.Size(185, 24);
             this.toolStripMenuItemEdit.Text = "Edit";
+            // 
+            // toolStripMenuItemFileLocs
+            // 
+            this.toolStripMenuItemFileLocs.Name = "toolStripMenuItemFileLocs";
+            this.toolStripMenuItemFileLocs.Size = new System.Drawing.Size(185, 24);
+            this.toolStripMenuItemFileLocs.Text = "See file location";
             // 
             // buttonSaveChanges
             // 
@@ -101,7 +112,7 @@
             this.buttonSaveChanges.Name = "buttonSaveChanges";
             this.buttonSaveChanges.Size = new System.Drawing.Size(145, 29);
             this.buttonSaveChanges.TabIndex = 4;
-            this.buttonSaveChanges.Text = "Commit Changes";
+            this.buttonSaveChanges.Text = "&Commit Changes";
             this.buttonSaveChanges.UseVisualStyleBackColor = true;
             this.buttonSaveChanges.Click += new System.EventHandler(this.buttonSaveChanges_Click);
             // 
@@ -118,27 +129,51 @@
             // 
             // textBoxMessages
             // 
+            this.textBoxMessages.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBoxMessages.Location = new System.Drawing.Point(12, 411);
             this.textBoxMessages.Name = "textBoxMessages";
             this.textBoxMessages.Size = new System.Drawing.Size(405, 27);
             this.textBoxMessages.TabIndex = 3;
+            // 
+            // menuStrip
+            // 
+            this.menuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemAbout});
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size(800, 28);
+            this.menuStrip.TabIndex = 6;
+            this.menuStrip.Text = "menuStrip";
+            this.menuStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip_ItemClicked);
+            // 
+            // toolStripMenuItemAbout
+            // 
+            this.toolStripMenuItemAbout.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripMenuItemAbout.Name = "toolStripMenuItemAbout";
+            this.toolStripMenuItemAbout.Size = new System.Drawing.Size(64, 24);
+            this.toolStripMenuItemAbout.Text = "&About";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.menuStrip);
             this.Controls.Add(this.textBoxMessages);
             this.Controls.Add(this.buttonDone);
             this.Controls.Add(this.buttonSaveChanges);
             this.Controls.Add(this.songGrid);
             this.Controls.Add(this.btnCrawl);
             this.Controls.Add(this.btnMP3Tag);
+            this.MainMenuStrip = this.menuStrip;
             this.Name = "MainForm";
             this.Text = "MP3 Main Panel";
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.songGrid)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
+            this.menuStrip.ResumeLayout(false);
+            this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -155,6 +190,9 @@
         private System.Windows.Forms.Button buttonSaveChanges;
         private System.Windows.Forms.Button buttonDone;
         private System.Windows.Forms.TextBox textBoxMessages;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFileLocs;
+        private System.Windows.Forms.MenuStrip menuStrip;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemAbout;
     }
 }
 

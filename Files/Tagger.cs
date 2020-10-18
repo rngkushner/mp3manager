@@ -81,6 +81,7 @@ namespace MP3Manager.Files
                     {
                         FileName = fileNameOnly
                     };
+                    
                     file.Paths.Add(filePath);
                     file.Title = mp3.Tag.Title ?? fileNameOnly;
                     file.Album = mp3.Tag.Album;

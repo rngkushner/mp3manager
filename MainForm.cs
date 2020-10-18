@@ -98,6 +98,8 @@ namespace MP3Manager
         {
             songGrid.Rows.Clear();
 
+            FileUtils.Transform(list);
+
             foreach(var key in list.Keys)
             {
                 songGrid.Rows.Add(new object[]{
@@ -107,7 +109,7 @@ namespace MP3Manager
                 list[key].Album,
                 list[key].Genre,
                 list[key].MatchCount.ToString(),
-                list[key].FileName
+                list[key].FileName + "|" + list[key].SoundexTag
                 });
             }
 
@@ -180,6 +182,15 @@ namespace MP3Manager
                     }
                 }
             }
+            else if (e.ClickedItem.Name == "toolStripMenuItemFileLocs")
+            {
+                var rows = songGrid.SelectedRows;
+                if (completeList != null && rows.Count > 0)
+                {
+                    FormFileLocs fileModal = new FormFileLocs(completeList[rows[0].Cells["Key"].Value.ToString()]);
+                    fileModal.ShowDialog();
+                }               
+            }
         }
 
         private void buttonSaveChanges_Click(object sender, EventArgs e)
@@ -196,6 +207,7 @@ namespace MP3Manager
                         {
                             var file = completeList[row.Cells["key"].Value.ToString()];
                             WriteMP3PropertiesToFile(file, row);
+                            row.DefaultCellStyle.BackColor = Color.Empty;
                         }
                     }
                 }
@@ -209,9 +221,7 @@ namespace MP3Manager
             fileData.Artist = row.Cells["Artist"].Value == null ? null : row.Cells["Artist"].Value.ToString();
             fileData.Title = row.Cells["Title"].Value == null ? null : row.Cells["Title"].Value.ToString();
             fileData.Genre = row.Cells["Genre"].Value == null ? null : row.Cells["Genre"].Value.ToString();
-
-
-                
+                            
             var mp3File = TagLib.File.Create(fileData.Paths[0]);
 
             mp3File.Tag.Album = fileData.Album;
@@ -232,6 +242,15 @@ namespace MP3Manager
         private void buttonDone_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void menuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            if (e.ClickedItem.Name == "toolStripMenuItemAbout")
+            {
+                FormAbout form = new FormAbout();
+                form.ShowDialog();
+            }
         }
     }
 }

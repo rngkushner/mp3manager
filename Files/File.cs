@@ -23,6 +23,7 @@ namespace MP3Manager.Files
         public string Artist { get; set; }
         public string Album { get; set; }
         public string Genre { get; set; }
+        public string SoundexTag { get; set; }
         public int MatchCount
         {
             get
