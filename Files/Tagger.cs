@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Text;
-using System.Threading;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 
 namespace MP3Manager.Files
@@ -13,6 +11,7 @@ namespace MP3Manager.Files
         public List<string> Exceptions { get; set; }
 
         private Dictionary<string, File> musicList;
+        private Dictionary<string, string> secondaryKey;
 
         public delegate void JobDoneDelegate(Dictionary<string, File> completeList);
 
@@ -21,6 +20,7 @@ namespace MP3Manager.Files
         public Tagger(Dictionary<string, File> MP3List)
         {
             musicList = MP3List;
+            secondaryKey = new Dictionary<string, string>();
             Exceptions = new List<string>();
         }
         public void RunTagJob(List<string> paths, JobDoneDelegate jobDone)
@@ -66,29 +66,47 @@ namespace MP3Manager.Files
         {
             try
             {
-                var mp3 = TagLib.File.Create(filePath);
-
 
                 var fileNameOnly = Path.GetFileName(filePath);
 
-                if (musicList.ContainsKey(fileNameOnly))
+                var mp3 = TagLib.File.Create(filePath);
+
+                //A song with this exact TITLE is in musicList
+                if (mp3.Tag.Title != null && secondaryKey.ContainsKey(mp3.Tag.Title))
                 {
-                    (musicList[fileNameOnly] as MP3Manager.Files.File).Paths.Add(filePath);
+                    //by my logic, it MUST exist in music list
+                    var existingFile = musicList[secondaryKey[mp3.Tag.Title]];
+                    if(!FileHasPath(existingFile, filePath) && existingFile.Artist == mp3.Tag.FirstAlbumArtist)                    {
+                        existingFile.Paths.Add(filePath);
+                        existingFile.Title = !String.IsNullOrEmpty(existingFile.Title) ? existingFile.Title : mp3.Tag.Title ?? fileNameOnly;
+                        existingFile.Album = !String.IsNullOrEmpty(existingFile.Album) ? existingFile.Album : mp3.Tag.Album;
+                        existingFile.Artist = !String.IsNullOrEmpty(existingFile.Artist) ? existingFile.Artist : mp3.Tag.FirstAlbumArtist;
+                        existingFile.Genre = !String.IsNullOrEmpty(existingFile.Genre) ? existingFile.Genre : mp3.Tag.FirstGenre;
+                    }
                 }
                 else
-                {
-                    File file = new MP3Manager.Files.File
-                    {
-                        FileName = fileNameOnly
-                    };
-                    
-                    file.Paths.Add(filePath);
-                    file.Title = mp3.Tag.Title ?? fileNameOnly;
-                    file.Album = mp3.Tag.Album;
-                    file.Artist = mp3.Tag.FirstAlbumArtist;
-                    file.Genre = mp3.Tag.FirstGenre;
+                {                    
 
-                    musicList.Add(fileNameOnly, file);
+                    if (musicList.ContainsKey(fileNameOnly))
+                    {
+                        musicList[fileNameOnly].Paths.Add(filePath);
+                    }
+                    else
+                    {
+                        File file = new MP3Manager.Files.File
+                        {
+                            FileName = fileNameOnly
+                        };
+
+                        file.Paths.Add(filePath);
+                        file.Title = mp3.Tag.Title ?? fileNameOnly;
+                        file.Album = mp3.Tag.Album;
+                        file.Artist = mp3.Tag.FirstAlbumArtist;
+                        file.Genre = mp3.Tag.FirstGenre;
+
+                        musicList.Add(fileNameOnly, file);
+                        secondaryKey.Add(file.Title, fileNameOnly);
+                    }
                 }
             }
             catch(Exception e)
@@ -96,5 +114,20 @@ namespace MP3Manager.Files
                 Exceptions.Add(e.Message);
             }          
         }   
+
+        private Boolean FileHasPath(File file, string filePath)
+        {
+            var retn = false;
+
+            foreach(string path in file.Paths)
+            {
+                if(path == filePath)
+                {
+                    return true;
+                }
+            }
+
+            return retn;
+        }
     }
 }   
