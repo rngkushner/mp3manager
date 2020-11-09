@@ -41,6 +41,7 @@
             this.textBoxMessages = new System.Windows.Forms.TextBox();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkBoxRunWeb = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.songGrid)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip.SuspendLayout();
@@ -154,11 +155,23 @@
             this.toolStripMenuItemAbout.Size = new System.Drawing.Size(64, 24);
             this.toolStripMenuItemAbout.Text = "&About";
             // 
+            // checkBoxRunWeb
+            // 
+            this.checkBoxRunWeb.AutoSize = true;
+            this.checkBoxRunWeb.Location = new System.Drawing.Point(478, 36);
+            this.checkBoxRunWeb.Name = "checkBoxRunWeb";
+            this.checkBoxRunWeb.Size = new System.Drawing.Size(135, 24);
+            this.checkBoxRunWeb.TabIndex = 2;
+            this.checkBoxRunWeb.Text = "Run Web Server";
+            this.checkBoxRunWeb.UseVisualStyleBackColor = true;
+            this.checkBoxRunWeb.CheckedChanged += new System.EventHandler(this.checkBoxRunWeb_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.checkBoxRunWeb);
             this.Controls.Add(this.menuStrip);
             this.Controls.Add(this.textBoxMessages);
             this.Controls.Add(this.buttonDone);
@@ -193,6 +206,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFileLocs;
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemAbout;
+        private System.Windows.Forms.CheckBox checkBoxRunWeb;
     }
 }
 

@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.IO;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -43,5 +46,40 @@ namespace MP3Manager.Files
             //1 maybe run through Soundex
             return null;
         }
+
+        public static byte[] GetFileAsByteArray(string key, Dictionary<string, File> musicList)
+        {
+            Stream stream = System.IO.File.OpenRead(musicList[key].Paths[0]);
+
+            MemoryStream sr = new MemoryStream();
+            stream.CopyTo(sr);
+
+            byte[] bytes = sr.ToArray();
+
+            stream.Close();
+            sr.Close();
+            stream.Dispose();
+            sr.Dispose();
+
+            return bytes;
+        }
+
+        public static string GetFileAsBase64String(string key, Dictionary<string, File> musicList)
+        {
+            Stream stream = System.IO.File.OpenRead(musicList[key].Paths[0]);
+
+            MemoryStream sr = new MemoryStream();
+            stream.CopyTo(sr);
+
+            byte[] bytes = sr.ToArray();
+
+            stream.Close();
+            sr.Close();
+            stream.Dispose();
+            sr.Dispose();
+
+            return Convert.ToBase64String(bytes);
+        }
+
     }
 }

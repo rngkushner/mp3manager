@@ -1,13 +1,8 @@
 ﻿using MP3Manager.Files;
+using MP3Manager.WebServer;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Security.Permissions;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MP3Manager
@@ -236,11 +231,12 @@ namespace MP3Manager
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            InitGrid();
+            InitGrid();            
         }
 
         private void buttonDone_Click(object sender, EventArgs e)
         {
+            WebService.ShutDown();
             Close();
         }
 
@@ -250,6 +246,18 @@ namespace MP3Manager
             {
                 FormAbout form = new FormAbout();
                 form.ShowDialog();
+            }
+        }
+
+        private void checkBoxRunWeb_CheckedChanged(object sender, EventArgs e)
+        {
+            if(((CheckBox) sender).Checked == true)
+            {
+                WebService.StartWebHost(new MP3RequestHandler(completeList));
+            }
+            else
+            {
+                WebService.ShutDown();
             }
         }
     }
