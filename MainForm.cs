@@ -9,7 +9,7 @@ namespace MP3Manager
 {
     public partial class MainForm : Form
     {
-        private Crawler crawler = new Crawler();       
+        private readonly Crawler crawler = new Crawler();       
         private Tagger tagger = null;
         private delegate void SetGridDataDelegate(Dictionary<string, File> completeList);
         private Dictionary<string, File> completeList = null;

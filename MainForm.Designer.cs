@@ -91,20 +91,20 @@
             this.toolStripMenuItemEdit,
             this.toolStripMenuItemFileLocs});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(186, 52);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(202, 52);
             this.contextMenuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuStrip1_ItemClicked);
             // 
             // toolStripMenuItemEdit
             // 
             this.toolStripMenuItemEdit.Name = "toolStripMenuItemEdit";
-            this.toolStripMenuItemEdit.Size = new System.Drawing.Size(185, 24);
+            this.toolStripMenuItemEdit.Size = new System.Drawing.Size(201, 24);
             this.toolStripMenuItemEdit.Text = "Edit";
             // 
             // toolStripMenuItemFileLocs
             // 
             this.toolStripMenuItemFileLocs.Name = "toolStripMenuItemFileLocs";
-            this.toolStripMenuItemFileLocs.Size = new System.Drawing.Size(185, 24);
-            this.toolStripMenuItemFileLocs.Text = "See file location";
+            this.toolStripMenuItemFileLocs.Size = new System.Drawing.Size(201, 24);
+            this.toolStripMenuItemFileLocs.Text = "See file location(s)";
             // 
             // buttonSaveChanges
             // 

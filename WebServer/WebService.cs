@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -51,7 +52,11 @@ namespace MP3Manager.WebServer
                 Task.Run(() =>
                 {
                     Listen();
-                });                
+                });
+
+                //launch default browser with index page.
+                Process.Start(new ProcessStartInfo(prefixes[1]) { UseShellExecute = true });
+       
             }
         }
 
@@ -65,7 +70,6 @@ namespace MP3Manager.WebServer
             {
                 Listen();
             });
-
         }
 
         public static void ShutDown()
