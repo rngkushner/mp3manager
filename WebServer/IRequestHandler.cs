@@ -9,5 +9,7 @@ namespace MP3Manager.WebServer
     public interface IRequestHandler
     {
         public void HandleRequest(HttpListenerContext context);
+        public string[] prefixes { get; }        
+            
     }
 }

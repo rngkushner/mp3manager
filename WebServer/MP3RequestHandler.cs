@@ -2,10 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Net;
 using System.Resources;
 using System.Text;
 using System.Web;
+using File = MP3Manager.Files.File;
 
 namespace MP3Manager.WebServer
 {
@@ -13,10 +15,19 @@ namespace MP3Manager.WebServer
     {
 
         private Dictionary<string, File> musicFiles;
+        private string[] _prefixes;
+
+        public string[] prefixes {
+            get
+            {
+                return _prefixes;
+            }
+        }
 
         public MP3RequestHandler(Dictionary<string, File> musicFiles)
         {
             this.musicFiles = musicFiles;
+            _prefixes = new string[] { "http://localhost:8675/song/", "http://localhost:8675/index/", "http://localhost:8675/songajax/" };
         }
 
         public override void HandleRequest(HttpListenerContext context) 
@@ -57,17 +68,29 @@ namespace MP3Manager.WebServer
         private void SetSongList()
         {
             StringBuilder sb = new StringBuilder();
-            ComponentResourceManager componentResourceManager = new ComponentResourceManager(typeof(WebServerResources));
-            string page = componentResourceManager.GetString("WebListingPlayer");
+            //Uncomment this out when page is finalized.
+            //ComponentResourceManager componentResourceManager = new ComponentResourceManager(typeof(WebServerResources));
+            //string page = componentResourceManager.GetString("WebListingPlayer");
+            string page = string.Empty;
+
+            using (var sr = new StreamReader("./webpage.txt"))
+            {
+                page = sr.ReadToEnd();
+            }
+
             sb.AppendLine("<div id='songlist'>");
             foreach(string key in musicFiles.Keys)
             {
+                //If you want to open the song in its own window
                 //$"<li><a target='_blank' href='/song/{key}'>{musicFiles[key].Title}</a></li>"
                 //audio member is set to autoplay on 'canplaythrough' event. 
+
+                var escapedKey = key.Replace("'", @"_!_");
+
                 sb.AppendLine(
-                    $"<div class='OneSong'>{musicFiles[key].Title}" +
-                    $"<div class='Control' onclick='audioWrapper.load(\"/songajax/{key}\");'>Play</div>" +
-                    $"<div class='Control' onclick='audioWrapper.pause();'>Stop</div>" +
+                    $"<div class='OneSong' id='{escapedKey}' data-artist='{musicFiles[key].Artist}' data-album='{musicFiles[key].Album}'>{musicFiles[key].Title}" +
+                    $"<div class='Control' onclick='audioWrapper.load(\"/songajax/{escapedKey}\");'>Play</div>" +
+                    $"<div class='Control' onclick='audioWrapper.pause();'>Pause</div>" +
                     $"</div>"
                 );
             }

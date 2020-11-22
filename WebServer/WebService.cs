@@ -11,7 +11,7 @@ namespace MP3Manager.WebServer
     //https://docs.microsoft.com/en-us/dotnet/api/system.net.httplistener?view=netcore-2.2&WT.mc_id=DT-MVP-5002999
     public class WebService
     {
-        private static WebService instance;
+        private static readonly WebService instance;
         private  HttpListener listener = null;
         private IRequestHandler requestHandler = null;
 
@@ -26,7 +26,7 @@ namespace MP3Manager.WebServer
 
             if (instance.listener == null || !instance.listener.IsListening)
             {
-                string[] prefixes = { "http://localhost:8675/song/", "http://localhost:8675/index/", "http://localhost:8675/songajax/" };
+                string[] prefixes = requestHandler.prefixes;
 
                 if (!HttpListener.IsSupported)
                 {
@@ -79,6 +79,24 @@ namespace MP3Manager.WebServer
                 instance.listener.Stop();
                 instance.listener = null;
             }           
-        }   
+        }
+        
+        public static IRequestHandler GetRequestHandler()
+        {
+            if(instance != null && instance.requestHandler != null)
+            {
+                return instance.requestHandler;
+            }
+
+            return null;
+        }
+
+        public static void SetRequestHandler(IRequestHandler requestHandler)
+        {
+            if (instance != null)
+            {
+                instance.requestHandler = requestHandler;
+            }
+        }
     }
 }

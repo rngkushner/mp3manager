@@ -81,5 +81,10 @@ namespace MP3Manager
                 }
             }            
         }
+
+        private void FormFileLocs_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult = DialogResult.OK;
+        }
     }
 }

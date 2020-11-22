@@ -110,6 +110,9 @@ namespace MP3Manager
 
             crawler.GetFiles().Clear();
             completeList = list;
+
+            WebService.SetRequestHandler(new MP3RequestHandler(completeList));
+
             textBoxMessages.Text = $"All done crawling. {completeList.Count.ToString()} songs found.";
         }
 
@@ -117,11 +120,11 @@ namespace MP3Manager
         {
             if(e.ClickedItem.Name == "toolStripMenuItemEdit")
             {
-                FormUpdate modal = null;
-                
+
                 //new FormUpdate();
                 var rows = songGrid.SelectedRows;
 
+                FormUpdate modal;
                 if (rows.Count == 1)
                 {
                     modal = new FormUpdate(
@@ -183,7 +186,11 @@ namespace MP3Manager
                 if (completeList != null && rows.Count > 0)
                 {
                     FormFileLocs fileModal = new FormFileLocs(completeList[rows[0].Cells["Key"].Value.ToString()]);
-                    fileModal.ShowDialog();
+                    if(fileModal.ShowDialog() == DialogResult.OK)
+                    {
+                        //reset grid with new info
+                        SetGridData(completeList);
+                    }
                 }               
             }
         }
