@@ -28,6 +28,7 @@ namespace MP3Manager.WebServer
         {
             this.musicFiles = musicFiles;
             _prefixes = new string[] { "http://localhost:8675/song/", "http://localhost:8675/index/", "http://localhost:8675/songajax/" };
+            //_prefixes = new string[] { "http://localhost/song/", "http://localhost/index/", "http://localhost/songajax/" };
         }
 
         public override void HandleRequest(HttpListenerContext context) 
@@ -57,6 +58,12 @@ namespace MP3Manager.WebServer
                     string song = context.Request.Url.Segments[2];
                     song = HttpUtility.UrlDecode(song);
                     var songData = GetSongAsByteArray(song);
+                    if(songData == null)
+                    {
+                        //get error sound
+                        songData = GetErrorSound();
+
+                    }
                     base.RequestToJson(context, songData);
                     return;
                 }
@@ -65,14 +72,22 @@ namespace MP3Manager.WebServer
             base.HandleRequest(context);
         }
 
+        private byte[] GetErrorSound()
+        {
+            ComponentResourceManager componentResourceManager = new ComponentResourceManager(typeof(WebServerResources));
+            Byte[] errorSound = (Byte [])componentResourceManager.GetObject("PacManDying");
+
+            return errorSound;
+        }
+
         private void SetSongList()
         {
             StringBuilder sb = new StringBuilder();
-            //Uncomment this out when page is finalized.
-            //ComponentResourceManager componentResourceManager = new ComponentResourceManager(typeof(WebServerResources));
+            //**GK Uncomment this out when page is finalized.
+           //ComponentResourceManager componentResourceManager = new ComponentResourceManager(typeof(WebServerResources));
             //string page = componentResourceManager.GetString("WebListingPlayer");
+            
             string page = string.Empty;
-
             using (var sr = new StreamReader("./webpage.txt"))
             {
                 page = sr.ReadToEnd();

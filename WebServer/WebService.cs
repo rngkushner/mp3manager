@@ -22,6 +22,8 @@ namespace MP3Manager.WebServer
 
         public static void StartWebHost(IRequestHandler requestHandler)
         {
+
+            //netsh http delete urlacl url=http://+:8675/
             instance.requestHandler = requestHandler;
 
             if (instance.listener == null || !instance.listener.IsListening)

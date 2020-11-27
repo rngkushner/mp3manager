@@ -61,7 +61,28 @@ namespace MP3Manager.WebServer {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pacman {
+            get {
+                object obj = ResourceManager.GetObject("pacman", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] PacManDying {
+            get {
+                object obj = ResourceManager.GetObject("PacManDying", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;head&gt;
+        ///&lt;script src=&quot;https://code.jquery.com/jquery-git.js&quot;&gt;jQuery  &lt;/script&gt;
         ///&lt;script&gt;
         ///    class AudioWrapper {
         ///
@@ -78,9 +99,7 @@ namespace MP3Manager.WebServer {
         ///        }
         ///
         ///        load(url) {
-        ///            //url = &quot;/songajax/&quot; + url;
-        ///            this.audio.src = url;
-        ///    [rest of string was truncated]&quot;;.
+        ///         [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string WebListingPlayer {
             get {

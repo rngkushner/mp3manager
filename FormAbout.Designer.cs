@@ -53,7 +53,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(220, 20);
             this.label1.TabIndex = 1;
-            this.label1.Text = "MP3 Manager - Version 0.1 Beta";
+            this.label1.Text = "MP3 Manager - Version 0.5 Beta";
             // 
             // textBox2
             // 

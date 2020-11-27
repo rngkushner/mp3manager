@@ -49,6 +49,11 @@ namespace MP3Manager.Files
 
         public static byte[] GetFileAsByteArray(string key, Dictionary<string, File> musicList)
         {
+            //check for files' existence in musicList. Most likely illegal characters screwing up find.
+            if(!musicList.ContainsKey(key))
+            {
+                return null;
+            }
             Stream stream = System.IO.File.OpenRead(musicList[key].Paths[0]);
 
             MemoryStream sr = new MemoryStream();

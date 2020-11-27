@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.btnMP3Tag = new System.Windows.Forms.Button();
             this.btnCrawl = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
@@ -179,6 +180,7 @@
             this.Controls.Add(this.songGrid);
             this.Controls.Add(this.btnCrawl);
             this.Controls.Add(this.btnMP3Tag);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MainForm";
             this.Text = "MP3 Main Panel";

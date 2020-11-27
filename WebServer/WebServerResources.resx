@@ -117,8 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="pacman" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>pacman.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PacManDying" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>PacManDying.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="WebListingPlayer" xml:space="preserve">
     <value>&lt;head&gt;
+&lt;script src="https://code.jquery.com/jquery-git.js"&gt;jQuery  &lt;/script&gt;
 &lt;script&gt;
     class AudioWrapper {
 
@@ -136,12 +144,7 @@
 
         load(url) {
             //url = "/songajax/" + url;
-            this.audio.src = url;
-            return this;
-        }
-
-        get isPlaying() {
-            return !this.audio.paused;
+            this.audio.src = url.replace("_!_", "'");
         }
 
         get isLoaded() {
@@ -164,17 +167,170 @@
         }
     }
 
+    class Playlister {
+        allSongs = null;
+        songIndex = 0;
+
+        load() {
+            this._buildList();
+            //console.log(this.allSongs);
+        }
+
+        makePlaylist() {
+            this.songIndex = 0;
+            this._shuffle();
+            let str = '';
+
+            this.allSongs.forEach(s =&gt; {
+                str += "&lt;div class='PlaylistItem'&gt;" + s.title + " - " + s.artist + "&lt;/div&gt;";
+            });
+
+            document.getElementById("playlist").innerHTML = str;
+        }
+
+        getNextSong() {
+            let player = document.getElementById("visiblePlayer");
+            if(this.allSongs !== null &amp;&amp; this.allSongs.length &gt; 0)
+            {
+                
+                let lastSongIndex = this.songIndex;
+                this.songIndex++;
+
+                if(this.allSongs.length &lt;= this.songIndex) {
+                    this.songIndex = 0;
+                }
+
+                $('.PlaylistItem:nth-child(' + (lastSongIndex + 1) + ')').removeClass('NowPlaying');
+
+                let currentSong = $('.PlaylistItem')[this.songIndex];
+                $(currentSong).addClass('NowPlaying');
+                currentSong.scrollIntoView({ behavior: "smooth", block: "center" });
+
+                let song = this.allSongs[this.songIndex];
+                document.title = "Playing: " + song.title + " - " + song.artist;
+
+                player.src = "/songajax/" + song.key.replace("_!_", "'");
+
+            }
+
+        }
+
+        getPreviousSong() {
+            let player = document.getElementById("visiblePlayer");
+            if(this.allSongs !== null &amp;&amp; this.allSongs.length &gt; 0)
+            {
+                let lastSong = this.songIndex;
+
+                this.songIndex--;
+
+                if(this.songIndex &lt; 0) {
+                    this.songIndex = this.allSongs.length - 1;
+                }
+
+                //PlaylistItem
+                $('.PlaylistItem:nth-child(' + (lastSong + 1) +')').removeClass('NowPlaying');
+                let currentSong = $('.PlaylistItem:nth-child(' + (this.songIndex + 1) +')');
+                currentSong.addClass('NowPlaying');
+                currentSong.get(0).scrollIntoView({ behavior: "smooth", block: "center" });
+
+                let song = this.allSongs[this.songIndex];
+                document.title = "Playing: " + song.title + " - " + song.artist;
+
+                player.src = "/songajax/" + song.key.replace("_!_", "'");
+            }
+        }
+
+        get isLoaded() {
+            return this.allSongs != null;
+        }
+
+        _buildList() {
+            if(!this.isLoaded)
+            {
+                this.allSongs = Array.from(document.querySelectorAll(".OneSong"))
+                            .map(s =&gt; {
+                                return {
+                                   key: s.id,
+                                   artist: s.getAttribute('data-artist'),
+                                   title: s.childNodes[0].textContent
+                                }
+                            });
+            }
+        }
+
+
+        _shuffle() {
+            var currentIndex = this.allSongs.length, temporaryValue, randomIndex;
+
+            // While there remain elements to shuffle...
+            while (0 !== currentIndex) {
+
+                // Pick a remaining element...
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex -= 1;
+
+                // And swap it with the current element.
+                temporaryValue = this.allSongs[currentIndex];
+                this.allSongs[currentIndex] = this.allSongs[randomIndex];
+                this.allSongs[randomIndex] = temporaryValue;
+            }            
+        }
+    }
+
     let audioWrapper = new AudioWrapper();
+    let pl = null;
+
+    window.addEventListener('load', (event) =&gt; {
+        pl = new Playlister();
+        pl.load();
+
+        document.getElementById("visiblePlayer").addEventListener("ended", function(event) {
+            pl.getNextSong();
+        });
+
+        document.getElementById("shuffle").addEventListener("click", function(event) {
+            pl.makePlaylist();
+            pl.getNextSong();
+        });
+
+        document.getElementById("next").addEventListener("click", function(event) {
+            pl.getNextSong();
+        });
+
+        document.getElementById("back").addEventListener("click", function(event) {
+            pl.getPreviousSong();
+        });
+
+        document.getElementById("toggleALaCarte").addEventListener("click", function(event) {
+            if($('#alacarteContainer').is(':visible')) {
+                $('#alacarteContainer').hide();
+            } else {
+                $('#alacarteContainer').show();
+            }
+        });
+        
+    });
 &lt;/script&gt;
+
 &lt;style&gt;
+Body {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 10pt;
+}
+
+Button {
+    background-color: #000000;
+    color: #66FF00;
+}
+
 .OneSong {
     cursor:pointer;
     border-radius: 8px;
     margin: 5px 0 5px 0;
     border: 1px solid;
     box-shadow: 3px 3px #cccccc;
-
 }
+
 .Control {
     display:inline-block;
     background-color: #cfcfcf;
@@ -183,10 +339,83 @@
     padding: 3px;
     margin: 1px 5px 1px 5px;
 }
+
+.HalfScreen {
+    display: inline-block;
+    width: 45%;
+    padding: 7px;
+}
+
+.AlignTop {
+    vertical-align: top;
+}
+
+#playlist {
+    height: 80px;
+    overflow-y: auto;
+    background-color: #909090;
+    margin-bottom:8px;
+}
+
+#playlist DIV {
+    margin: 4px;
+    background-color: black;
+    color: #66FF00;
+    padding: 4px;
+    border-radius: 5px;
+}
+
+.NowPlaying {
+    text-shadow: 1px 1px 8px #FFFFFF;
+    font-weight: bold;
+}
+
+ #playlistContainer {
+    background-color: #909090;
+    border: 1pt black solid;
+    border-radius: 10px;
+ }
+
+.playerControl {
+    padding: 8px;
+    margin-left: 5px;
+}
+
 &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
-&lt;&lt;bodyHTML&gt;&gt;
+&lt;div class="header"&gt;
+    &lt;h1&gt;MP3 Manager Song Server&lt;/h1&gt;
+    &lt;h2&gt;Project Wurlitzer&lt;/h2&gt;
+&lt;/div&gt;
+&lt;div class="HalfScreen AlignTop"&gt;
+    &lt;h2&gt;Your Playlist&lt;/h2&gt;
+    &lt;div id="playlistContainer"&gt;
+        &lt;div class="playerControl"&gt;
+            &lt;button id="shuffle"&gt;Shuffle&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;div class="playerControl"&gt;
+            &lt;audio id="visiblePlayer" controls autoplay&gt;&lt;/audio&gt;
+        &lt;/div&gt;
+        &lt;div class="playerControl"&gt;
+            &lt;button id="back"&gt;&lt;&lt; Back&lt;/button&gt;
+            &lt;button id="next"&gt;Next &gt;&gt;&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;div id="nowPlaying"&gt;
+        &lt;/div&gt;
+        &lt;div id="playlist"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        I just heard PacMan, what's up?
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="HalfScreen"&gt;
+    &lt;h2&gt;All Songs a la carte&lt;/h2&gt;
+    &lt;button id="toggleALaCarte"&gt;Show/Hide&lt;/button&gt;
+    &lt;div id="alacarteContainer" style="display:block"&gt;
+    &lt;&lt;bodyHTML&gt;&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
 &lt;/body&gt;</value>
     <comment>HTML Template for music list and player</comment>
   </data>
