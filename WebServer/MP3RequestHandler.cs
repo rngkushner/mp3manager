@@ -15,7 +15,7 @@ namespace MP3Manager.WebServer
     {
 
         private Dictionary<string, File> musicFiles;
-        private string[] _prefixes;
+        private readonly string[] _prefixes;
 
         public string[] prefixes {
             get
@@ -27,49 +27,73 @@ namespace MP3Manager.WebServer
         public MP3RequestHandler(Dictionary<string, File> musicFiles)
         {
             this.musicFiles = musicFiles;
-            _prefixes = new string[] { "http://localhost:8675/song/", "http://localhost:8675/index/", "http://localhost:8675/songajax/" };
-            //_prefixes = new string[] { "http://localhost/song/", "http://localhost/index/", "http://localhost/songajax/" };
+            _prefixes = new string[] { "http://localhost:8675/song/", 
+                "http://localhost:8675/index/", 
+                "http://localhost:8675/songajax/",
+                "http://localhost:8675/images/",
+                "http://localhost:8675/"
+            };
+            
         }
 
         public override void HandleRequest(HttpListenerContext context) 
         {
-            //if context.request.url contains "list" else "song"  
-            if(context.Request.Url.Segments.Length > 1)
+            try
             {
-                string action = context.Request.Url.Segments[1];
-                if(action == "song/")
+                //if context.request.url contains "list" else "song"  
+                if (context.Request.Url.Segments.Length > 1)
                 {
-                    //serve up song
-                    string song = context.Request.Url.Segments[2];
-                    song = HttpUtility.UrlDecode(song);
-                    ServeUpSong(song);
-
-                } 
-                else if(action == "index/")
-                {
-                    //build up and return song list.
-                    if (musicFiles != null && musicFiles.Keys.Count > 0)
+                    string action = context.Request.Url.Segments[1];
+                    System.Diagnostics.Trace.WriteLine(action);
+                    if (action == "song/")
                     {
-                        SetSongList();
-                    }
-                }
-                else if(action == "songajax/")
-                {
-                    string song = context.Request.Url.Segments[2];
-                    song = HttpUtility.UrlDecode(song);
-                    var songData = GetSongAsByteArray(song);
-                    if(songData == null)
-                    {
-                        //get error sound
-                        songData = GetErrorSound();
+                        //serve up song
+                        string song = context.Request.Url.Segments[2];
+                        song = HttpUtility.UrlDecode(song);
+                        ServeUpSong(song);
 
                     }
-                    base.RequestToJson(context, songData);
-                    return;
+                    else if (action == "index/")
+                    {
+                        //build up and return song list.
+                        if (musicFiles != null && musicFiles.Keys.Count > 0)
+                        {
+                            SetSongList();
+                        }
+                    }
+                    else if (action == "songajax/")
+                    {
+                        string song = context.Request.Url.Segments[2];
+                        song = HttpUtility.UrlDecode(song);
+                        var songData = GetSongAsByteArray(song);
+                        if (songData == null)
+                        {
+                            //get error sound
+                            songData = GetErrorSound();
+
+                        }
+                        base.RequestToJson(context, songData);
+                        return;
+                    }
+                    else if (action == "images/")
+                    {
+                        string image = context.Request.Url.Segments[2];
+                        RequestToImage(context, FileUtils.GetResource(image));
+                        return;
+                    }
+                    else if (action == "favicon.ico")
+                    {                       
+                        RequestToImage(context, FileUtils.GetIcon("favicon"), "image /x-icon");
+                        return;
+                    }
                 }
+
+                base.HandleRequest(context);
             }
-
-            base.HandleRequest(context);
+            catch(Exception ex)
+            {
+                ErrorLogger.LogError(ex);
+            }
         }
 
         private byte[] GetErrorSound()
@@ -83,16 +107,18 @@ namespace MP3Manager.WebServer
         private void SetSongList()
         {
             StringBuilder sb = new StringBuilder();
-            //**GK Uncomment this out when page is finalized.
-           //ComponentResourceManager componentResourceManager = new ComponentResourceManager(typeof(WebServerResources));
-            //string page = componentResourceManager.GetString("WebListingPlayer");
-            
+
+#if !DEBUG 
+            //Get page from resource
+            ComponentResourceManager componentResourceManager = new ComponentResourceManager(typeof(WebServerResources));
+            string page = componentResourceManager.GetString("WebListingPlayer");
+#else
             string page = string.Empty;
             using (var sr = new StreamReader("./webpage.txt"))
             {
                 page = sr.ReadToEnd();
             }
-
+#endif
             sb.AppendLine("<div id='songlist'>");
             foreach(string key in musicFiles.Keys)
             {

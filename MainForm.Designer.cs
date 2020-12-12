@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.btnMP3Tag = new System.Windows.Forms.Button();
             this.btnCrawl = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.songGrid = new System.Windows.Forms.DataGridView();
@@ -43,20 +42,11 @@
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.checkBoxRunWeb = new System.Windows.Forms.CheckBox();
+            this.buttonErrors = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.songGrid)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btnMP3Tag
-            // 
-            this.btnMP3Tag.Location = new System.Drawing.Point(240, 33);
-            this.btnMP3Tag.Name = "btnMP3Tag";
-            this.btnMP3Tag.Size = new System.Drawing.Size(209, 29);
-            this.btnMP3Tag.TabIndex = 1;
-            this.btnMP3Tag.Text = "&Tag";
-            this.btnMP3Tag.UseVisualStyleBackColor = true;
-            this.btnMP3Tag.Click += new System.EventHandler(this.btnMP3Tag_Click);
             // 
             // btnCrawl
             // 
@@ -64,7 +54,7 @@
             this.btnCrawl.Name = "btnCrawl";
             this.btnCrawl.Size = new System.Drawing.Size(209, 29);
             this.btnCrawl.TabIndex = 0;
-            this.btnCrawl.Text = "Crawl &Directory";
+            this.btnCrawl.Text = "Crawl &Music Directories";
             this.btnCrawl.UseVisualStyleBackColor = true;
             this.btnCrawl.Click += new System.EventHandler(this.btnCrawl_Click);
             // 
@@ -159,19 +149,31 @@
             // checkBoxRunWeb
             // 
             this.checkBoxRunWeb.AutoSize = true;
-            this.checkBoxRunWeb.Location = new System.Drawing.Point(478, 36);
+            this.checkBoxRunWeb.Location = new System.Drawing.Point(245, 36);
             this.checkBoxRunWeb.Name = "checkBoxRunWeb";
-            this.checkBoxRunWeb.Size = new System.Drawing.Size(135, 24);
+            this.checkBoxRunWeb.Size = new System.Drawing.Size(153, 24);
             this.checkBoxRunWeb.TabIndex = 2;
-            this.checkBoxRunWeb.Text = "Run Web Server";
+            this.checkBoxRunWeb.Text = "Launch Music Web";
             this.checkBoxRunWeb.UseVisualStyleBackColor = true;
             this.checkBoxRunWeb.CheckedChanged += new System.EventHandler(this.checkBoxRunWeb_CheckedChanged);
+            // 
+            // buttonErrors
+            // 
+            this.buttonErrors.Location = new System.Drawing.Point(575, 36);
+            this.buttonErrors.Name = "buttonErrors";
+            this.buttonErrors.Size = new System.Drawing.Size(213, 29);
+            this.buttonErrors.TabIndex = 7;
+            this.buttonErrors.Text = "Houston, we got a problem";
+            this.buttonErrors.UseVisualStyleBackColor = true;
+            this.buttonErrors.Visible = false;
+            this.buttonErrors.Click += new System.EventHandler(this.buttonErrors_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.buttonErrors);
             this.Controls.Add(this.checkBoxRunWeb);
             this.Controls.Add(this.menuStrip);
             this.Controls.Add(this.textBoxMessages);
@@ -179,7 +181,6 @@
             this.Controls.Add(this.buttonSaveChanges);
             this.Controls.Add(this.songGrid);
             this.Controls.Add(this.btnCrawl);
-            this.Controls.Add(this.btnMP3Tag);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MainForm";
@@ -195,8 +196,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnMP3Tag;
         private System.Windows.Forms.Button btnCrawl;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.DataGridView songGrid;
@@ -209,6 +208,7 @@
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemAbout;
         private System.Windows.Forms.CheckBox checkBoxRunWeb;
+        private System.Windows.Forms.Button buttonErrors;
     }
 }
 

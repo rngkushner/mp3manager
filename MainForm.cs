@@ -6,13 +6,16 @@ using System.Drawing;
 using System.Windows.Forms;
 
 namespace MP3Manager
-{
+{    
+
     public partial class MainForm : Form
     {
         private readonly Crawler crawler = new Crawler();       
         private Tagger tagger = null;
         private delegate void SetGridDataDelegate(Dictionary<string, File> completeList);
-        private Dictionary<string, File> completeList = null;
+        private delegate void WebServerErrorDelegate();
+
+        private Dictionary<string, File> completeList = null;        
 
         public MainForm()
         {
@@ -24,30 +27,34 @@ namespace MP3Manager
             folderBrowserDialog1.ShowDialog();
             string startingPath = folderBrowserDialog1.SelectedPath;
 
-            if(startingPath != String.Empty)
+            try
             {
-                crawler.Crawl(startingPath);
-            }
-            textBoxMessages.Text = $"Found {crawler.GetFiles().Count.ToString()} music files.";
-            
-        }
-
-        private void btnMP3Tag_Click(object sender, EventArgs e)
-        {
-            if (crawler != null && crawler.GetFiles() != null)
-            {
-                textBoxMessages.Text = "Tagging all the files. Hang on.";
-
-                var resultFiles = new Dictionary<string, File>();
-
-                tagger = new Tagger(resultFiles);
-                tagger.RunTagJob(crawler.GetFiles(), (list) =>
+                if (startingPath != String.Empty)
                 {
-                    SetGridDataDelegate d = new SetGridDataDelegate(SetGridData);
-                    this.Invoke(d, new object[] { list });
-                });
+                    crawler.Crawl(startingPath);
+                }
+                textBoxMessages.Text = $"Found {crawler.GetFiles().Count.ToString()} music files.";
 
+                if (crawler.GetFiles() != null)
+                {
+                    textBoxMessages.Text = "Tagging all the files. Hang on.";
+
+                    var resultFiles = new Dictionary<string, File>();
+
+                    tagger = new Tagger(resultFiles);
+                    tagger.RunTagJob(crawler.GetFiles(), (list) =>
+                    {
+                        SetGridDataDelegate d = new SetGridDataDelegate(SetGridData);
+                        this.Invoke(d, new object[] { list });
+                    });
+
+                }
             }
+            catch(Exception ex)
+            {
+                ErrorLogger.LogError(ex);
+            }
+
         }
 
         private void InitGrid()
@@ -91,29 +98,36 @@ namespace MP3Manager
         }
         private void SetGridData(Dictionary<string, File> list)
         {
-            songGrid.Rows.Clear();
-
-            FileUtils.Transform(list);
-
-            foreach(var key in list.Keys)
+            try
             {
-                songGrid.Rows.Add(new object[]{
-                key,
-                list[key].Title,
-                list[key].Artist,
-                list[key].Album,
-                list[key].Genre,
-                list[key].MatchCount.ToString(),
-                list[key].FileName + "|" + list[key].SoundexTag
-                });
+                songGrid.Rows.Clear();
+
+                FileUtils.Transform(list);
+
+                foreach (var key in list.Keys)
+                {
+                    songGrid.Rows.Add(new object[]{
+                    key,
+                    list[key].Title,
+                    list[key].Artist,
+                    list[key].Album,
+                    list[key].Genre,
+                    list[key].MatchCount.ToString(),
+                    list[key].FileName + "|" + list[key].SoundexTag
+                    });
+                }
+
+                crawler.GetFiles().Clear();
+                completeList = list;
+
+                WebService.SetRequestHandler(new MP3RequestHandler(completeList));
+
+                textBoxMessages.Text = $"All done crawling. {completeList.Count.ToString()} songs found.";
             }
-
-            crawler.GetFiles().Clear();
-            completeList = list;
-
-            WebService.SetRequestHandler(new MP3RequestHandler(completeList));
-
-            textBoxMessages.Text = $"All done crawling. {completeList.Count.ToString()} songs found.";
+            catch(Exception ex)
+            {
+                ErrorLogger.LogError(ex);
+            }
         }
 
         private void contextMenuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -202,16 +216,24 @@ namespace MP3Manager
             {
                 if(completeList != null)
                 {
-                    //do save of beige lines
-                    foreach (DataGridViewRow row in songGrid.Rows)
+                    try
                     {
-                        if (row.DefaultCellStyle.BackColor == Color.Beige)
+                        //do save of beige lines
+                        foreach (DataGridViewRow row in songGrid.Rows)
                         {
-                            var file = completeList[row.Cells["key"].Value.ToString()];
-                            WriteMP3PropertiesToFile(file, row);
-                            row.DefaultCellStyle.BackColor = Color.Empty;
+                            if (row.DefaultCellStyle.BackColor == Color.Beige)
+                            {
+                                var file = completeList[row.Cells["key"].Value.ToString()];
+                                WriteMP3PropertiesToFile(file, row);
+                                row.DefaultCellStyle.BackColor = Color.Empty;
+                            }
                         }
                     }
+                    catch (Exception ex)
+                    {
+                        ErrorLogger.LogError(ex);
+                    }
+
                 }
             }
         }
@@ -238,7 +260,20 @@ namespace MP3Manager
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            InitGrid();            
+            ErrorLogger.ErrorHappenedEvent += ErrorLogger_ErrorHappenedEvent;
+            InitGrid();
+        }
+
+        private void ErrorLogger_ErrorHappenedEvent(object sender, EventArgs e)
+        {
+            WebServerErrorDelegate d= new WebServerErrorDelegate(WebServerError);
+            buttonErrors.Invoke(d);
+            
+        }
+
+        private void WebServerError()
+        {
+            buttonErrors.Visible = true;
         }
 
         private void buttonDone_Click(object sender, EventArgs e)
@@ -266,6 +301,12 @@ namespace MP3Manager
             {
                 WebService.ShutDown();
             }
+        }
+
+        private void buttonErrors_Click(object sender, EventArgs e)
+        {
+            var errorForm = new FormErrors();
+            errorForm.ShowDialog();
         }
     }
 }

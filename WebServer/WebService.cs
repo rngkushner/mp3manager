@@ -22,56 +22,69 @@ namespace MP3Manager.WebServer
 
         public static void StartWebHost(IRequestHandler requestHandler)
         {
-
-            //netsh http delete urlacl url=http://+:8675/
-            instance.requestHandler = requestHandler;
-
-            if (instance.listener == null || !instance.listener.IsListening)
+            try
             {
-                string[] prefixes = requestHandler.prefixes;
+                //netsh http delete urlacl url=http://+:8675/
+                instance.requestHandler = requestHandler;
 
-                if (!HttpListener.IsSupported)
+                if (instance.listener == null || !instance.listener.IsListening)
                 {
-                    System.Diagnostics.Trace.WriteLine("Windows XP SP2 or Server 2003 is required to use the HttpListener class.");
-                    return;
+                    string[] prefixes = requestHandler.prefixes;
+
+                    if (!HttpListener.IsSupported)
+                    {
+                        Trace.WriteLine("Windows XP SP2 or Server 2003 is required to use the HttpListener class.");
+                        return;
+                    }
+
+                    if (prefixes == null || prefixes.Length == 0)
+                    {
+                        throw new ArgumentException("prefixes");
+                    }
+
+                    // Create a listener.
+                    instance.listener = new HttpListener();
+                    // Add the prefixes.
+                    foreach (string s in prefixes)
+                    {
+                        instance.listener.Prefixes.Add(s);
+                    }
+                    instance.listener.Start();
+                    Trace.WriteLine("Listening...");
+                    // Note: The GetContext method blocks while waiting for a request.
+                    var task = Task.Run(() =>
+                    {
+                        Listen();                        
+                    });
+
+                    //launch default browser with index page.
+                    Process.Start(new ProcessStartInfo(prefixes[1]) { UseShellExecute = true });
+
                 }
-
-                if (prefixes == null || prefixes.Length == 0)
-                {
-                    throw new ArgumentException("prefixes");
-                }
-
-                // Create a listener.
-                instance.listener = new HttpListener();
-                // Add the prefixes.
-                foreach (string s in prefixes)
-                {
-                    instance.listener.Prefixes.Add(s);
-                }
-                instance.listener.Start();
-                System.Diagnostics.Trace.WriteLine("Listening...");
-                // Note: The GetContext method blocks while waiting for a request.
-                Task.Run(() =>
-                {
-                    Listen();
-                });
-
-                //launch default browser with index page.
-                Process.Start(new ProcessStartInfo(prefixes[1]) { UseShellExecute = true });
-       
+            }
+            catch(Exception ex)
+            {
+                ErrorLogger.LogError(ex);
             }
         }
 
-        private static void Listen()
-        {
-            HttpListenerContext context = instance.listener.GetContext();           
+        private static void Listen()        {
 
-            instance.requestHandler.HandleRequest(context);
-
-            Task.Run(() =>
+            try
             {
-                Listen();
-            });
+                HttpListenerContext context = instance.listener.GetContext();
+                //throw new Exception("Gordon created this error.");
+                instance.requestHandler.HandleRequest(context);
+
+                var task = Task.Run(() =>
+                {
+                    Listen();
+                });
+            }
+            catch(Exception ex)
+            {
+                ErrorLogger.LogError(ex);
+            }            
         }
 
         public static void ShutDown()

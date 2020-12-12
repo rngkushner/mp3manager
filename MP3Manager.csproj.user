@@ -7,6 +7,9 @@
     <Compile Update="FormAbout.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="FormErrors.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="FormFileLocs.cs">
       <SubType>Form</SubType>
     </Compile>

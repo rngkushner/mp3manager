@@ -20,3 +20,4 @@ C:\Users\rngku\source\repos\MP3Manager\obj\Debug\netcoreapp3.1\MP3Manager.pdb
 C:\Users\rngku\source\repos\MP3Manager\obj\Debug\netcoreapp3.1\MP3Manager.genruntimeconfig.cache
 C:\Users\rngku\source\repos\MP3Manager\bin\Debug\netcoreapp3.1\MP3Manager.pdb
 C:\Users\rngku\source\repos\MP3Manager\obj\Debug\netcoreapp3.1\MP3Manager.csprojAssemblyReference.cache
+C:\Users\rngku\source\repos\MP3Manager\obj\Debug\netcoreapp3.1\MP3Manager.FormErrors.resources

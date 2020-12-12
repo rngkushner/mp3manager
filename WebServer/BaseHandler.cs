@@ -29,7 +29,6 @@ namespace MP3Manager.WebServer
         {
             try
             {
-                HttpListenerRequest request = context.Request;
                 // Obtain a response object.
                 HttpListenerResponse response = context.Response;
                 response.Headers.Add("content-type", "audio/mpeg");
@@ -55,6 +54,21 @@ namespace MP3Manager.WebServer
             {
                 System.Diagnostics.Trace.WriteLine(ex);
             }
+        }
+
+        public virtual void RequestToImage(HttpListenerContext context, byte[] content, string contentType = "image/gif")
+        {
+            // Obtain a response object.
+            HttpListenerResponse response = context.Response;
+            //**gk TODO: get the image type from the byte array.
+            response.Headers.Add("content-type", contentType);
+
+            // Get a response stream and write the response to it.
+            response.ContentLength64 = content.Length;
+            System.IO.Stream output = response.OutputStream;
+            output.Write(content, 0, content.Length);
+            // You must close the output stream.
+            output.Close();
         }
     }
 }

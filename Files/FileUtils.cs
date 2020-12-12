@@ -1,6 +1,9 @@
-﻿using System;
+﻿using MP3Manager.WebServer;
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.ComponentModel;
+using System.Drawing;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -86,5 +89,25 @@ namespace MP3Manager.Files
             return Convert.ToBase64String(bytes);
         }
 
+        public static byte[] GetResource(string name)
+        {
+            ComponentResourceManager componentResourceManager = new ComponentResourceManager(typeof(WebServerResources));
+            Bitmap img = (Bitmap)componentResourceManager.GetObject(name);
+            ImageConverter converter = new ImageConverter();
+            Byte[] retn = (byte[])converter.ConvertTo(img, typeof(byte[]));
+            return retn;
+        }
+
+        public static byte[] GetIcon(string name)
+        {
+            ComponentResourceManager componentResourceManager = new ComponentResourceManager(typeof(WebServerResources));
+            Icon img = (Icon)componentResourceManager.GetObject(name);
+            using (MemoryStream ms = new MemoryStream())
+            {
+                img.Save(ms);
+                var retn = ms.ToArray();
+                return retn;
+            }            
+        }
     }
 }
