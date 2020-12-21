@@ -39,6 +39,7 @@
             this.buttonOK = new System.Windows.Forms.Button();
             this.comboBoxGenre = new System.Windows.Forms.ComboBox();
             this.checkBoxIgnoreBlank = new System.Windows.Forms.CheckBox();
+            this.buttonGetSpotify = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -302,13 +303,24 @@
             this.checkBoxIgnoreBlank.Text = "Ignore if Blank";
             this.checkBoxIgnoreBlank.UseVisualStyleBackColor = true;
             // 
+            // buttonGetSpotify
+            // 
+            this.buttonGetSpotify.Location = new System.Drawing.Point(156, 13);
+            this.buttonGetSpotify.Name = "buttonGetSpotify";
+            this.buttonGetSpotify.Size = new System.Drawing.Size(148, 29);
+            this.buttonGetSpotify.TabIndex = 8;
+            this.buttonGetSpotify.Text = "Get Spotify Data";
+            this.buttonGetSpotify.UseVisualStyleBackColor = true;
+            this.buttonGetSpotify.Click += new System.EventHandler(this.buttonGetSpotify_ClickAsync);
+            // 
             // FormUpdate
             // 
             this.AcceptButton = this.buttonOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(411, 323);
+            this.ClientSize = new System.Drawing.Size(407, 323);
+            this.Controls.Add(this.buttonGetSpotify);
             this.Controls.Add(this.checkBoxIgnoreBlank);
             this.Controls.Add(this.comboBoxGenre);
             this.Controls.Add(this.buttonOK);
@@ -342,5 +354,6 @@
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.ComboBox comboBoxGenre;
         private System.Windows.Forms.CheckBox checkBoxIgnoreBlank;
+        private System.Windows.Forms.Button buttonGetSpotify;
     }
 }

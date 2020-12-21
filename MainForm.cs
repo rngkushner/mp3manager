@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Text.Json;
 
 namespace MP3Manager
 {    
@@ -47,7 +48,6 @@ namespace MP3Manager
                         SetGridDataDelegate d = new SetGridDataDelegate(SetGridData);
                         this.Invoke(d, new object[] { list });
                     });
-
                 }
             }
             catch(Exception ex)
@@ -122,7 +122,11 @@ namespace MP3Manager
 
                 WebService.SetRequestHandler(new MP3RequestHandler(completeList));
 
-                textBoxMessages.Text = $"All done crawling. {completeList.Count.ToString()} songs found.";
+                textBoxMessages.Text = $"All done crawling. {completeList.Count} songs found.";
+                checkBoxRunWeb.Enabled = true;
+
+                var playList = JsonSerializer.Serialize(completeList);                
+
             }
             catch(Exception ex)
             {

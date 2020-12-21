@@ -15,6 +15,7 @@ namespace MP3Manager.Files
         public File()
         {
             Paths = new List<string>();
+            MetaData = new Dictionary<string, string>();
         }
 
         public string FileName { get; set; }
@@ -24,6 +25,7 @@ namespace MP3Manager.Files
         public string Album { get; set; }
         public string Genre { get; set; }
         public string SoundexTag { get; set; }
+        public Dictionary<string, string> MetaData { get; set; }
         public int MatchCount
         {
             get

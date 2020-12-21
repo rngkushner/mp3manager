@@ -149,6 +149,7 @@
             // checkBoxRunWeb
             // 
             this.checkBoxRunWeb.AutoSize = true;
+            this.checkBoxRunWeb.Enabled = false;
             this.checkBoxRunWeb.Location = new System.Drawing.Point(245, 36);
             this.checkBoxRunWeb.Name = "checkBoxRunWeb";
             this.checkBoxRunWeb.Size = new System.Drawing.Size(153, 24);

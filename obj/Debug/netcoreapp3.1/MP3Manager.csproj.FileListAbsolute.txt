@@ -13,7 +13,6 @@ C:\Users\rngku\source\repos\MP3Manager\obj\Debug\netcoreapp3.1\MP3Manager.WebSer
 C:\Users\rngku\source\repos\MP3Manager\obj\Debug\netcoreapp3.1\MP3Manager.csproj.GenerateResource.cache
 C:\Users\rngku\source\repos\MP3Manager\obj\Debug\netcoreapp3.1\MP3Manager.AssemblyInfoInputs.cache
 C:\Users\rngku\source\repos\MP3Manager\obj\Debug\netcoreapp3.1\MP3Manager.AssemblyInfo.cs
-C:\Users\rngku\source\repos\MP3Manager\obj\Debug\netcoreapp3.1\MP3Manager.csproj.CoreCompileInputs.cache
 C:\Users\rngku\source\repos\MP3Manager\obj\Debug\netcoreapp3.1\MP3Manager.csproj.CopyComplete
 C:\Users\rngku\source\repos\MP3Manager\obj\Debug\netcoreapp3.1\MP3Manager.dll
 C:\Users\rngku\source\repos\MP3Manager\obj\Debug\netcoreapp3.1\MP3Manager.pdb
@@ -21,3 +20,5 @@ C:\Users\rngku\source\repos\MP3Manager\obj\Debug\netcoreapp3.1\MP3Manager.genrun
 C:\Users\rngku\source\repos\MP3Manager\bin\Debug\netcoreapp3.1\MP3Manager.pdb
 C:\Users\rngku\source\repos\MP3Manager\obj\Debug\netcoreapp3.1\MP3Manager.csprojAssemblyReference.cache
 C:\Users\rngku\source\repos\MP3Manager\obj\Debug\netcoreapp3.1\MP3Manager.FormErrors.resources
+C:\Users\rngku\source\repos\MP3Manager\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\rngku\source\repos\MP3Manager\obj\Debug\netcoreapp3.1\MP3Manager.csproj.CoreCompileInputs.cache

@@ -56,5 +56,15 @@ namespace MP3Manager
                 comboBoxGenre.Text = Genre;
             }
         }
+
+        private async void buttonGetSpotify_ClickAsync(object sender, EventArgs e)
+        {
+            var spotify = new JSONClient.JSONClient();
+
+            string result = await spotify.Search(textBoxArtist.Text);
+
+            System.Diagnostics.Trace.Write(result);
+
+        }
     }
 }
