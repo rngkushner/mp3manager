@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MP3Manager.Files;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -75,7 +76,7 @@ namespace MP3Manager.JSONClient
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.UTF8.GetBytes(credentials)));
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", FileUtils.ConvertToBase64(credentials));
 
             List<KeyValuePair<string, string>> requestData = new List<KeyValuePair<string, string>>();
             requestData.Add(new KeyValuePair<string, string>("grant_type", "client_credentials"));

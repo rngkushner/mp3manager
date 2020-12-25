@@ -43,6 +43,7 @@
             this.toolStripMenuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.checkBoxRunWeb = new System.Windows.Forms.CheckBox();
             this.buttonErrors = new System.Windows.Forms.Button();
+            this.buttonSaveAsPlaylist = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.songGrid)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip.SuspendLayout();
@@ -50,9 +51,9 @@
             // 
             // btnCrawl
             // 
-            this.btnCrawl.Location = new System.Drawing.Point(12, 33);
+            this.btnCrawl.Location = new System.Drawing.Point(12, 36);
             this.btnCrawl.Name = "btnCrawl";
-            this.btnCrawl.Size = new System.Drawing.Size(209, 29);
+            this.btnCrawl.Size = new System.Drawing.Size(182, 29);
             this.btnCrawl.TabIndex = 0;
             this.btnCrawl.Text = "Crawl &Music Directories";
             this.btnCrawl.UseVisualStyleBackColor = true;
@@ -72,7 +73,7 @@
             this.songGrid.RowHeadersWidth = 51;
             this.songGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.songGrid.Size = new System.Drawing.Size(776, 299);
-            this.songGrid.TabIndex = 2;
+            this.songGrid.TabIndex = 3;
             this.songGrid.Text = "dataGridView1";
             // 
             // contextMenuStrip1
@@ -126,6 +127,7 @@
             this.textBoxMessages.Name = "textBoxMessages";
             this.textBoxMessages.Size = new System.Drawing.Size(405, 27);
             this.textBoxMessages.TabIndex = 3;
+            this.textBoxMessages.TabStop = false;
             // 
             // menuStrip
             // 
@@ -150,7 +152,7 @@
             // 
             this.checkBoxRunWeb.AutoSize = true;
             this.checkBoxRunWeb.Enabled = false;
-            this.checkBoxRunWeb.Location = new System.Drawing.Point(245, 36);
+            this.checkBoxRunWeb.Location = new System.Drawing.Point(411, 39);
             this.checkBoxRunWeb.Name = "checkBoxRunWeb";
             this.checkBoxRunWeb.Size = new System.Drawing.Size(153, 24);
             this.checkBoxRunWeb.TabIndex = 2;
@@ -169,11 +171,23 @@
             this.buttonErrors.Visible = false;
             this.buttonErrors.Click += new System.EventHandler(this.buttonErrors_Click);
             // 
+            // buttonSaveAsPlaylist
+            // 
+            this.buttonSaveAsPlaylist.Location = new System.Drawing.Point(200, 36);
+            this.buttonSaveAsPlaylist.Name = "buttonSaveAsPlaylist";
+            this.buttonSaveAsPlaylist.Size = new System.Drawing.Size(182, 29);
+            this.buttonSaveAsPlaylist.TabIndex = 1;
+            this.buttonSaveAsPlaylist.Text = "&Save as Library";
+            this.buttonSaveAsPlaylist.UseVisualStyleBackColor = true;
+            this.buttonSaveAsPlaylist.Visible = false;
+            this.buttonSaveAsPlaylist.Click += new System.EventHandler(this.buttonSaveAsPlaylist_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.buttonSaveAsPlaylist);
             this.Controls.Add(this.buttonErrors);
             this.Controls.Add(this.checkBoxRunWeb);
             this.Controls.Add(this.menuStrip);
@@ -210,6 +224,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemAbout;
         private System.Windows.Forms.CheckBox checkBoxRunWeb;
         private System.Windows.Forms.Button buttonErrors;
+        private System.Windows.Forms.Button buttonSaveAsPlaylist;
     }
 }
 

@@ -22,3 +22,4 @@ C:\Users\rngku\source\repos\MP3Manager\obj\Debug\netcoreapp3.1\MP3Manager.csproj
 C:\Users\rngku\source\repos\MP3Manager\obj\Debug\netcoreapp3.1\MP3Manager.FormErrors.resources
 C:\Users\rngku\source\repos\MP3Manager\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 C:\Users\rngku\source\repos\MP3Manager\obj\Debug\netcoreapp3.1\MP3Manager.csproj.CoreCompileInputs.cache
+C:\Users\rngku\source\repos\MP3Manager\obj\Debug\netcoreapp3.1\MP3Manager.FormGenericInput.resources

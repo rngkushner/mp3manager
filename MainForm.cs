@@ -34,7 +34,7 @@ namespace MP3Manager
                 {
                     crawler.Crawl(startingPath);
                 }
-                textBoxMessages.Text = $"Found {crawler.GetFiles().Count.ToString()} music files.";
+                textBoxMessages.Text = $"Found {crawler.GetFiles().Count} music files.";
 
                 if (crawler.GetFiles() != null)
                 {
@@ -48,6 +48,7 @@ namespace MP3Manager
                         SetGridDataDelegate d = new SetGridDataDelegate(SetGridData);
                         this.Invoke(d, new object[] { list });
                     });
+                    buttonSaveAsPlaylist.Visible = true;
                 }
             }
             catch(Exception ex)
@@ -122,10 +123,8 @@ namespace MP3Manager
 
                 WebService.SetRequestHandler(new MP3RequestHandler(completeList));
 
-                textBoxMessages.Text = $"All done crawling. {completeList.Count} songs found.";
-                checkBoxRunWeb.Enabled = true;
-
-                var playList = JsonSerializer.Serialize(completeList);                
+                textBoxMessages.Text = $"All done. {completeList.Count} songs.";
+                checkBoxRunWeb.Enabled = true;                
 
             }
             catch(Exception ex)
@@ -266,6 +265,18 @@ namespace MP3Manager
         {
             ErrorLogger.ErrorHappenedEvent += ErrorLogger_ErrorHappenedEvent;
             InitGrid();
+
+            if(LoadDefaultPlaylist())
+            {
+                SetGridData(completeList);
+            }           
+
+        }
+
+        private bool LoadDefaultPlaylist()
+        {
+            completeList = FileUtils.LoadDefaultPlaylist();
+            return (completeList != null);
         }
 
         private void ErrorLogger_ErrorHappenedEvent(object sender, EventArgs e)
@@ -311,6 +322,23 @@ namespace MP3Manager
         {
             var errorForm = new FormErrors();
             errorForm.ShowDialog();
+            buttonErrors.Visible = false;
+        }
+
+        private void buttonSaveAsPlaylist_Click(object sender, EventArgs e)
+        {
+            var dlg = new FormGenericInput("Library", "Name your library!", "Make default");
+            if(dlg.ShowDialog() == DialogResult.OK)
+            {
+                //if default, ignore provide name
+                string fileName = dlg.BooleanResult ? "default_" : "" + dlg.ReturnValue;
+
+                FileUtils.SaveCrawl(fileName, completeList);
+                buttonSaveAsPlaylist.Visible = false;
+            }
+            
+            dlg.Close();            
+
         }
     }
 }

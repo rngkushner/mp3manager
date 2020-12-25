@@ -64,7 +64,8 @@ namespace MP3Manager.WebServer
                     else if (action == "songajax/")
                     {
                         string song = context.Request.Url.Segments[2];
-                        song = HttpUtility.UrlDecode(song);
+
+                        song = FileUtils.ConvertFromBase64(song);
                         var songData = GetSongAsByteArray(song);
                         if (songData == null)
                         {
@@ -119,23 +120,21 @@ namespace MP3Manager.WebServer
                 page = sr.ReadToEnd();
             }
 #endif
-            sb.AppendLine("<div id='songlist'>");
-            foreach(string key in musicFiles.Keys)
+            sb.AppendLine("<script>");
+            
+            foreach (string key in musicFiles.Keys)
             {
-                //If you want to open the song in its own window
-                //$"<li><a target='_blank' href='/song/{key}'>{musicFiles[key].Title}</a></li>"
-                //audio member is set to autoplay on 'canplaythrough' event. 
 
-                var escapedKey = key.Replace("'", @"_!_");
-
+                var escapedKey = FileUtils.ConvertToBase64(key);
+                
                 sb.AppendLine(
-                    $"<div class='OneSong' id='{escapedKey}' data-artist='{musicFiles[key].Artist}' data-album='{musicFiles[key].Album}'>{musicFiles[key].Title}" +
-                    $"<div class='Control' onclick='audioWrapper.load(\"/songajax/{escapedKey}\");'>Play</div>" +
-                    $"<div class='Control' onclick='audioWrapper.pause();'>Pause</div>" +
-                    $"</div>"
+                    $"allSongs.set(\"{escapedKey}\", {{ album: \"{musicFiles[key].Album}\", " +
+                    $"artist: \"{musicFiles[key].Artist}\", " +
+                    $"title: \"{musicFiles[key].Title}\" }});"
                 );
             }
-            sb.AppendLine("</div>");
+            
+            sb.AppendLine("</script>");
 
             page = page.Replace("<<bodyHTML>>", sb.ToString());
 

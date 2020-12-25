@@ -13,6 +13,9 @@
     <Compile Update="FormFileLocs.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="FormGenericInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="FormUpdate.cs">
       <SubType>Form</SubType>
     </Compile>

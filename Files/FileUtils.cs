@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -16,6 +17,8 @@ namespace MP3Manager.Files
     {
         public static void Transform(Dictionary<string, File> fileList)
         {
+            //The intention here is  to create a soundex that will make fuzzy matches. Maybe it can be used 
+            //to clean up funky file names on the hard drive if that's what the user desires. 
             Regex rxLeadingNumbersAndNoise = new Regex(@"^[^a-zA-Z]+");
             Regex rxSymbols = new Regex(@"[^\w\d]");
             Regex rxSpaces = new Regex(@"\s+");
@@ -97,7 +100,6 @@ namespace MP3Manager.Files
             Byte[] retn = (byte[])converter.ConvertTo(img, typeof(byte[]));
             return retn;
         }
-
         public static byte[] GetIcon(string name)
         {
             ComponentResourceManager componentResourceManager = new ComponentResourceManager(typeof(WebServerResources));
@@ -107,7 +109,59 @@ namespace MP3Manager.Files
                 img.Save(ms);
                 var retn = ms.ToArray();
                 return retn;
-            }            
+            }
+        }
+
+        public static Dictionary<string, File> LoadDefaultPlaylist()
+        {
+            var defaultWord = ConvertToBase64("default_");
+            string [] files = Directory.GetFiles(@".\", defaultWord + "*.json");
+            if(files.Length > 0)
+            {
+                return JsonSerializer.Deserialize<Dictionary<string, File>>(Read(files[0]));
+            }
+            return null;
+        }
+
+        public static void SaveCrawl(string name, Dictionary<string, File> crawlResults)
+        {
+            name = ConvertToBase64(name);
+            Write(name + ".json", JsonSerializer.Serialize(crawlResults));
+        }
+        public static void SavePlaylist(string playlistName, List<Playlist> playlists)
+        {
+            Write("playlist_" + playlistName + ".json", JsonSerializer.Serialize(playlists));
+        }
+
+        public static void SaveMetaData(Metadata metaData)
+        {
+            Write("metadata.json", JsonSerializer.Serialize(metaData));
+        }
+
+        public static string ConvertToBase64(string input)
+        {
+            return Convert.ToBase64String(Encoding.UTF8.GetBytes(input));
+        }
+
+        public static string ConvertFromBase64(string input)
+        {
+            return Encoding.UTF8.GetString(Convert.FromBase64String(input));
+        }
+
+        private static string Read(string fileName)
+        {
+            using(StreamReader sr = new StreamReader(fileName))
+            {
+                return sr.ReadToEnd();
+            }
+        }
+        private static void Write(string fileName, string fileContent)
+        {
+            using(StreamWriter sw = new StreamWriter(fileName))
+            {
+                sw.Write(fileContent);
+                sw.Flush();
+            }
         }
     }
 }
