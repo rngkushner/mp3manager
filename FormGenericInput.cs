@@ -44,6 +44,14 @@ namespace MP3Manager
         private void checkBoxBooleanOption_CheckedChanged(object sender, EventArgs e)
         {
             BooleanResult = checkBoxBooleanOption.Checked;
+            if(BooleanResult)
+            {
+                textBoxInput.Enabled = false;
+            }
+            else
+            {
+                textBoxInput.Enabled = true;
+            }
         }
     }
 }

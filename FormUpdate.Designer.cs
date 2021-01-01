@@ -311,6 +311,7 @@
             this.buttonGetSpotify.TabIndex = 8;
             this.buttonGetSpotify.Text = "Get Spotify Data";
             this.buttonGetSpotify.UseVisualStyleBackColor = true;
+            this.buttonGetSpotify.Visible = false;
             this.buttonGetSpotify.Click += new System.EventHandler(this.buttonGetSpotify_ClickAsync);
             // 
             // FormUpdate

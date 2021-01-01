@@ -31,6 +31,7 @@ namespace MP3Manager.WebServer
                 "http://localhost:8675/index/", 
                 "http://localhost:8675/songajax/",
                 "http://localhost:8675/images/",
+                "http://localhost:8675/playlists/",
                 "http://localhost:8675/"
             };
             
@@ -44,7 +45,7 @@ namespace MP3Manager.WebServer
                 if (context.Request.Url.Segments.Length > 1)
                 {
                     string action = context.Request.Url.Segments[1];
-                    System.Diagnostics.Trace.WriteLine(action);
+                    System.Diagnostics.Trace.WriteLine(context.Request.Url.AbsoluteUri);
                     if (action == "song/")
                     {
                         //serve up song
@@ -73,7 +74,7 @@ namespace MP3Manager.WebServer
                             songData = GetErrorSound();
 
                         }
-                        base.RequestToJson(context, songData);
+                        base.RequestToJson(context, songData, "audio/mpeg");
                         return;
                     }
                     else if (action == "images/")
@@ -82,18 +83,55 @@ namespace MP3Manager.WebServer
                         RequestToImage(context, FileUtils.GetResource(image));
                         return;
                     }
+                    else if (action == "playlist/")
+                    {
+                        string playlistName = WebUtility.UrlDecode(context.Request.Url.Segments[2]);
+                        
+                        base.RequestToJson(context, FileUtils.GetPlaylist(playlistName), "text/json");
+
+                        return;
+                    }
+                    else if (action == "playlists/")
+                    {
+                        if (context.Request.HttpMethod == "PUT")
+                        {
+                            using (StreamReader sr = new StreamReader(context.Request.InputStream))
+                            {
+                                string requestContent = sr.ReadToEnd();
+                                HttpContentValues values = ParseQueryString(requestContent);
+                                Playlist playlist = new Playlist();
+                                playlist.SaveOrUpdate(values);
+                                
+                                JsonOKResponse(context);
+                            }
+                        }
+                        else if (context.Request.HttpMethod == "GET")
+                        {
+                            base.RequestToJson(context, FileUtils.GetFileList(FileType.PlayList), "text/json");
+
+                        }
+                        else if (context.Request.HttpMethod == "DELETE")
+                        {
+                            string playlistName = WebUtility.UrlDecode(context.Request.Url.Segments[2].Replace("delete_", ""));
+
+                            FileUtils.DeleteFile("playlist_" + playlistName + ".json");
+
+                            JsonOKResponse(context);
+                        }
+                        return;
+                    }
                     else if (action == "favicon.ico")
-                    {                       
+                    {
                         RequestToImage(context, FileUtils.GetIcon("favicon"), "image /x-icon");
                         return;
                     }
                 }
-
                 base.HandleRequest(context);
             }
             catch(Exception ex)
             {
                 ErrorLogger.LogError(ex);
+                context.Response.StatusCode = 500;
             }
         }
 
@@ -158,7 +196,7 @@ namespace MP3Manager.WebServer
 
         private string GetSongAsBase64(string song)
         {
-            return FileUtils.GetFileAsBase64String(song, musicFiles);
+            return FileUtils.GetSongFileAsBase64String(song, musicFiles);
         }
 
         private byte[] GetSongAsByteArray(string song)

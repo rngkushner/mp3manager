@@ -131,52 +131,141 @@
     <value>&lt;head&gt;
 &lt;script src="https://code.jquery.com/jquery-git.js"&gt;jQuery  &lt;/script&gt;
 &lt;script&gt;
-    class AudioWrapper {
+    let allSongs = new Map();
 
-        constructor() {
-            this.audio = new Audio();
-            let audioObj = this.audio;
-            this.audio.addEventListener('canplaythrough', event =&gt; {
-                if (audioObj.paused) {
-                    audioObj.play();
+    class PlayListManager {
+        buildPlaylist() {            
+            let playlistDiv = document.getElementById('playlistListing');
+            let str = '';
+            for(const s of allSongs.keys()) {
+                let song = allSongs.get(s);
+                str += "&lt;div class='PlayListEditorRow'&gt;&lt;input type='checkbox' id='" + s + "' /&gt; " + song.title + " - " + song.artist + " - " + song.album + "&lt;/div&gt;";
+            };
+
+            playlistDiv.innerHTML = str;        
+        }
+
+        filterPlaylist() {
+            let filterVal = document.getElementById('playlistSongFilter').value;
+            allSongs.forEach((song, key) =&gt; {
+
+                let songString = (song.title ? song.title.toLowerCase() : '') + 
+                    (song.artist ? song.artist.toLowerCase() : '') +  
+                    (song.album ? song.album.toLowerCase() : '');
+
+                if((songString).includes(filterVal.toLowerCase())) {
+                   document.getElementById(key).parentElement.style.display = 'block'; 
                 } else {
-                    audioObj.pause();
+                    document.getElementById(key).parentElement.style.display = 'none';
                 }
             });
         }
 
-        load(url) {
-            //url = "/songajax/" + url;
-            this.audio.src = url.replace("_!_", "'");
+        savePlaylist() {
+            let me = this;
+            let playListSongs = Array.from(playlistListing.querySelectorAll('input:checked')).map(s =&gt; s.id);
+
+            $.ajax(
+            {
+                url: '/playlists/',
+                method: "PUT",
+                dataType: "json",
+                data: {
+                    name: document.getElementById('playlistName').value,
+                    songs: playListSongs
+                },                
+                success: function(data) {
+                    me.loadPlaylistListings();
+                }
+            });
         }
 
-        get isLoaded() {
-            return this.audio.readyState == 4
+        deletePlaylist(playlistName) {
+            let me = this;
+            $.ajax(
+            {
+                url: '/playlists/' + playlistName,
+                method: "DELETE",
+                dataType: "json",                
+                success: function(data) {
+                    pl.resetPlaylist(false);
+                    me.loadPlaylistListings();
+                }
+            });
         }
 
-        get id() {
-            if (this.audio.src !== '' || this.audio.src !== null) {
-                let arr = this.audio.src.split('/');
-                return unescape(arr[arr.length - 1]);
+        loadPlaylistListings()
+        {
+            let me = this;
+            $.ajax(
+            {
+                url: '/playlists/',
+                method: "GET",
+                dataType: "json",
+                success: function(data) {
+                    me.setList(data);
+                }
+            });
+        }
+
+        setList(data) {
+            let listingContainer = document.getElementById('playlistsListing');
+            let str = '';
+
+            for(var i=0; i&lt;data.length; i++) {
+                let name = data[i].replace('.\\playlist_', '').replace('.json', '');
+
+                str += "&lt;div class='playlistRow'&gt;&lt;div class='playlistPlayButton' id='" + name + "'&gt;" + name + "&lt;/div&gt; &lt;div class='deletePlaylist' id='delete_" + name + "'&gt;delete&lt;/div&gt;&lt;/div&gt;";
+            
             }
-            return '';
-        }
-        play() {
-            this.audio.play();
+            listingContainer.innerHTML = str;
         }
 
-        pause() {
-            this.audio.pause();
+        loadPlaylist(playlistId)
+        {
+            let me = this;
+            $.ajax(
+            {
+                url: '/playlist/' + playlistId,
+                method: "GET",
+                dataType: "json",
+                success: function(data) {
+                   pl.filterToPlaylist(data.List);
+                }
+            });
         }
     }
 
-    class Playlister {
+    class PlayLibrarian {
         allSongs = null;
+        keys = [];
         songIndex = 0;
+
+        constructor()
+        {
+            this.allSongs = allSongs;
+            this.keys = Array.from(this.allSongs.keys());
+        }
 
         load() {
             this._buildList();
-            //console.log(this.allSongs);
+        }
+
+        resetPlaylist(startPlayer) {
+            this.keys = Array.from(this.allSongs.keys());
+            
+            this.makePlaylist();
+            if(startPlayer) {
+                this.getNextSong();
+            }            
+        }
+
+        filterToPlaylist(playlistSongs)
+        {
+            this.keys = playlistSongs;
+
+            this.makePlaylist();
+            this.getNextSong();
         }
 
         makePlaylist() {
@@ -184,8 +273,9 @@
             this._shuffle();
             let str = '';
 
-            this.allSongs.forEach(s =&gt; {
-                str += "&lt;div class='PlaylistItem'&gt;" + s.title + " - " + s.artist + "&lt;/div&gt;";
+            this.keys.forEach(s =&gt; {
+                let song = this.allSongs.get(decodeURIComponent(s));
+                str += "&lt;div class='PlaylistItem'&gt;" + song.title + " - " + song.artist + "&lt;/div&gt;";
             });
 
             document.getElementById("playlist").innerHTML = str;
@@ -193,77 +283,63 @@
 
         getNextSong() {
             let player = document.getElementById("visiblePlayer");
-            if(this.allSongs !== null &amp;&amp; this.allSongs.length &gt; 0)
+            if(this.allSongs !== null &amp;&amp; this.allSongs.size &gt; 0)
             {
                 
                 let lastSongIndex = this.songIndex;
                 this.songIndex++;
 
-                if(this.allSongs.length &lt;= this.songIndex) {
+                if(this.allSongs.size &lt;= this.songIndex) {
                     this.songIndex = 0;
                 }
 
                 $('.PlaylistItem:nth-child(' + (lastSongIndex + 1) + ')').removeClass('NowPlaying');
 
                 let currentSong = $('.PlaylistItem')[this.songIndex];
-                $(currentSong).addClass('NowPlaying');
-                currentSong.scrollIntoView({ behavior: "smooth", block: "center" });
+                if(currentSong) {
+                    $(currentSong).addClass('NowPlaying');
+                    //currentSong.scrollIntoView({ behavior: "smooth", block: "center" });
+                    currentSong.scrollIntoView();
 
-                let song = this.allSongs[this.songIndex];
-                document.title = "Playing: " + song.title + " - " + song.artist;
+                    let song = this.allSongs.get(decodeURIComponent(this.keys[this.songIndex].toString()));
+                    document.title = "Playing: " + song.title + " - " + song.artist;
 
-                player.src = "/songajax/" + song.key.replace("_!_", "'");
-
+                    player.src = "/songajax/" + decodeURIComponent(this.keys[this.songIndex].toString());
+                }
             }
-
         }
 
         getPreviousSong() {
             let player = document.getElementById("visiblePlayer");
-            if(this.allSongs !== null &amp;&amp; this.allSongs.length &gt; 0)
+            if(this.allSongs !== null &amp;&amp; this.allSongs.size &gt; 0)
             {
                 let lastSong = this.songIndex;
 
                 this.songIndex--;
 
                 if(this.songIndex &lt; 0) {
-                    this.songIndex = this.allSongs.length - 1;
+                    this.songIndex = this.keys.length - 1;
                 }
 
                 //PlaylistItem
                 $('.PlaylistItem:nth-child(' + (lastSong + 1) +')').removeClass('NowPlaying');
                 let currentSong = $('.PlaylistItem:nth-child(' + (this.songIndex + 1) +')');
-                currentSong.addClass('NowPlaying');
-                currentSong.get(0).scrollIntoView({ behavior: "smooth", block: "center" });
+                if(currentSong) {
+                    currentSong.addClass('NowPlaying');
+                    //currentSong.get(0).scrollIntoView({ behavior: "smooth", block: "center" });
+                    currentSong.get(0).scrollIntoView();
 
-                let song = this.allSongs[this.songIndex];
-                document.title = "Playing: " + song.title + " - " + song.artist;
+                    let song = this.allSongs.get(decodeURIComponent(this.keys[this.songIndex].toString()));
+                    document.title = "Playing: " + song.title + " - " + song.artist;
 
-                player.src = "/songajax/" + song.key.replace("_!_", "'");
+                    player.src = "/songajax/" + decodeURIComponent(this.keys[this.songIndex].toString());
+                }
             }
         }
-
-        get isLoaded() {
-            return this.allSongs != null;
-        }
-
-        _buildList() {
-            if(!this.isLoaded)
-            {
-                this.allSongs = Array.from(document.querySelectorAll(".OneSong"))
-                            .map(s =&gt; {
-                                return {
-                                   key: s.id,
-                                   artist: s.getAttribute('data-artist'),
-                                   title: s.childNodes[0].textContent
-                                }
-                            });
-            }
-        }
-
 
         _shuffle() {
-            var currentIndex = this.allSongs.length, temporaryValue, randomIndex;
+            
+            var currentIndex = this.keys.length, temporaryValue, randomIndex;
 
             // While there remain elements to shuffle...
             while (0 !== currentIndex) {
@@ -273,19 +349,21 @@
                 currentIndex -= 1;
 
                 // And swap it with the current element.
-                temporaryValue = this.allSongs[currentIndex];
-                this.allSongs[currentIndex] = this.allSongs[randomIndex];
-                this.allSongs[randomIndex] = temporaryValue;
+                temporaryValue = this.keys[currentIndex];
+                this.keys[currentIndex] = this.keys[randomIndex];
+                this.keys[randomIndex] = temporaryValue;
             }            
         }
     }
 
-    let audioWrapper = new AudioWrapper();
     let pl = null;
+    let manager = null;
 
     window.addEventListener('load', (event) =&gt; {
-        pl = new Playlister();
-        pl.load();
+        pl = new PlayLibrarian();
+         
+        manager = new PlayListManager();
+        manager.loadPlaylistListings();
 
         document.getElementById("visiblePlayer").addEventListener("ended", function(event) {
             pl.getNextSong();
@@ -304,20 +382,50 @@
             pl.getPreviousSong();
         });
 
-        document.getElementById("toggleALaCarte").addEventListener("click", function(event) {
-            if($('#alacarteContainer').is(':visible')) {
-                $('#alacarteContainer').hide();
-            } else {
-                $('#alacarteContainer').show();
-            }
-        });
-
         document.getElementById("pacmanwtf").addEventListener("click", function(event) {
             if($('#pacmanwtfexplained').is(':visible')) {
                 $('#pacmanwtfexplained').hide();
             } else {
                 $('#pacmanwtfexplained').show();
             }
+        });
+
+        document.getElementById("createPlaylist").addEventListener("click", function(event) {
+            manager.buildPlaylist();
+            $('#editPlaylistContainer').show();
+        });
+       
+        document.getElementById("playlistSongFilter").addEventListener("keyup", function(event) {
+            manager.filterPlaylist();
+        });
+        
+        document.getElementById("savePlaylist").addEventListener("click", function(event) {
+            manager.savePlaylist();
+        });
+
+        document.getElementById("playlistName").addEventListener("keydown", function(e){
+            if (e.ctrlKey || e.altKey) {
+                e.preventDefault();
+            } else {
+                var key = e.keyCode;
+                if (!((key == 8) || (key == 32) || (key == 46) || (key &gt;= 35 &amp;&amp; key &lt;= 40) || (key &gt;= 65 &amp;&amp; key &lt;= 90))) {
+                    e.preventDefault();
+                }
+            }
+        });
+
+        document.getElementById("playlistsListing").addEventListener("click", function(event) {
+
+            let playlistId = event.target.id;
+            if(playlistId.startsWith("delete_")) {
+                manager.deletePlaylist(playlistId);
+            } else {
+                manager.loadPlaylist(playlistId);
+            }                       
+        });        
+
+        document.getElementById("clearPlaylist").addEventListener("click", function(event) {
+            pl.resetPlaylist(true);
         });
         
     });
@@ -381,7 +489,7 @@ Button {
     font-weight: bold;
 }
 
- #playlistContainer {
+ #playerContainer {
     background-color: #909090;
     border: 1pt black solid;
     border-radius: 10px;
@@ -398,6 +506,15 @@ Button {
     color: #6060FF;
 }
 
+.playlistRow DIV {
+    display: inline-block;
+    cursor: pointer;    
+    margin: 3px;
+}
+
+.deletePlaylist {
+   color: #6060FF;
+}
 &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
@@ -406,8 +523,8 @@ Button {
     &lt;h2&gt;Project Wurlitzer&lt;/h2&gt;
 &lt;/div&gt;
 &lt;div class="HalfScreen AlignTop"&gt;
-    &lt;h2&gt;Your Playlist&lt;/h2&gt;
-    &lt;div id="playlistContainer"&gt;
+    &lt;h2&gt;Player&lt;/h2&gt;
+    &lt;div id="playerContainer"&gt;
         &lt;div class="playerControl"&gt;
             &lt;button id="shuffle"&gt;Shuffle&lt;/button&gt;
         &lt;/div&gt;
@@ -434,14 +551,35 @@ Button {
             &lt;/p&gt;
         &lt;/div&gt;
     &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="HalfScreen"&gt;
-    &lt;h2&gt;All Songs a la carte&lt;/h2&gt;
-    &lt;button id="toggleALaCarte"&gt;Show/Hide&lt;/button&gt;
-    &lt;div id="alacarteContainer" style="display:block"&gt;
-    &lt;&lt;bodyHTML&gt;&gt;
+    &lt;div&gt;
+    Future home of the user-controlled 
+    quality tuner
     &lt;/div&gt;
 &lt;/div&gt;
+&lt;div class="HalfScreen"&gt;
+    &lt;h2&gt;Your Playlists&lt;/h2&gt;
+    &lt;div&gt;
+        &lt;div class='playlistRow'&gt;&lt;div class='playlistPlayButton' id='clearPlaylist'&gt;All Songs&lt;/div&gt;&lt;/div&gt;
+        &lt;div id="playlistsListing"&gt;
+        &lt;/div&gt;
+        &lt;button id="createPlaylist"&gt;
+            Create Playlist
+        &lt;/button&gt;
+    &lt;div&gt;
+    &lt;div id="editPlaylistContainer" style="display:none"&gt;
+        &lt;h2&gt;Create/Edit Playlists&lt;/h2&gt;
+        &lt;div&gt;
+            &lt;input type="text" placeholder="Playlist name" maxlength="20" id="playlistName"&gt;&lt;/input&gt;
+            &lt;button id="savePlaylist"&gt;Save&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+            &lt;input type="text" placeholder="Filter" id="playlistSongFilter"&gt;&lt;/input&gt;
+        &lt;/div&gt;
+        &lt;div id="playlistListing"&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;&lt;bodyHTML&gt;&gt;
 &lt;/body&gt;</value>
     <comment>HTML Template for music list and player</comment>
   </data>

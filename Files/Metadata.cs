@@ -6,6 +6,8 @@ namespace MP3Manager.Files
 {
     public class Metadata : Dictionary<string, Dictionary<string, string>>
     {
+        //The metadata is structured so that every song (song key) can have a set of name/value pairs
+        
         public Metadata()
         {
 

@@ -21,3 +21,5 @@ C:\Users\rngku\source\repos\MP3Manager\obj\Release\netcoreapp3.1\MP3Manager.dll
 C:\Users\rngku\source\repos\MP3Manager\obj\Release\netcoreapp3.1\MP3Manager.pdb
 C:\Users\rngku\source\repos\MP3Manager\obj\Release\netcoreapp3.1\MP3Manager.genruntimeconfig.cache
 C:\Users\rngku\source\repos\MP3Manager\obj\Release\netcoreapp3.1\MP3Manager.FormErrors.resources
+C:\Users\rngku\source\repos\MP3Manager\bin\Release\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\rngku\source\repos\MP3Manager\obj\Release\netcoreapp3.1\MP3Manager.FormGenericInput.resources

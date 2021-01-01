@@ -13,6 +13,12 @@ using System.Windows.Forms;
 
 namespace MP3Manager.Files
 {
+
+    public enum FileType
+    {
+        PlayList = 1,
+        Library
+    }
     public static class FileUtils
     {
         public static void Transform(Dictionary<string, File> fileList)
@@ -75,7 +81,7 @@ namespace MP3Manager.Files
             return bytes;
         }
 
-        public static string GetFileAsBase64String(string key, Dictionary<string, File> musicList)
+        public static string GetSongFileAsBase64String(string key, Dictionary<string, File> musicList)
         {
             Stream stream = System.IO.File.OpenRead(musicList[key].Paths[0]);
 
@@ -90,6 +96,24 @@ namespace MP3Manager.Files
             sr.Dispose();
 
             return Convert.ToBase64String(bytes);
+        }
+
+        public static Playlist GetPlaylist(string playlistName)
+        {
+            var fileContent = Read($"playlist_{playlistName}.json");
+            return JsonSerializer.Deserialize<Playlist>(fileContent);
+        }
+        public static List<string> GetFileList(FileType fileType)
+        {
+            if(fileType == FileType.PlayList)
+            {                
+                return new List<string>(Directory.GetFiles(@".\", "playlist_*.json"));
+            }
+            else if(fileType == FileType.Library)
+            {
+
+            }
+            return null;
         }
 
         public static byte[] GetResource(string name)
@@ -128,9 +152,9 @@ namespace MP3Manager.Files
             name = ConvertToBase64(name);
             Write(name + ".json", JsonSerializer.Serialize(crawlResults));
         }
-        public static void SavePlaylist(string playlistName, List<Playlist> playlists)
+        public static void SavePlaylist(string playlistName, Playlist playlist)
         {
-            Write("playlist_" + playlistName + ".json", JsonSerializer.Serialize(playlists));
+            Write("playlist_" + playlistName + ".json", JsonSerializer.Serialize(playlist));
         }
 
         public static void SaveMetaData(Metadata metaData)
@@ -138,6 +162,13 @@ namespace MP3Manager.Files
             Write("metadata.json", JsonSerializer.Serialize(metaData));
         }
 
+        public static void DeleteFile(string fileName)
+        {
+            if(System.IO.File.Exists(fileName))
+            {
+                System.IO.File.Delete(fileName);
+            }
+        }
         public static string ConvertToBase64(string input)
         {
             return Convert.ToBase64String(Encoding.UTF8.GetBytes(input));

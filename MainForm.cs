@@ -331,7 +331,7 @@ namespace MP3Manager
             if(dlg.ShowDialog() == DialogResult.OK)
             {
                 //if default, ignore provide name
-                string fileName = dlg.BooleanResult ? "default_" : "" + dlg.ReturnValue;
+                string fileName = dlg.BooleanResult ? "default_" : dlg.ReturnValue;
 
                 FileUtils.SaveCrawl(fileName, completeList);
                 buttonSaveAsPlaylist.Visible = false;

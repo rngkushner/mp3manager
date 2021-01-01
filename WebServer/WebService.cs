@@ -44,6 +44,8 @@ namespace MP3Manager.WebServer
 
                     // Create a listener.
                     instance.listener = new HttpListener();
+                    instance.listener.IgnoreWriteExceptions = true;
+
                     // Add the prefixes.
                     foreach (string s in prefixes)
                     {

@@ -94,22 +94,15 @@ namespace MP3Manager.WebServer {
         ///   Looks up a localized string similar to &lt;head&gt;
         ///&lt;script src=&quot;https://code.jquery.com/jquery-git.js&quot;&gt;jQuery  &lt;/script&gt;
         ///&lt;script&gt;
-        ///    class AudioWrapper {
+        ///    let allSongs = new Map();
         ///
-        ///        constructor() {
-        ///            this.audio = new Audio();
-        ///            let audioObj = this.audio;
-        ///            this.audio.addEventListener(&apos;canplaythrough&apos;, event =&gt; {
-        ///                if (audioObj.paused) {
-        ///                    audioObj.play();
-        ///                } else {
-        ///                    audioObj.pause();
-        ///                }
-        ///            });
-        ///        }
-        ///
-        ///        load(url) {
-        ///         [rest of string was truncated]&quot;;.
+        ///    class PlayListManager {
+        ///        buildPlaylist() {            
+        ///            let playlistDiv = document.getElementById(&apos;playlistListing&apos;);
+        ///            let str = &apos;&apos;;
+        ///            for(const s of allSongs.keys()) {
+        ///                let song = allSongs.get(s);
+        ///                str += &quot;&lt;div class=&apos;PlayListEditorRow&apos;&gt;&lt;input type=&apos;checkbox&apos; id=&apos;&quot; + s + &quot;&apos; /&gt; &quot; + song.title + &quot; - &quot; + song.ar [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string WebListingPlayer {
             get {
