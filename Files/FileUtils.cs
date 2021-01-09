@@ -14,6 +14,12 @@ using System.Windows.Forms;
 namespace MP3Manager.Files
 {
 
+    public enum MediaType
+    {
+        Audio = 1,
+        Video
+    }
+
     public enum FileType
     {
         PlayList = 1,
@@ -45,6 +51,7 @@ namespace MP3Manager.Files
                 fileName = rxSpaces.Replace(fileName, " ");
 
                 //4 remove file extension
+                //TODO, make it clean up all file extensions
                 fileName = fileName.Replace("mp3", "", StringComparison.InvariantCultureIgnoreCase);
 
                 //5 remove artist name

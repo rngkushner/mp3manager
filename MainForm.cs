@@ -25,37 +25,38 @@ namespace MP3Manager
 
         private void btnCrawl_Click(object sender, EventArgs e)
         {
-            folderBrowserDialog1.ShowDialog();
-            string startingPath = folderBrowserDialog1.SelectedPath;
-
             try
             {
-                if (startingPath != String.Empty)
+                if(folderBrowserDialog1.ShowDialog() == DialogResult.OK)
                 {
-                    crawler.Crawl(startingPath);
-                }
-                textBoxMessages.Text = $"Found {crawler.GetFiles().Count} music files.";
+                    string startingPath = folderBrowserDialog1.SelectedPath;
 
-                if (crawler.GetFiles() != null)
-                {
-                    textBoxMessages.Text = "Tagging all the files. Hang on.";
-
-                    var resultFiles = new Dictionary<string, File>();
-
-                    tagger = new Tagger(resultFiles);
-                    tagger.RunTagJob(crawler.GetFiles(), (list) =>
+                    if (startingPath != String.Empty)
                     {
-                        SetGridDataDelegate d = new SetGridDataDelegate(SetGridData);
-                        this.Invoke(d, new object[] { list });
-                    });
-                    buttonSaveAsPlaylist.Visible = true;
+                        crawler.Crawl(startingPath, MediaType.Audio);
+                    }
+                    textBoxMessages.Text = $"Found {crawler.GetFiles().Count} music files.";
+
+                    if (crawler.GetFiles() != null)
+                    {
+                        textBoxMessages.Text = "Tagging all the files. Hang on.";
+
+                        var resultFiles = new Dictionary<string, File>();
+
+                        tagger = new Tagger(resultFiles);
+                        tagger.RunTagJob(crawler.GetFiles(), (list) =>
+                        {
+                            SetGridDataDelegate d = new SetGridDataDelegate(SetGridData);
+                            this.Invoke(d, new object[] { list });
+                        });
+                        buttonSaveAsPlaylist.Visible = true;
+                    }
                 }
             }
             catch(Exception ex)
             {
                 ErrorLogger.LogError(ex);
             }
-
         }
 
         private void InitGrid()
@@ -214,7 +215,7 @@ namespace MP3Manager
 
         private void buttonSaveChanges_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("This will apply your changes to your MP3s. Continue?", "Save Changes",
+            if (MessageBox.Show("This will apply your changes to the files. Continue?", "Save Changes",
                 MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
             {
                 if(completeList != null)
@@ -227,7 +228,7 @@ namespace MP3Manager
                             if (row.DefaultCellStyle.BackColor == Color.Beige)
                             {
                                 var file = completeList[row.Cells["key"].Value.ToString()];
-                                WriteMP3PropertiesToFile(file, row);
+                                WriteMediaPropertiesToFile(file, row);
                                 row.DefaultCellStyle.BackColor = Color.Empty;
                             }
                         }
@@ -242,23 +243,23 @@ namespace MP3Manager
         }
 
 
-        private void WriteMP3PropertiesToFile(File fileData, DataGridViewRow row)
+        private void WriteMediaPropertiesToFile(File fileData, DataGridViewRow row)
         {
             fileData.Album = row.Cells["Album"].Value == null ? null : row.Cells["Album"].Value.ToString(); 
             fileData.Artist = row.Cells["Artist"].Value == null ? null : row.Cells["Artist"].Value.ToString();
             fileData.Title = row.Cells["Title"].Value == null ? null : row.Cells["Title"].Value.ToString();
             fileData.Genre = row.Cells["Genre"].Value == null ? null : row.Cells["Genre"].Value.ToString();
                             
-            var mp3File = TagLib.File.Create(fileData.Paths[0]);
+            var mediaFile = TagLib.File.Create(fileData.Paths[0]);
 
-            mp3File.Tag.Album = fileData.Album;
+            mediaFile.Tag.Album = fileData.Album;
 
-            mp3File.Tag.Performers = new[] { fileData.Artist ?? String.Empty };
-            mp3File.Tag.AlbumArtists = mp3File.Tag.Performers;
-            mp3File.Tag.Title = fileData.Title;
-            mp3File.Tag.Genres = new[] { fileData.Genre ?? String.Empty };
+            mediaFile.Tag.Performers = new[] { fileData.Artist ?? String.Empty };
+            mediaFile.Tag.AlbumArtists = mediaFile.Tag.Performers;
+            mediaFile.Tag.Title = fileData.Title;
+            mediaFile.Tag.Genres = new[] { fileData.Genre ?? String.Empty };
 
-            mp3File.Save();
+            mediaFile.Save();
         }
 
         private void MainForm_Load(object sender, EventArgs e)

@@ -17,9 +17,9 @@ namespace MP3Manager.Files
 
         private JobDoneDelegate myJobIsDone;
 
-        public Tagger(Dictionary<string, File> MP3List)
+        public Tagger(Dictionary<string, File> MediaFileList)
         {
-            musicList = MP3List;
+            musicList = MediaFileList;
             secondaryKey = new Dictionary<string, string>();
             Exceptions = new List<string>();
         }
@@ -53,7 +53,7 @@ namespace MP3Manager.Files
                 {
                     var val = paths.Dequeue();
                     jobList.Add(
-                        Task.Run(() => { SetMP3Properties(val); })
+                        Task.Run(() => { SetMediaFileProperties(val); })
                     );
                 }
 
@@ -62,26 +62,25 @@ namespace MP3Manager.Files
             }            
         }
 
-        private void SetMP3Properties(string filePath)
+        private void SetMediaFileProperties(string filePath)
         {
             try
             {
-
                 var fileNameOnly = Path.GetFileName(filePath);
 
-                var mp3 = TagLib.File.Create(filePath);
+                var mediaFile = TagLib.File.Create(filePath);
 
                 //A song with this exact TITLE is in musicList
-                if (mp3.Tag.Title != null && secondaryKey.ContainsKey(mp3.Tag.Title))
+                if (mediaFile.Tag.Title != null && secondaryKey.ContainsKey(mediaFile.Tag.Title))
                 {
                     //by my logic, it MUST exist in music list
-                    var existingFile = musicList[secondaryKey[mp3.Tag.Title]];
-                    if(!FileHasPath(existingFile, filePath) && existingFile.Artist == mp3.Tag.FirstAlbumArtist)                    {
+                    var existingFile = musicList[secondaryKey[mediaFile.Tag.Title]];
+                    if(!FileHasPath(existingFile, filePath) && existingFile.Artist == mediaFile.Tag.FirstAlbumArtist)                    {
                         existingFile.Paths.Add(filePath);
-                        existingFile.Title = !String.IsNullOrEmpty(existingFile.Title) ? existingFile.Title : mp3.Tag.Title ?? fileNameOnly;
-                        existingFile.Album = !String.IsNullOrEmpty(existingFile.Album) ? existingFile.Album : mp3.Tag.Album;
-                        existingFile.Artist = !String.IsNullOrEmpty(existingFile.Artist) ? existingFile.Artist : mp3.Tag.FirstAlbumArtist;
-                        existingFile.Genre = !String.IsNullOrEmpty(existingFile.Genre) ? existingFile.Genre : mp3.Tag.FirstGenre;
+                        existingFile.Title = !String.IsNullOrEmpty(existingFile.Title) ? existingFile.Title : mediaFile.Tag.Title ?? fileNameOnly;
+                        existingFile.Album = !String.IsNullOrEmpty(existingFile.Album) ? existingFile.Album : mediaFile.Tag.Album;
+                        existingFile.Artist = !String.IsNullOrEmpty(existingFile.Artist) ? existingFile.Artist : mediaFile.Tag.FirstAlbumArtist;
+                        existingFile.Genre = !String.IsNullOrEmpty(existingFile.Genre) ? existingFile.Genre : mediaFile.Tag.FirstGenre;
                     }
                 }
                 else
@@ -99,10 +98,10 @@ namespace MP3Manager.Files
                         };
 
                         file.Paths.Add(filePath);
-                        file.Title = mp3.Tag.Title ?? fileNameOnly;
-                        file.Album = mp3.Tag.Album;
-                        file.Artist = mp3.Tag.FirstAlbumArtist;
-                        file.Genre = mp3.Tag.FirstGenre;
+                        file.Title = mediaFile.Tag.Title ?? fileNameOnly;
+                        file.Album = mediaFile.Tag.Album;
+                        file.Artist = mediaFile.Tag.FirstAlbumArtist;
+                        file.Genre = mediaFile.Tag.FirstGenre;
 
                         musicList.Add(fileNameOnly, file);
                         secondaryKey.Add(file.Title, fileNameOnly);

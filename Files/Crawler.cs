@@ -15,14 +15,27 @@ namespace MP3Manager.Files
         {
             FileList = new List<string>();
         }
-        public void Crawl(string startingDirectory)
+        public void Crawl(string startingDirectory, MediaType mediaType)
         {
             FileList.Clear();
 
-            foreach (string dir in Directory.GetFiles(startingDirectory, "*.mp3", SearchOption.AllDirectories))
-            {               
-                FileList.Add(dir);                
+            string[] filters;
+            if(mediaType == MediaType.Audio)
+            {
+                filters = new string[] { ".mp3", ".m4a", ".ogg", ".wav" };
             }
+            else // if (mediaType == MediaType.Video)
+            {
+                filters = new string[] { ".mp4" };
+            }
+
+
+            foreach(var dirFile in Directory.EnumerateFiles(startingDirectory, "*.*", SearchOption.AllDirectories)
+                .Where(f => filters.Any(f.EndsWith)))
+            {
+                FileList.Add(dirFile);
+            }
+
         }
 
         public List<string> GetFiles()

@@ -199,7 +199,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MainForm";
-            this.Text = "MP3 Main Panel";
+            this.Text = "Media Manager Main Panel";
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.songGrid)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);

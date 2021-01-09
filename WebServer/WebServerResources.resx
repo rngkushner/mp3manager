@@ -162,8 +162,19 @@
         }
 
         savePlaylist() {
+
+            if(document.getElementById('playlistName').value === '') {
+                alert('Please name your playlist.');
+                return;
+            }
+
             let me = this;
             let playListSongs = Array.from(playlistListing.querySelectorAll('input:checked')).map(s =&gt; s.id);
+
+            if(playListSongs.length == 0) {
+                alert('Please select at least one song. Probably more since it is a playlist, right?');
+                return;
+            }
 
             $.ajax(
             {
@@ -188,7 +199,7 @@
                 method: "DELETE",
                 dataType: "json",                
                 success: function(data) {
-                    pl.resetPlaylist(false);
+                    //pl.resetPlaylist(false);
                     me.loadPlaylistListings();
                 }
             });
@@ -289,7 +300,7 @@
                 let lastSongIndex = this.songIndex;
                 this.songIndex++;
 
-                if(this.allSongs.size &lt;= this.songIndex) {
+                if(this.keys.length &lt;= this.songIndex) {
                     this.songIndex = 0;
                 }
 
@@ -435,6 +446,21 @@
 Body {
     font-family: Verdana, Arial, sans-serif;
     font-size: 10pt;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 
 Button {
@@ -509,17 +535,26 @@ Button {
 .playlistRow DIV {
     display: inline-block;
     cursor: pointer;    
-    margin: 3px;
+    margin: 5px;
+    padding: 2px;
+    border: 1pt solid #333333;
+    border-radius: 8px;
+    box-shadow: 2px 1px 1px black;
 }
 
 .deletePlaylist {
    color: #6060FF;
 }
+
+#playlistsListing{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
 &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
 &lt;div class="header"&gt;
-    &lt;h1&gt;MP3 Manager Song Server&lt;/h1&gt;
+    &lt;h1&gt;Media Manager Song Server&lt;/h1&gt;
     &lt;h2&gt;Project Wurlitzer&lt;/h2&gt;
 &lt;/div&gt;
 &lt;div class="HalfScreen AlignTop"&gt;
