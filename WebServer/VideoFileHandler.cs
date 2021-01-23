@@ -1,35 +1,32 @@
 ﻿using MP3Manager.Files;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Net;
-using System.Resources;
 using System.Text;
 using System.Web;
 using File = MP3Manager.Files.File;
 
 namespace MP3Manager.WebServer
 {
-    public class MP3RequestHandler : BaseHandler, IRequestHandler
+    public class VideoFileHandler : BaseHandler, IRequestHandler
     {
 
-        private Dictionary<string, File> musicFiles;
+        private Dictionary<string, File> videoFiles;
 
-        public MP3RequestHandler(Dictionary<string, File> musicFiles)
+        public VideoFileHandler(Dictionary<string, File> videoFiles)
         {
-            this.musicFiles = musicFiles;
-            prefixes = new string[] { "http://localhost:8675/song/", 
-                "http://localhost:8675/index/", 
-                "http://localhost:8675/songajax/",
+            this.videoFiles = videoFiles;
+            prefixes = new string[] { "http://localhost:8675/vid/",
+                "http://localhost:8675/index/",
+                "http://localhost:8675/vidajax/",
                 "http://localhost:8675/images/",
                 "http://localhost:8675/playlists/",
                 "http://localhost:8675/"
             };
-            
-        }
 
-        public override void HandleRequest(HttpListenerContext context) 
+        }
+        public override void HandleRequest(HttpListenerContext context)
         {
             try
             {
@@ -38,28 +35,20 @@ namespace MP3Manager.WebServer
                 {
                     string action = context.Request.Url.Segments[1];
                     System.Diagnostics.Trace.WriteLine(context.Request.Url.AbsoluteUri);
-                    if (action == "song/")
-                    {
-                        //serve up song
-                        string song = context.Request.Url.Segments[2];
-                        song = HttpUtility.UrlDecode(song);
-                        ServeUpSong(song);
-
-                    }
-                    else if (action == "index/")
+                    if (action == "index/")
                     {
                         //build up and return song list.
-                        if (musicFiles != null && musicFiles.Keys.Count > 0)
+                        if (videoFiles != null && videoFiles.Keys.Count > 0)
                         {
-                            SetSongList();
+                            SetVideoList();
                         }
                     }
-                    else if (action == "songajax/")
+                    else if (action == "vidajax/")
                     {
-                        string song = context.Request.Url.Segments[2];
+                        string video = context.Request.Url.Segments[2];
 
-                        song = FileUtils.ConvertFromBase64(song);
-                        var songData = GetSongAsByteArray(song);
+                        video = FileUtils.ConvertFromBase64(video);
+                        var songData = GetVideoAsByteArray(video);
                         if (songData == null)
                         {
                             //get error sound
@@ -78,8 +67,8 @@ namespace MP3Manager.WebServer
                     else if (action == "playlist/")
                     {
                         string playlistName = WebUtility.UrlDecode(context.Request.Url.Segments[2]);
-                        
-                        base.RequestToJson(context, FileUtils.GetPlaylist(playlistName, MediaType.Audio), "text/json");
+
+                        base.RequestToJson(context, FileUtils.GetPlaylist(playlistName, MediaType.Video), "text/json");
 
                         return;
                     }
@@ -91,15 +80,15 @@ namespace MP3Manager.WebServer
                             {
                                 string requestContent = sr.ReadToEnd();
                                 HttpContentValues values = ParseQueryString(requestContent);
-                                Playlist playlist = new Playlist(true);
+                                Playlist playlist = new Playlist(false);
                                 playlist.SaveOrUpdate(values);
-                                
+
                                 JsonOKResponse(context);
                             }
                         }
                         else if (context.Request.HttpMethod == "GET")
                         {
-                            base.RequestToJson(context, FileUtils.GetPlaylists(MediaType.Audio), "text/json");
+                            base.RequestToJson(context, FileUtils.GetPlaylists(MediaType.Video), "text/json");
 
                         }
                         else if (context.Request.HttpMethod == "DELETE")
@@ -120,14 +109,19 @@ namespace MP3Manager.WebServer
                 }
                 base.HandleRequest(context);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ErrorLogger.LogError(ex);
                 context.Response.StatusCode = 500;
             }
         }
 
-        private void SetSongList()
+        private byte[] GetVideoAsByteArray(string video)
+        {
+            return FileUtils.GetFileAsByteArray(video, videoFiles);
+        }
+
+        private void SetVideoList()
         {
             StringBuilder sb = new StringBuilder();
 
@@ -137,56 +131,31 @@ namespace MP3Manager.WebServer
             string page = componentResourceManager.GetString("WebListingPlayer");
 #else
             string page = string.Empty;
-            using (var sr = new StreamReader("./webpage.txt"))
+            using (var sr = new StreamReader("./videowebpage.txt"))
             {
                 page = sr.ReadToEnd();
             }
 #endif
             sb.AppendLine("<script>");
-            
-            foreach (string key in musicFiles.Keys)
+
+            foreach (string key in videoFiles.Keys)
             {
-                var musicFile = (AudioFile)musicFiles[key];
+                var videoFile = videoFiles[key] as VideoFile;
                 var escapedKey = FileUtils.ConvertToBase64(key);
-                
-                sb.AppendLine(
-                    $"allSongs.set(\"{escapedKey}\", {{ album: \"{musicFile.Album}\", " +
-                    $"artist: \"{musicFile.Artist}\", " +
-                    $"title: \"{musicFile.Title}\" }});"
-                );
+
+                //TODO
+                //sb.AppendLine(
+                //    $"allVids.set(\"{escapedKey}\", {{ album: \"{videoFile.Album}\", " +
+                //    $"artist: \"{videoFile.Artist}\", " +
+                //    $"title: \"{videoFile.Title}\" }});"
+                //);
             }
-            
+
             sb.AppendLine("</script>");
 
             page = page.Replace("<<bodyHTML>>", sb.ToString());
 
             bodyHTML = page;
         }
-
-        private void ServeUpSong(string song)
-        {
-            //populates a JavaScript variable with a B64 array intended for a page
-            StringBuilder sb = new StringBuilder();
-
-            sb.AppendLine("<script>");
-            sb.AppendLine($"var tune = 'data:audio/wav;base64,{GetSongAsBase64(song)}';");
-            sb.AppendLine("function playTune() { var audio = new Audio(tune); audio.play(); }");
-            sb.AppendLine("</script>");
-
-            sb.AppendLine($"<button onclick='playTune();'>{song}</button>");
-
-            bodyHTML = sb.ToString();
-        }
-
-        private string GetSongAsBase64(string song)
-        {
-            return FileUtils.GetSongFileAsBase64String(song, musicFiles);
-        }
-
-        private byte[] GetSongAsByteArray(string song)
-        {
-            return FileUtils.GetFileAsByteArray(song, musicFiles);
-        }
-
     }
 }

@@ -32,7 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.btnCrawl = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.songGrid = new System.Windows.Forms.DataGridView();
+            this.mainGrid = new System.Windows.Forms.DataGridView();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItemEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemFileLocs = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,7 +44,9 @@
             this.checkBoxRunWeb = new System.Windows.Forms.CheckBox();
             this.buttonErrors = new System.Windows.Forms.Button();
             this.buttonSaveAsPlaylist = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.songGrid)).BeginInit();
+            this.radioButtonMusic = new System.Windows.Forms.RadioButton();
+            this.radioButtonVideo = new System.Windows.Forms.RadioButton();
+            ((System.ComponentModel.ISupportInitialize)(this.mainGrid)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -59,22 +61,22 @@
             this.btnCrawl.UseVisualStyleBackColor = true;
             this.btnCrawl.Click += new System.EventHandler(this.btnCrawl_Click);
             // 
-            // songGrid
+            // mainGrid
             // 
-            this.songGrid.AllowUserToAddRows = false;
-            this.songGrid.AllowUserToDeleteRows = false;
-            this.songGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.mainGrid.AllowUserToAddRows = false;
+            this.mainGrid.AllowUserToDeleteRows = false;
+            this.mainGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.songGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.songGrid.ContextMenuStrip = this.contextMenuStrip1;
-            this.songGrid.Location = new System.Drawing.Point(12, 94);
-            this.songGrid.Name = "songGrid";
-            this.songGrid.RowHeadersWidth = 51;
-            this.songGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.songGrid.Size = new System.Drawing.Size(776, 299);
-            this.songGrid.TabIndex = 3;
-            this.songGrid.Text = "dataGridView1";
+            this.mainGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.mainGrid.ContextMenuStrip = this.contextMenuStrip1;
+            this.mainGrid.Location = new System.Drawing.Point(12, 94);
+            this.mainGrid.Name = "mainGrid";
+            this.mainGrid.RowHeadersWidth = 51;
+            this.mainGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.mainGrid.Size = new System.Drawing.Size(776, 299);
+            this.mainGrid.TabIndex = 3;
+            this.mainGrid.Text = "dataGridView1";
             // 
             // contextMenuStrip1
             // 
@@ -182,11 +184,37 @@
             this.buttonSaveAsPlaylist.Visible = false;
             this.buttonSaveAsPlaylist.Click += new System.EventHandler(this.buttonSaveAsPlaylist_Click);
             // 
+            // radioButtonMusic
+            // 
+            this.radioButtonMusic.AutoSize = true;
+            this.radioButtonMusic.Checked = true;
+            this.radioButtonMusic.Location = new System.Drawing.Point(12, 64);
+            this.radioButtonMusic.Name = "radioButtonMusic";
+            this.radioButtonMusic.Size = new System.Drawing.Size(68, 24);
+            this.radioButtonMusic.TabIndex = 8;
+            this.radioButtonMusic.TabStop = true;
+            this.radioButtonMusic.Text = "Music";
+            this.radioButtonMusic.UseVisualStyleBackColor = true;
+            this.radioButtonMusic.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+            // 
+            // radioButtonVideo
+            // 
+            this.radioButtonVideo.AutoSize = true;
+            this.radioButtonVideo.Location = new System.Drawing.Point(126, 64);
+            this.radioButtonVideo.Name = "radioButtonVideo";
+            this.radioButtonVideo.Size = new System.Drawing.Size(69, 24);
+            this.radioButtonVideo.TabIndex = 8;
+            this.radioButtonVideo.Text = "Video";
+            this.radioButtonVideo.UseVisualStyleBackColor = true;
+            this.radioButtonVideo.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.radioButtonVideo);
+            this.Controls.Add(this.radioButtonMusic);
             this.Controls.Add(this.buttonSaveAsPlaylist);
             this.Controls.Add(this.buttonErrors);
             this.Controls.Add(this.checkBoxRunWeb);
@@ -194,14 +222,14 @@
             this.Controls.Add(this.textBoxMessages);
             this.Controls.Add(this.buttonDone);
             this.Controls.Add(this.buttonSaveChanges);
-            this.Controls.Add(this.songGrid);
+            this.Controls.Add(this.mainGrid);
             this.Controls.Add(this.btnCrawl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MainForm";
             this.Text = "Media Manager Main Panel";
             this.Load += new System.EventHandler(this.MainForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.songGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mainGrid)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
@@ -213,7 +241,7 @@
         #endregion
         private System.Windows.Forms.Button btnCrawl;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
-        private System.Windows.Forms.DataGridView songGrid;
+        private System.Windows.Forms.DataGridView mainGrid;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemEdit;
         private System.Windows.Forms.Button buttonSaveChanges;
@@ -225,6 +253,8 @@
         private System.Windows.Forms.CheckBox checkBoxRunWeb;
         private System.Windows.Forms.Button buttonErrors;
         private System.Windows.Forms.Button buttonSaveAsPlaylist;
+        private System.Windows.Forms.RadioButton radioButtonMusic;
+        private System.Windows.Forms.RadioButton radioButtonVideo;
     }
 }
 

@@ -2,6 +2,7 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <_LastSelectedProfileId>C:\Users\rngku\source\repos\MP3Manager\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
+    <ShowAllFiles>false</ShowAllFiles>
   </PropertyGroup>
   <ItemGroup>
     <Compile Update="FormAbout.cs">
@@ -16,7 +17,7 @@
     <Compile Update="FormGenericInput.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="FormUpdate.cs">
+    <Compile Update="FormAudioUpdate.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="MainForm.cs">

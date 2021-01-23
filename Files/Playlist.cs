@@ -6,10 +6,13 @@ namespace MP3Manager.Files
 {
     public class Playlist
     {
-        public Playlist()
+        public Playlist(bool isMusic)
         {
+            IsMusic = isMusic;
             List = new List<string>();
         }
+
+        private bool IsMusic;
         public string Name { get; set; }
         public List<string> List { get; set; }
 
@@ -24,7 +27,7 @@ namespace MP3Manager.Files
                 List.Add(song);
             }
 
-            FileUtils.SavePlaylist(Name, this);
+            FileUtils.SavePlaylist(Name, this, IsMusic);
 
             return retn;
         }

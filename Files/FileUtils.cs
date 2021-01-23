@@ -5,6 +5,7 @@ using System.Collections.Immutable;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
@@ -27,6 +28,9 @@ namespace MP3Manager.Files
     }
     public static class FileUtils
     {
+        public const string AUDIOPREFIX = "a";
+        public const string VIDEOPREFIX = "a";
+
         public static void Transform(Dictionary<string, File> fileList)
         {
             //The intention here is  to create a soundex that will make fuzzy matches. Maybe it can be used 
@@ -105,22 +109,18 @@ namespace MP3Manager.Files
             return Convert.ToBase64String(bytes);
         }
 
-        public static Playlist GetPlaylist(string playlistName)
+        public static Playlist GetPlaylist(string playlistName, MediaType mediaType)
         {
-            var fileContent = Read($"playlist_{playlistName}.json");
+            string type = GetPrefix(mediaType);
+
+            var fileContent = Read($"{type}playlist_{playlistName}.json");
             return JsonSerializer.Deserialize<Playlist>(fileContent);
         }
-        public static List<string> GetFileList(FileType fileType)
+        public static List<string> GetPlaylists(MediaType mediaType)
         {
-            if(fileType == FileType.PlayList)
-            {                
-                return new List<string>(Directory.GetFiles(@".\", "playlist_*.json"));
-            }
-            else if(fileType == FileType.Library)
-            {
-
-            }
-            return null;
+            string type = GetPrefix(mediaType);           
+                
+            return new List<string>(Directory.GetFiles(@".\", $"{type}playlist_ *.json"));
         }
 
         public static byte[] GetResource(string name)
@@ -143,13 +143,29 @@ namespace MP3Manager.Files
             }
         }
 
-        public static Dictionary<string, File> LoadDefaultPlaylist()
+        public static Dictionary<string, File> LoadDefaultPlaylist(bool isMusic)
         {
-            var defaultWord = ConvertToBase64("default_");
+            var prefix = string.Empty;
+            if(isMusic)
+            {
+                prefix = "a";
+            }
+            else
+            {
+                prefix = "v";
+            }
+
+            var defaultWord = ConvertToBase64($"{prefix}default_");
             string [] files = Directory.GetFiles(@".\", defaultWord + "*.json");
             if(files.Length > 0)
             {
-                return JsonSerializer.Deserialize<Dictionary<string, File>>(Read(files[0]));
+
+                var dic = JsonSerializer.Deserialize<Dictionary<string, AudioFile>>(Read(files[0]));
+
+                return dic.ToDictionary(
+                    k => k.Key, 
+                    v => (File)v.Value
+                );
             }
             return null;
         }
@@ -159,16 +175,34 @@ namespace MP3Manager.Files
             name = ConvertToBase64(name);
             Write(name + ".json", JsonSerializer.Serialize(crawlResults));
         }
-        public static void SavePlaylist(string playlistName, Playlist playlist)
+        public static void SavePlaylist(string playlistName, Playlist playlist, bool isMusic)
         {
-            Write("playlist_" + playlistName + ".json", JsonSerializer.Serialize(playlist));
+            Write(GetPrefix(isMusic) + "playlist_" + playlistName + ".json", JsonSerializer.Serialize(playlist));
         }
 
-        public static void SaveMetaData(Metadata metaData)
+        public static void SaveMetaData(Metadata metaData, bool isMusic)
         {
-            Write("metadata.json", JsonSerializer.Serialize(metaData));
+            Write(GetPrefix(isMusic) + "metadata.json", JsonSerializer.Serialize(metaData));
         }
+   
+        public static string GetPrefix(MediaType mediaType)
+        {
+            if (mediaType == MediaType.Audio)
+            {
+                return GetPrefix(true);
+            }
 
+            return GetPrefix(false);
+        }
+        public static string GetPrefix(bool isMusic)
+        {
+            if(isMusic)
+            {
+                return AUDIOPREFIX;
+            }
+
+            return VIDEOPREFIX;
+        }
         public static void DeleteFile(string fileName)
         {
             if(System.IO.File.Exists(fileName))

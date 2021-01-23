@@ -1,6 +1,6 @@
 ﻿namespace MP3Manager
 {
-    partial class FormUpdate
+    partial class FormAudioUpdate
     {
         /// <summary>
         /// Required designer variable.
@@ -314,7 +314,7 @@
             this.buttonGetSpotify.Visible = false;
             this.buttonGetSpotify.Click += new System.EventHandler(this.buttonGetSpotify_ClickAsync);
             // 
-            // FormUpdate
+            // FormAudioUpdate
             // 
             this.AcceptButton = this.buttonOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -334,7 +334,7 @@
             this.Controls.Add(this.textBoxTitle);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "FormUpdate";
+            this.Name = "FormAudioUpdate";
             this.Text = "Set Properties For Selected Items";
             this.Load += new System.EventHandler(this.FormUpdate_Load);
             this.ResumeLayout(false);

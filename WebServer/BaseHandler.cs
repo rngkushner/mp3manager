@@ -1,6 +1,7 @@
 ﻿using MP3Manager.Files;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Net;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -13,6 +14,7 @@ namespace MP3Manager.WebServer
     {
         protected string bodyHTML;
 
+        public string[] prefixes { get; protected set; }
 
         protected HttpContentValues ParseQueryString(string queryString)
         {
@@ -101,6 +103,13 @@ namespace MP3Manager.WebServer
             output.Write(content, 0, content.Length);
             // You must close the output stream.
             output.Close();
+        }
+        protected byte[] GetErrorSound()
+        {
+            ComponentResourceManager componentResourceManager = new ComponentResourceManager(typeof(WebServerResources));
+            Byte[] errorSound = (Byte[])componentResourceManager.GetObject("PacManDying");
+
+            return errorSound;
         }
     }
 }

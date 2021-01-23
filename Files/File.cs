@@ -19,11 +19,9 @@ namespace MP3Manager.Files
 
         public string FileName { get; set; }
         public List<string> Paths { get; set; }
-        public string Title { get; set; }
-        public string Artist { get; set; }
-        public string Album { get; set; }
-        public string Genre { get; set; }
+
         public string SoundexTag { get; set; }
+
         public int MatchCount
         {
             get

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace MP3Manager
 {
-    public partial class FormUpdate : Form
+    public partial class FormAudioUpdate : Form
     {
         public string Title { get; set; }
         public string Artist { get; set; }
@@ -18,12 +18,12 @@ namespace MP3Manager
 
         public bool IgnoreBlanks { get; set; }
 
-        public FormUpdate()
+        public FormAudioUpdate()
         {
             InitializeComponent();
         }
 
-        public FormUpdate(string Title, string Artist, string Album, string Genre) : this()
+        public FormAudioUpdate(string Title, string Artist, string Album, string Genre) : this()
         {
             this.Title = Title;
             this.Artist = Artist;
