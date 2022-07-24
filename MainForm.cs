@@ -23,107 +23,39 @@ namespace MP3Manager
             InitializeComponent();
         }
 
-        private void btnCrawl_Click(object sender, EventArgs e)
-        {
-            folderBrowserDialog1.ShowDialog();
-            string startingPath = folderBrowserDialog1.SelectedPath;
-
-            try
-            {
-                if (startingPath != String.Empty)
-                {
-                    crawler.Crawl(startingPath);
-                }
-                textBoxMessages.Text = $"Found {crawler.GetFiles().Count} music files.";
-
-                if (crawler.GetFiles() != null)
-                {
-                    textBoxMessages.Text = "Tagging all the files. Hang on.";
-
-                    var resultFiles = new Dictionary<string, File>();
-
-                    tagger = new Tagger(resultFiles);
-                    tagger.RunTagJob(crawler.GetFiles(), (list) =>
-                    {
-                        SetGridDataDelegate d = new SetGridDataDelegate(SetGridData);
-                        this.Invoke(d, new object[] { list });
-                    });
-                    buttonSaveAsPlaylist.Visible = true;
-                }
-            }
-            catch(Exception ex)
-            {
-                ErrorLogger.LogError(ex);
-            }
-
-        }
-
         private void InitGrid()
         {
-            songGrid.Columns.AddRange(new DataGridViewColumn[7]{
-                new DataGridViewColumn(new DataGridViewTextBoxCell()),
-                new DataGridViewColumn(new DataGridViewTextBoxCell()),
-                new DataGridViewColumn(new DataGridViewTextBoxCell()),
-                new DataGridViewColumn(new DataGridViewTextBoxCell()),
-                new DataGridViewColumn(new DataGridViewTextBoxCell()),
-                new DataGridViewColumn(new DataGridViewTextBoxCell()),
-                new DataGridViewColumn(new DataGridViewTextBoxCell())
-            });
+            GridHelper.SetGridColumns(songGrid);
 
-            int i = 0;
-            songGrid.Columns[i].Name = "Key";
-            songGrid.Columns[i].Visible = false;
-
-            songGrid.Columns[++i].Name = "Title";
-            songGrid.Columns[i].ReadOnly = true;
-            songGrid.Columns[i].SortMode = DataGridViewColumnSortMode.Automatic;
-
-            songGrid.Columns[++i].Name = "Artist";
-            songGrid.Columns[i].ReadOnly = true;
-            songGrid.Columns[i].SortMode = DataGridViewColumnSortMode.Automatic;
-
-            songGrid.Columns[++i].Name = "Album";
-            songGrid.Columns[i].ReadOnly = true;
-            songGrid.Columns[i].SortMode = DataGridViewColumnSortMode.Automatic;
-
-            songGrid.Columns[++i].Name = "Genre";
-            songGrid.Columns[i].ReadOnly = true;
-            songGrid.Columns[i].SortMode = DataGridViewColumnSortMode.Automatic;
-
-            songGrid.Columns[++i].Name = "Count";
-            songGrid.Columns[i].ReadOnly = true;
-            songGrid.Columns[i].SortMode = DataGridViewColumnSortMode.Automatic;
-
-            songGrid.Columns[++i].Name = "FileName";
-            songGrid.Columns[i].ReadOnly = true;
         }
         private void SetGridData(Dictionary<string, File> list)
         {
             try
             {
                 songGrid.Rows.Clear();
+                completeList = list;
 
-                FileUtils.Transform(list);
+                //FileUtils.Transform(list);
 
                 foreach (var key in list.Keys)
                 {
-                    songGrid.Rows.Add(new object[]{
-                    key,
-                    list[key].Title,
-                    list[key].Artist,
-                    list[key].Album,
-                    list[key].Genre,
-                    list[key].MatchCount.ToString(),
-                    list[key].FileName + "|" + list[key].SoundexTag
-                    });
+                    var thisRow = list[key];
+                    int rowIdx;
+                    rowIdx = songGrid.Rows.Add(
+                        GridHelper.FileToGridRow(thisRow, key)
+                    );
+
+                    if(thisRow.fixName)
+                    {
+                        songGrid.Rows[rowIdx].Cells[1].Style.BackColor = Color.AliceBlue;
+                    }
                 }
 
-                crawler.GetFiles().Clear();
-                completeList = list;
+                crawler.GetFiles().Clear();                
 
                 WebService.SetRequestHandler(new MP3RequestHandler(completeList));
 
-                textBoxMessages.Text = $"All done. {completeList.Count} songs.";
+                textBoxMessages.Text = $"Loaded. {completeList.Count} songs.";
                 checkBoxRunWeb.Enabled = true;                
 
             }
@@ -148,7 +80,8 @@ namespace MP3Manager
                         rows[0].Cells["Title"].Value?.ToString(),
                         rows[0].Cells["Artist"].Value?.ToString(),
                         rows[0].Cells["Album"].Value?.ToString(),
-                        rows[0].Cells["Genre"].Value?.ToString()
+                        rows[0].Cells["Genre"].Value?.ToString(),
+                        FileUtils.ConvertToBase64(rows[0].Cells[0].Value.ToString())
                     );
                 }
                 else
@@ -214,7 +147,7 @@ namespace MP3Manager
 
         private void buttonSaveChanges_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("This will apply your changes to your MP3s. Continue?", "Save Changes",
+            if (MessageBox.Show("This will apply your changes to your MP3s.\nRemember to update your library too! Continue?", "Save Changes",
                 MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
             {
                 if(completeList != null)
@@ -244,11 +177,8 @@ namespace MP3Manager
 
         private void WriteMP3PropertiesToFile(File fileData, DataGridViewRow row)
         {
-            fileData.Album = row.Cells["Album"].Value == null ? null : row.Cells["Album"].Value.ToString(); 
-            fileData.Artist = row.Cells["Artist"].Value == null ? null : row.Cells["Artist"].Value.ToString();
-            fileData.Title = row.Cells["Title"].Value == null ? null : row.Cells["Title"].Value.ToString();
-            fileData.Genre = row.Cells["Genre"].Value == null ? null : row.Cells["Genre"].Value.ToString();
-                            
+            GridHelper.SetAudioFile(fileData, row);
+
             var mp3File = TagLib.File.Create(fileData.Paths[0]);
 
             mp3File.Tag.Album = fileData.Album;
@@ -266,16 +196,16 @@ namespace MP3Manager
             ErrorLogger.ErrorHappenedEvent += ErrorLogger_ErrorHappenedEvent;
             InitGrid();
 
-            if(LoadDefaultPlaylist())
+            if(LoadDefaultLibrary())
             {
                 SetGridData(completeList);
             }           
 
         }
 
-        private bool LoadDefaultPlaylist()
+        private bool LoadDefaultLibrary()
         {
-            completeList = FileUtils.LoadDefaultPlaylist();
+            completeList = FileUtils.LoadDefaultLibrary();
             return (completeList != null);
         }
 
@@ -299,10 +229,16 @@ namespace MP3Manager
 
         private void menuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
+
+
             if (e.ClickedItem.Name == "toolStripMenuItemAbout")
             {
                 FormAbout form = new FormAbout();
                 form.ShowDialog();
+            }
+            else if (e.ClickedItem.Name == "toolStripMenuItemOpenLibrary")
+            {
+
             }
         }
 
@@ -325,20 +261,83 @@ namespace MP3Manager
             buttonErrors.Visible = false;
         }
 
-        private void buttonSaveAsPlaylist_Click(object sender, EventArgs e)
+        private void toolStripMenuItemOpenLibrary_Click(object sender, EventArgs e)
+        {
+            FormOpenLibraries form = new FormOpenLibraries();
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                if (form.SelectedLib != null)
+                {
+                    completeList = FileUtils.LoadLibrary(form.SelectedLib);
+                    SetGridData(completeList);
+                }
+            }
+        }
+
+        private void toolStripMenuItemCrawlLibrary_Click(object sender, EventArgs e)
+        {
+            folderBrowserDialog1.ShowDialog();
+            string startingPath = folderBrowserDialog1.SelectedPath;
+
+            try
+            {
+                if (startingPath != String.Empty)
+                {
+                    crawler.Crawl(startingPath);
+                }
+                textBoxMessages.Text = $"Found {crawler.GetFiles().Count} music files.";
+
+                if (crawler.GetFiles() != null)
+                {
+                    textBoxMessages.Text = "Tagging all the files. Hang on.";
+
+                    var resultFiles = new Dictionary<string, File>();
+
+                    tagger = new Tagger(resultFiles);
+                    tagger.RunTagJob(crawler.GetFiles(), (list) =>
+                    {
+                        SetGridDataDelegate d = new SetGridDataDelegate(SetGridData);
+                        this.Invoke(d, new object[] { list });
+                    });
+
+                    if(tagger.Exceptions.Count > 0)
+                    {
+                        //**gk to do 
+                        //show crawl exceptions here.
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorLogger.LogError(ex);
+            }
+        }
+
+        private void toolStripMenuItemSaveLibrary_Click(object sender, EventArgs e)
         {
             var dlg = new FormGenericInput("Library", "Name your library!", "Make default");
-            if(dlg.ShowDialog() == DialogResult.OK)
+            if (dlg.ShowDialog() == DialogResult.OK)
             {
                 //if default, ignore provide name
                 string fileName = dlg.BooleanResult ? "default_" : dlg.ReturnValue;
 
                 FileUtils.SaveCrawl(fileName, completeList);
-                buttonSaveAsPlaylist.Visible = false;
             }
-            
-            dlg.Close();            
 
+            dlg.Close();
+        }
+
+        private void toolStripMenuItemNameCleanup_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in songGrid.Rows)
+            {
+                if(row.Cells[1].Style.BackColor == Color.AliceBlue)
+                {
+                    row.Cells[1].Value = row.Cells[1].Value.ToString().Substring(row.Cells[1].Value.ToString().IndexOf(' ') +1).Replace(".mp3", string.Empty);
+                    row.Cells[1].Style.BackColor = Color.Empty;
+                    row.DefaultCellStyle.BackColor = Color.Beige;
+                }
+            }
         }
     }
 }

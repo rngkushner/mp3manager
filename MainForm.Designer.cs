@@ -36,14 +36,18 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItemEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemFileLocs = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemLibraryFunctions = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemOpenLibrary = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemCrawlLibrary = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemNameCleanup = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemSaveLibrary = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonSaveChanges = new System.Windows.Forms.Button();
             this.buttonDone = new System.Windows.Forms.Button();
             this.textBoxMessages = new System.Windows.Forms.TextBox();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.checkBoxRunWeb = new System.Windows.Forms.CheckBox();
-            this.buttonErrors = new System.Windows.Forms.Button();
-            this.buttonSaveAsPlaylist = new System.Windows.Forms.Button();
+            this.buttonErrors = new System.Windows.Forms.Button();            
             ((System.ComponentModel.ISupportInitialize)(this.songGrid)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip.SuspendLayout();
@@ -51,13 +55,10 @@
             // 
             // btnCrawl
             // 
-            this.btnCrawl.Location = new System.Drawing.Point(12, 36);
+            this.btnCrawl.Location = new System.Drawing.Point(0, 0);
             this.btnCrawl.Name = "btnCrawl";
-            this.btnCrawl.Size = new System.Drawing.Size(182, 29);
-            this.btnCrawl.TabIndex = 0;
-            this.btnCrawl.Text = "Crawl &Music Directories";
-            this.btnCrawl.UseVisualStyleBackColor = true;
-            this.btnCrawl.Click += new System.EventHandler(this.btnCrawl_Click);
+            this.btnCrawl.Size = new System.Drawing.Size(75, 23);
+            this.btnCrawl.TabIndex = 8;
             // 
             // songGrid
             // 
@@ -98,6 +99,45 @@
             this.toolStripMenuItemFileLocs.Size = new System.Drawing.Size(201, 24);
             this.toolStripMenuItemFileLocs.Text = "See file location(s)";
             // 
+            // toolStripMenuItemLibraryFunctions
+            // 
+            this.toolStripMenuItemLibraryFunctions.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemOpenLibrary,
+            this.toolStripMenuItemCrawlLibrary,
+            this.toolStripMenuItemNameCleanup,
+            this.toolStripMenuItemSaveLibrary});
+            this.toolStripMenuItemLibraryFunctions.Name = "toolStripMenuItemLibraryFunctions";
+            this.toolStripMenuItemLibraryFunctions.Size = new System.Drawing.Size(126, 24);
+            this.toolStripMenuItemLibraryFunctions.Text = "&Manage Library";
+            // 
+            // toolStripMenuItemOpenLibrary
+            // 
+            this.toolStripMenuItemOpenLibrary.Name = "toolStripMenuItemOpenLibrary";
+            this.toolStripMenuItemOpenLibrary.Size = new System.Drawing.Size(280, 26);
+            this.toolStripMenuItemOpenLibrary.Text = "&Open Library";
+            this.toolStripMenuItemOpenLibrary.Click += new System.EventHandler(this.toolStripMenuItemOpenLibrary_Click);
+            // 
+            // toolStripMenuItemCrawlLibrary
+            // 
+            this.toolStripMenuItemCrawlLibrary.Name = "toolStripMenuItemCrawlLibrary";
+            this.toolStripMenuItemCrawlLibrary.Size = new System.Drawing.Size(280, 26);
+            this.toolStripMenuItemCrawlLibrary.Text = "C&rawl Folders";
+            this.toolStripMenuItemCrawlLibrary.Click += new System.EventHandler(this.toolStripMenuItemCrawlLibrary_Click);
+            // 
+            // toolStripMenuItemNameCleanup
+            // 
+            this.toolStripMenuItemNameCleanup.Name = "toolStripMenuItemNameCleanup";
+            this.toolStripMenuItemNameCleanup.Size = new System.Drawing.Size(280, 26);
+            this.toolStripMenuItemNameCleanup.Text = "Clean up &Names (Light Blue)";
+            this.toolStripMenuItemNameCleanup.Click += new System.EventHandler(this.toolStripMenuItemNameCleanup_Click);
+            // 
+            // toolStripMenuItemSaveLibrary
+            // 
+            this.toolStripMenuItemSaveLibrary.Name = "toolStripMenuItemSaveLibrary";
+            this.toolStripMenuItemSaveLibrary.Size = new System.Drawing.Size(280, 26);
+            this.toolStripMenuItemSaveLibrary.Text = "&Save Library";
+            this.toolStripMenuItemSaveLibrary.Click += new System.EventHandler(this.toolStripMenuItemSaveLibrary_Click);
+            // 
             // buttonSaveChanges
             // 
             this.buttonSaveChanges.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -133,6 +173,7 @@
             // 
             this.menuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemLibraryFunctions,
             this.toolStripMenuItemAbout});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
@@ -171,23 +212,11 @@
             this.buttonErrors.Visible = false;
             this.buttonErrors.Click += new System.EventHandler(this.buttonErrors_Click);
             // 
-            // buttonSaveAsPlaylist
-            // 
-            this.buttonSaveAsPlaylist.Location = new System.Drawing.Point(200, 36);
-            this.buttonSaveAsPlaylist.Name = "buttonSaveAsPlaylist";
-            this.buttonSaveAsPlaylist.Size = new System.Drawing.Size(182, 29);
-            this.buttonSaveAsPlaylist.TabIndex = 1;
-            this.buttonSaveAsPlaylist.Text = "&Save as Library";
-            this.buttonSaveAsPlaylist.UseVisualStyleBackColor = true;
-            this.buttonSaveAsPlaylist.Visible = false;
-            this.buttonSaveAsPlaylist.Click += new System.EventHandler(this.buttonSaveAsPlaylist_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.buttonSaveAsPlaylist);
             this.Controls.Add(this.buttonErrors);
             this.Controls.Add(this.checkBoxRunWeb);
             this.Controls.Add(this.menuStrip);
@@ -224,7 +253,11 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemAbout;
         private System.Windows.Forms.CheckBox checkBoxRunWeb;
         private System.Windows.Forms.Button buttonErrors;
-        private System.Windows.Forms.Button buttonSaveAsPlaylist;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemLibraryFunctions;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemOpenLibrary;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemCrawlLibrary;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemSaveLibrary;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemNameCleanup;
     }
 }
 

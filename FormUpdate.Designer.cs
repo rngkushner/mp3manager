@@ -40,6 +40,9 @@
             this.comboBoxGenre = new System.Windows.Forms.ComboBox();
             this.checkBoxIgnoreBlank = new System.Windows.Forms.CheckBox();
             this.buttonGetSpotify = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBoxTrackNumber = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.textBoxTrackNumber)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -102,10 +105,10 @@
             // buttonCancel
             // 
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(156, 263);
+            this.buttonCancel.Location = new System.Drawing.Point(156, 326);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(94, 29);
-            this.buttonCancel.TabIndex = 6;
+            this.buttonCancel.TabIndex = 7;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
@@ -113,10 +116,10 @@
             // buttonOK
             // 
             this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonOK.Location = new System.Drawing.Point(265, 263);
+            this.buttonOK.Location = new System.Drawing.Point(265, 326);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(94, 29);
-            this.buttonOK.TabIndex = 7;
+            this.buttonOK.TabIndex = 8;
             this.buttonOK.Text = "Save";
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
@@ -296,23 +299,38 @@
             this.checkBoxIgnoreBlank.AutoSize = true;
             this.checkBoxIgnoreBlank.Checked = true;
             this.checkBoxIgnoreBlank.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxIgnoreBlank.Location = new System.Drawing.Point(12, 268);
+            this.checkBoxIgnoreBlank.Location = new System.Drawing.Point(12, 331);
             this.checkBoxIgnoreBlank.Name = "checkBoxIgnoreBlank";
             this.checkBoxIgnoreBlank.Size = new System.Drawing.Size(127, 24);
-            this.checkBoxIgnoreBlank.TabIndex = 5;
+            this.checkBoxIgnoreBlank.TabIndex = 6;
             this.checkBoxIgnoreBlank.Text = "Ignore if Blank";
             this.checkBoxIgnoreBlank.UseVisualStyleBackColor = true;
             // 
             // buttonGetSpotify
             // 
-            this.buttonGetSpotify.Location = new System.Drawing.Point(156, 13);
+            this.buttonGetSpotify.Location = new System.Drawing.Point(134, 12);
             this.buttonGetSpotify.Name = "buttonGetSpotify";
-            this.buttonGetSpotify.Size = new System.Drawing.Size(148, 29);
+            this.buttonGetSpotify.Size = new System.Drawing.Size(226, 29);
             this.buttonGetSpotify.TabIndex = 8;
             this.buttonGetSpotify.Text = "Get Spotify Data";
             this.buttonGetSpotify.UseVisualStyleBackColor = true;
-            this.buttonGetSpotify.Visible = false;
             this.buttonGetSpotify.Click += new System.EventHandler(this.buttonGetSpotify_ClickAsync);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(44, 258);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(84, 20);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Track (Sort)";
+            // 
+            // textBoxTrackNumber
+            // 
+            this.textBoxTrackNumber.Location = new System.Drawing.Point(134, 258);
+            this.textBoxTrackNumber.Name = "textBoxTrackNumber";
+            this.textBoxTrackNumber.Size = new System.Drawing.Size(226, 27);
+            this.textBoxTrackNumber.TabIndex = 10;
             // 
             // FormUpdate
             // 
@@ -320,7 +338,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(407, 323);
+            this.ClientSize = new System.Drawing.Size(407, 382);
+            this.Controls.Add(this.textBoxTrackNumber);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.buttonGetSpotify);
             this.Controls.Add(this.checkBoxIgnoreBlank);
             this.Controls.Add(this.comboBoxGenre);
@@ -337,6 +357,7 @@
             this.Name = "FormUpdate";
             this.Text = "Set Properties For Selected Items";
             this.Load += new System.EventHandler(this.FormUpdate_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.textBoxTrackNumber)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -356,5 +377,7 @@
         private System.Windows.Forms.ComboBox comboBoxGenre;
         private System.Windows.Forms.CheckBox checkBoxIgnoreBlank;
         private System.Windows.Forms.Button buttonGetSpotify;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.NumericUpDown textBoxTrackNumber;
     }
 }

@@ -97,6 +97,7 @@
             this.Controls.Add(this.textBoxInput);
             this.Name = "FormGenericInput";
             this.Text = "FormGenericInput";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormGenericInput_FormClosing);
             this.Load += new System.EventHandler(this.FormGenericInput_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

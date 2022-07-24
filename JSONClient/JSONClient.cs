@@ -1,10 +1,8 @@
 ﻿using MP3Manager.Files;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -15,8 +13,8 @@ namespace MP3Manager.JSONClient
         private AccessToken authToken = null;
 
         private readonly HttpClient client = null;
-        private readonly string CLIENT_ID = "Your client credentials here";
-        private readonly string CLIENT_SECRET = "Nice try, Fed";
+        private readonly string CLIENT_ID = "b77ba17e964a4f10bc76b2023fb5a8d2";
+        private readonly string CLIENT_SECRET = "416b887b0e544761b963ae606a358094";
 
         //Authorization call reference
         //https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow

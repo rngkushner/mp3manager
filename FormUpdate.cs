@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Security.Policy;
-using System.Text;
+﻿using MP3Manager.Files;
+using System;
 using System.Windows.Forms;
 
 namespace MP3Manager
@@ -15,20 +10,26 @@ namespace MP3Manager
         public string Artist { get; set; }
         public string Album { get; set; }
         public string Genre { get; set; }
-
+        public Int32 Track { get; set; }
         public bool IgnoreBlanks { get; set; }
+
+        private string FileKey;
 
         public FormUpdate()
         {
             InitializeComponent();
+            buttonGetSpotify.Visible = false;
         }
 
-        public FormUpdate(string Title, string Artist, string Album, string Genre) : this()
+        public FormUpdate(string Title, string Artist, string Album, string Genre, string FileKey) : this()
         {
+            buttonGetSpotify.Visible = true;
+
             this.Title = Title;
             this.Artist = Artist;
             this.Album = Album;
             this.Genre = Genre;
+            this.FileKey = FileKey;
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
@@ -37,6 +38,7 @@ namespace MP3Manager
             Artist = textBoxArtist.Text;
             Album = textBoxAlbum.Text;
             Genre = comboBoxGenre.Text;
+            Track = decimal.ToInt32(textBoxTrackNumber.Value);        
 
             IgnoreBlanks = checkBoxIgnoreBlank.Checked;
         }
@@ -54,6 +56,7 @@ namespace MP3Manager
                 textBoxArtist.Text = Artist;
                 textBoxAlbum.Text = Album;
                 comboBoxGenre.Text = Genre;
+                textBoxTrackNumber.Value = Track;
             }
         }
 
@@ -63,7 +66,9 @@ namespace MP3Manager
 
             string result = await spotify.Search(textBoxArtist.Text);
 
-            System.Diagnostics.Trace.Write(result);
+            FileUtils.SaveSpotifyMeta(textBoxArtist.Text, result);
+
+            MessageBox.Show("Done!");
 
         }
     }

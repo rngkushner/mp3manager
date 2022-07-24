@@ -56,17 +56,16 @@ namespace MP3Manager.Files
                         Task.Run(() => { SetMP3Properties(val); })
                     );
                 }
+            }
 
-                Task.WaitAll(jobList.ToArray());
-                jobList.Clear();
-            }            
+            Task.WaitAll(jobList.ToArray());
+            jobList.Clear();
         }
 
         private void SetMP3Properties(string filePath)
         {
             try
             {
-
                 var fileNameOnly = Path.GetFileName(filePath);
 
                 var mp3 = TagLib.File.Create(filePath);
@@ -74,15 +73,37 @@ namespace MP3Manager.Files
                 //A song with this exact TITLE is in musicList
                 if (mp3.Tag.Title != null && secondaryKey.ContainsKey(mp3.Tag.Title))
                 {
-                    //by my logic, it MUST exist in music list
+                    //by my logic, it MUST exist in music list - except covers
                     var existingFile = musicList[secondaryKey[mp3.Tag.Title]];
-                    if(!FileHasPath(existingFile, filePath) && existingFile.Artist == mp3.Tag.FirstAlbumArtist)                    {
+                    if (!FileHasPath(existingFile, filePath) && existingFile.Artist == mp3.Tag.FirstAlbumArtist)
+                    {
                         existingFile.Paths.Add(filePath);
-                        existingFile.Title = !String.IsNullOrEmpty(existingFile.Title) ? existingFile.Title : mp3.Tag.Title ?? fileNameOnly;
-                        existingFile.Album = !String.IsNullOrEmpty(existingFile.Album) ? existingFile.Album : mp3.Tag.Album;
-                        existingFile.Artist = !String.IsNullOrEmpty(existingFile.Artist) ? existingFile.Artist : mp3.Tag.FirstAlbumArtist;
-                        existingFile.Genre = !String.IsNullOrEmpty(existingFile.Genre) ? existingFile.Genre : mp3.Tag.FirstGenre;
+                        if (string.IsNullOrEmpty(existingFile.Title))
+                        {
+                            if (string.IsNullOrEmpty(mp3.Tag.Title))
+                            {
+                                existingFile.Title = fileNameOnly;
+                                existingFile.fixName = true;
+                            }
+                            else
+                            {
+                                existingFile.Title = mp3.Tag.Title;
+                            }
+                        }
+                        else if (FileUtils.FilePatternMatches(existingFile.Title) && existingFile.Title == fileNameOnly)
+                        {
+                            //uuuh
+                        }
+
+                        existingFile.Album = !string.IsNullOrEmpty(existingFile.Album) ? existingFile.Album : mp3.Tag.Album;
+                        existingFile.Artist = !string.IsNullOrEmpty(existingFile.Artist) ? existingFile.Artist : mp3.Tag.FirstAlbumArtist;
+                        existingFile.Genre = !string.IsNullOrEmpty(existingFile.Genre) ? existingFile.Genre : mp3.Tag.FirstGenre;
+                        existingFile.FileDate = mp3.FileDate.Value;
                     }
+                    else
+                    {
+                        AddFile(mp3, filePath, fileNameOnly, true);
+                    }                    
                 }
                 else
                 {                    
@@ -93,19 +114,7 @@ namespace MP3Manager.Files
                     }
                     else
                     {
-                        File file = new MP3Manager.Files.File
-                        {
-                            FileName = fileNameOnly
-                        };
-
-                        file.Paths.Add(filePath);
-                        file.Title = mp3.Tag.Title ?? fileNameOnly;
-                        file.Album = mp3.Tag.Album;
-                        file.Artist = mp3.Tag.FirstAlbumArtist;
-                        file.Genre = mp3.Tag.FirstGenre;
-
-                        musicList.Add(fileNameOnly, file);
-                        secondaryKey.Add(file.Title, fileNameOnly);
+                        AddFile(mp3, filePath, fileNameOnly);
                     }
                 }
             }
@@ -114,6 +123,50 @@ namespace MP3Manager.Files
                 Exceptions.Add(e.Message);
             }          
         }   
+
+        private void AddFile(TagLib.File mp3, string filePath, string fileNameOnly, bool addTitle = false)
+        {
+            File file = new MP3Manager.Files.File
+            {
+                FileName = fileNameOnly
+            };
+
+            file.Paths.Add(filePath);
+            if (mp3.Tag.Title != null)
+            {
+                if (FileUtils.FilePatternMatches(mp3.Tag.Title))
+                {
+                    file.fixName = true;
+                }
+                file.Title = mp3.Tag.Title;
+            }
+            else
+            {
+                file.Title = fileNameOnly;
+                file.fixName = true;
+            }
+
+            file.Album = mp3.Tag.Album;
+            file.Artist = mp3.Tag.FirstAlbumArtist;
+            file.Genre = mp3.Tag.FirstGenre;
+            file.Track = Convert.ToInt32(mp3.Tag.Track);
+            file.FileDate = mp3.FileDate.Value;
+
+            lock(musicList)
+            {
+                musicList.Add(fileNameOnly, file);
+            }
+            
+            var key = file.Title;
+            if (addTitle)
+            {
+                key += "_" + file.Artist;
+            }
+            lock (secondaryKey)
+            {
+                secondaryKey.Add(key, fileNameOnly);
+            }
+        }
 
         private Boolean FileHasPath(File file, string filePath)
         {

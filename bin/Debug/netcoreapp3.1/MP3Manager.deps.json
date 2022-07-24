@@ -9,7 +9,7 @@
       "MP3Manager/1.0.0": {
         "dependencies": {
           "Newtonsoft.Json": "12.0.3",
-          "TagLibSharp": "2.2.0"
+          "TagLibSharp": "2.3.0.0"
         },
         "runtime": {
           "MP3Manager.dll": {}
@@ -23,11 +23,11 @@
           }
         }
       },
-      "TagLibSharp/2.2.0": {
+      "TagLibSharp/2.3.0.0": {
         "runtime": {
-          "lib/netstandard2.0/TagLibSharp.dll": {
-            "assemblyVersion": "2.2.0.0",
-            "fileVersion": "2.2.0.0"
+          "TagLibSharp.dll": {
+            "assemblyVersion": "2.3.0.0",
+            "fileVersion": "2.3.0.0"
           }
         }
       }
@@ -46,12 +46,10 @@
       "path": "newtonsoft.json/12.0.3",
       "hashPath": "newtonsoft.json.12.0.3.nupkg.sha512"
     },
-    "TagLibSharp/2.2.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-Uemgywpy8wEOc6fUNTTpnUW0FGB7w6awlktn9j4y9mb/zJWyltL3OKlQCwBSdDgb7vMpUck35Dq1eoabbGcfAQ==",
-      "path": "taglibsharp/2.2.0",
-      "hashPath": "taglibsharp.2.2.0.nupkg.sha512"
+    "TagLibSharp/2.3.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

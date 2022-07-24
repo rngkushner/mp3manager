@@ -1,11 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "IN5s/iddQrTQNkDo0BJmg8oDSZ5HKRTFE2rATKLLvJvN6Hiu3aF7PvuVZepALwBVaLyYdVily8MsXk3uFY8tuA==",
+  "dgSpecHash": "yOYM2zDeeAqT+axFgdsRt9zGNE54rCGhf5bBqo04x1q1zPQqvN1hB5WjcY6bNRKgh45SuCYzy+6KIolao+Wv5w==",
   "success": true,
   "projectFilePath": "C:\\Users\\rngku\\source\\repos\\MP3Manager\\MP3Manager.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\rngku\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
-    "C:\\Users\\rngku\\.nuget\\packages\\taglibsharp\\2.2.0\\taglibsharp.2.2.0.nupkg.sha512"
+    "C:\\Users\\rngku\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
   ],
   "logs": []
 }

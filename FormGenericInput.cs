@@ -53,5 +53,17 @@ namespace MP3Manager
                 textBoxInput.Enabled = true;
             }
         }
+
+        private void FormGenericInput_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(DialogResult == DialogResult.OK && 
+                textBoxInput.Text == String.Empty && 
+                checkBoxBooleanOption.Checked == false)
+            {
+                MessageBox.Show("Please either name this library, check default or choose cancel.");
+                e.Cancel = true;
+            }
+           
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace MP3Manager.Files
 {
@@ -23,7 +24,12 @@ namespace MP3Manager.Files
         public string Artist { get; set; }
         public string Album { get; set; }
         public string Genre { get; set; }
+        public DateTime FileDate { get; set; }
         public string SoundexTag { get; set; }
+        public Int32 Track { get; set; }
+        
+        [JsonIgnore]
+        public bool fixName { get; set; }
         public int MatchCount
         {
             get

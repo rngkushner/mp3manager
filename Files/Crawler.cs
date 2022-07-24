@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace MP3Manager.Files
 {
@@ -19,9 +15,9 @@ namespace MP3Manager.Files
         {
             FileList.Clear();
 
-            foreach (string dir in Directory.GetFiles(startingDirectory, "*.mp3", SearchOption.AllDirectories))
-            {               
-                FileList.Add(dir);                
+            foreach (var dirFile in Directory.EnumerateFiles(startingDirectory, "*.mp3", SearchOption.AllDirectories))
+            {
+                FileList.Add(dirFile);
             }
         }
 

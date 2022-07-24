@@ -1,15 +1,12 @@
 ﻿using MP3Manager.WebServer;
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
 
 namespace MP3Manager.Files
 {
@@ -19,8 +16,14 @@ namespace MP3Manager.Files
         PlayList = 1,
         Library
     }
+       
     public static class FileUtils
     {
+
+        private const string MP3FilePattern = @"^[0-9]{2}\s{1}.+mp3";
+        private static readonly Regex mp3PatternFinder = new Regex(MP3FilePattern);
+
+
         public static void Transform(Dictionary<string, File> fileList)
         {
             //The intention here is  to create a soundex that will make fuzzy matches. Maybe it can be used 
@@ -51,6 +54,11 @@ namespace MP3Manager.Files
                                 
                 fileList[key].SoundexTag = fileName;
             }
+        }
+
+        public static bool FilePatternMatches(string input)
+        {
+            return mp3PatternFinder.IsMatch(input);
         }
 
         public static List<KeyValuePair<string, string>> FindPotentialMatches(Dictionary<string, File> fileList)
@@ -111,11 +119,30 @@ namespace MP3Manager.Files
             }
             else if(fileType == FileType.Library)
             {
+                var retn = new List<string>();
 
+                foreach(var fileName in Directory.GetFiles(@".\", "lib_*.json"))
+                {
+                    var newFileName = Path.GetFileNameWithoutExtension(fileName);
+
+                    if(!newFileName.StartsWith("playlist_"))
+                    {
+                        retn.Add(newFileName);
+                    }
+                }
+                return retn;
             }
             return null;
         }
-
+        /// <summary>
+        /// Saves the JSON result from Spotify by ALBUM
+        /// </summary>
+        /// <param name="albumId"></param>
+        /// <param name="json"></param>
+        public static void SaveSpotifyMeta(string albumId, string json)
+        {
+            Write("spotify_" + ConvertToBase64(albumId) + ".json", json);
+        }
         public static byte[] GetResource(string name)
         {
             ComponentResourceManager componentResourceManager = new ComponentResourceManager(typeof(WebServerResources));
@@ -136,10 +163,23 @@ namespace MP3Manager.Files
             }
         }
 
-        public static Dictionary<string, File> LoadDefaultPlaylist()
+        public static Dictionary<string, File> LoadLibrary(String libraryName)
         {
-            var defaultWord = ConvertToBase64("default_");
-            string [] files = Directory.GetFiles(@".\", defaultWord + "*.json");
+            if(!String.IsNullOrEmpty(libraryName) && libraryName == "Default Library")
+            {
+                libraryName = "default_";
+            }
+
+            string[] files = Directory.GetFiles(@".\", "lib_" + libraryName + ".json");
+            if (files.Length > 0)
+            {
+                return JsonSerializer.Deserialize<Dictionary<string, File>>(Read(files[0]));
+            }
+            return null;
+        }
+        public static Dictionary<string, File> LoadDefaultLibrary()
+        {
+            string [] files = Directory.GetFiles(@".\", "lib_default_.json");
             if(files.Length > 0)
             {
                 return JsonSerializer.Deserialize<Dictionary<string, File>>(Read(files[0]));
@@ -149,8 +189,7 @@ namespace MP3Manager.Files
 
         public static void SaveCrawl(string name, Dictionary<string, File> crawlResults)
         {
-            name = ConvertToBase64(name);
-            Write(name + ".json", JsonSerializer.Serialize(crawlResults));
+            Write("lib_" + name + ".json", JsonSerializer.Serialize(crawlResults));
         }
         public static void SavePlaylist(string playlistName, Playlist playlist)
         {
