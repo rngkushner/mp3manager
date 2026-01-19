@@ -13,14 +13,6 @@
             "fileVersion": "12.0.3.23909"
           }
         }
-      },
-      "TagLibSharp/2.2.0": {
-        "runtime": {
-          "lib/netstandard2.0/TagLibSharp.dll": {
-            "assemblyVersion": "2.2.0.0",
-            "fileVersion": "2.2.0.0"
-          }
-        }
       }
     }
   },
@@ -31,13 +23,6 @@
       "sha512": "sha512-6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
       "path": "newtonsoft.json/12.0.3",
       "hashPath": "newtonsoft.json.12.0.3.nupkg.sha512"
-    },
-    "TagLibSharp/2.2.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-Uemgywpy8wEOc6fUNTTpnUW0FGB7w6awlktn9j4y9mb/zJWyltL3OKlQCwBSdDgb7vMpUck35Dq1eoabbGcfAQ==",
-      "path": "taglibsharp/2.2.0",
-      "hashPath": "taglibsharp.2.2.0.nupkg.sha512"
     }
   }
 }

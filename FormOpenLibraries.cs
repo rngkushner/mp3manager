@@ -11,6 +11,7 @@ namespace MP3Manager
 {
     public partial class FormOpenLibraries : Form
     {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string SelectedLib { get; set; }
 
         public FormOpenLibraries()

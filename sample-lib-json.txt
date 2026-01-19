@@ -1,0 +1,1122 @@
+{
+  "12 - Smart Patrol _ Mr. DNA.mp3": {
+    "FileName": "12 - Smart Patrol _ Mr. DNA.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Duty Now For The Future\\12 - Smart Patrol _ Mr. DNA.mp3"
+    ],
+    "Title": "Smart Patrol / Mr. DNA",
+    "Artist": "Devo",
+    "Album": "Duty Now For The Future",
+    "Genre": "Alt",
+    "FileDate": "2017-12-08T10:03:17.2916146-05:00",
+    "SoundexTag": null,
+    "Track": 12,
+    "MatchCount": 1
+  },
+  "11 - Secret Agent Man.mp3": {
+    "FileName": "11 - Secret Agent Man.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Duty Now For The Future\\11 - Secret Agent Man.mp3"
+    ],
+    "Title": "Secret Agent Man",
+    "Artist": "Devo",
+    "Album": "Duty Now For The Future",
+    "Genre": "Alt",
+    "FileDate": "2017-12-08T10:03:17.0305196-05:00",
+    "SoundexTag": null,
+    "Track": 11,
+    "MatchCount": 1
+  },
+  "2 - Clockout.mp3": {
+    "FileName": "2 - Clockout.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Duty Now For The Future\\2 - Clockout.mp3"
+    ],
+    "Title": "Clockout",
+    "Artist": "Devo",
+    "Album": "Duty Now For The Future",
+    "Genre": "Alt",
+    "FileDate": "2017-12-08T10:03:17.6220702-05:00",
+    "SoundexTag": null,
+    "Track": 2,
+    "MatchCount": 1
+  },
+  "3 - Timing X _ Space Junk.mp3": {
+    "FileName": "3 - Timing X _ Space Junk.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Duty Now For The Future\\3 - Timing X _ Space Junk.mp3"
+    ],
+    "Title": "Timing X / Space Junk",
+    "Artist": "Devo",
+    "Album": "Duty Now For The Future",
+    "Genre": "Alt",
+    "FileDate": "2017-12-08T10:03:17.8416577-05:00",
+    "SoundexTag": null,
+    "Track": 3,
+    "MatchCount": 1
+  },
+  "4 - Wiggly World.mp3": {
+    "FileName": "4 - Wiggly World.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Duty Now For The Future\\4 - Wiggly World.mp3"
+    ],
+    "Title": "Wiggly World",
+    "Artist": "Devo",
+    "Album": "Duty Now For The Future",
+    "Genre": "Alt",
+    "FileDate": "2017-12-08T10:03:17.9824558-05:00",
+    "SoundexTag": null,
+    "Track": 4,
+    "MatchCount": 1
+  },
+  "01-15- Soo Bawlz (Remastered Album Version).mp3": {
+    "FileName": "01-15- Soo Bawlz (Remastered Album Version).mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Duty Now For The Future [Deluxe Remastered Edition] [Explicit]\\01-15- Soo Bawlz (Remastered Album Version).mp3"
+    ],
+    "Title": "Soo Bawlz (Remastered Album Version)",
+    "Artist": "Devo",
+    "Album": "Duty Now For The Future [Deluxe Remastered Edition] [Explicit]",
+    "Genre": "Alternative Rock",
+    "FileDate": "2017-12-08T10:01:58.0574397-05:00",
+    "SoundexTag": null,
+    "Track": 15,
+    "MatchCount": 1
+  },
+  "01-16- Be Stiff [Stiff Version] (Remastered Album Version).mp3": {
+    "FileName": "01-16- Be Stiff [Stiff Version] (Remastered Album Version).mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Duty Now For The Future [Deluxe Remastered Edition] [Explicit]\\01-16- Be Stiff [Stiff Version] (Remastered Album Version).mp3"
+    ],
+    "Title": "Be Stiff [Stiff Version] (Remastered Album Version)",
+    "Artist": "Devo",
+    "Album": "Duty Now For The Future [Deluxe Remastered Edition] [Explicit]",
+    "Genre": "Alternative Rock",
+    "FileDate": "2017-12-08T10:01:58.2136759-05:00",
+    "SoundexTag": null,
+    "Track": 16,
+    "MatchCount": 1
+  },
+  "01-17- Penetration In The Centrefold (Remastered Album Version) [Expli.mp3": {
+    "FileName": "01-17- Penetration In The Centrefold (Remastered Album Version) [Expli.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Duty Now For The Future [Deluxe Remastered Edition] [Explicit]\\01-17- Penetration In The Centrefold (Remastered Album Version) [Expli.mp3"
+    ],
+    "Title": "Penetration In The Centrefold (Remastered Album Version) [Explicit]",
+    "Artist": "Devo",
+    "Album": "Duty Now For The Future [Deluxe Remastered Edition] [Explicit]",
+    "Genre": "Alternative Rock",
+    "FileDate": "2017-12-08T10:01:58.4020992-05:00",
+    "SoundexTag": null,
+    "Track": 17,
+    "MatchCount": 1
+  },
+  "Devo - 01. Girl U Want.mp3": {
+    "FileName": "Devo - 01. Girl U Want.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Freedom Of Choice\\Devo - 01. Girl U Want.mp3"
+    ],
+    "Title": "Girl U Want",
+    "Artist": "Devo",
+    "Album": "Freedom Of Choice",
+    "Genre": "Alternative",
+    "FileDate": "2022-07-04T19:08:22-04:00",
+    "SoundexTag": null,
+    "Track": 1,
+    "MatchCount": 1
+  },
+  "Devo - 02. It's Not Right.mp3": {
+    "FileName": "Devo - 02. It's Not Right.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Freedom Of Choice\\Devo - 02. It's Not Right.mp3"
+    ],
+    "Title": "It's Not Right",
+    "Artist": "Devo",
+    "Album": "Freedom Of Choice",
+    "Genre": "Alternative",
+    "FileDate": "2022-07-04T19:08:22-04:00",
+    "SoundexTag": null,
+    "Track": 2,
+    "MatchCount": 1
+  },
+  "Devo - 04. Snowball.mp3": {
+    "FileName": "Devo - 04. Snowball.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Freedom Of Choice\\Devo - 04. Snowball.mp3"
+    ],
+    "Title": "Snowball",
+    "Artist": "Devo",
+    "Album": "Freedom Of Choice",
+    "Genre": "Alternative",
+    "FileDate": "2022-07-04T19:08:24-04:00",
+    "SoundexTag": null,
+    "Track": 4,
+    "MatchCount": 1
+  },
+  "Devo - 03. Whip It.mp3": {
+    "FileName": "Devo - 03. Whip It.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Freedom Of Choice\\Devo - 03. Whip It.mp3"
+    ],
+    "Title": "Whip It",
+    "Artist": "Devo",
+    "Album": "Freedom Of Choice",
+    "Genre": "Alternative",
+    "FileDate": "2022-07-04T19:08:24-04:00",
+    "SoundexTag": null,
+    "Track": 3,
+    "MatchCount": 1
+  },
+  "Devo - 05. Ton O' Luv.mp3": {
+    "FileName": "Devo - 05. Ton O' Luv.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Freedom Of Choice\\Devo - 05. Ton O' Luv.mp3"
+    ],
+    "Title": "Ton O' Luv",
+    "Artist": "Devo",
+    "Album": "Freedom Of Choice",
+    "Genre": "Alternative",
+    "FileDate": "2022-07-04T19:08:24-04:00",
+    "SoundexTag": null,
+    "Track": 5,
+    "MatchCount": 1
+  },
+  "Devo - 06. Freedom of Choice.mp3": {
+    "FileName": "Devo - 06. Freedom of Choice.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Freedom Of Choice\\Devo - 06. Freedom of Choice.mp3"
+    ],
+    "Title": "Freedom Of Choice",
+    "Artist": "Devo",
+    "Album": "Freedom Of Choice",
+    "Genre": "Alternative",
+    "FileDate": "2022-07-04T19:08:24-04:00",
+    "SoundexTag": null,
+    "Track": 6,
+    "MatchCount": 1
+  },
+  "Devo - 07. Gates of Steel.mp3": {
+    "FileName": "Devo - 07. Gates of Steel.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Freedom Of Choice\\Devo - 07. Gates of Steel.mp3"
+    ],
+    "Title": "Gates Of Steel",
+    "Artist": "Devo",
+    "Album": "Freedom Of Choice",
+    "Genre": "Alternative",
+    "FileDate": "2022-07-04T19:08:24-04:00",
+    "SoundexTag": null,
+    "Track": 7,
+    "MatchCount": 1
+  },
+  "Devo - 10. That's Pep!.mp3": {
+    "FileName": "Devo - 10. That's Pep!.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Freedom Of Choice\\Devo - 10. That's Pep!.mp3"
+    ],
+    "Title": "That's Pep!",
+    "Artist": "Devo",
+    "Album": "Freedom Of Choice",
+    "Genre": "Alternative",
+    "FileDate": "2022-07-04T19:08:26-04:00",
+    "SoundexTag": null,
+    "Track": 10,
+    "MatchCount": 1
+  },
+  "Devo - 08. Cold War.mp3": {
+    "FileName": "Devo - 08. Cold War.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Freedom Of Choice\\Devo - 08. Cold War.mp3"
+    ],
+    "Title": "Cold War",
+    "Artist": "Devo",
+    "Album": "Freedom Of Choice",
+    "Genre": "Alternative",
+    "FileDate": "2022-07-04T19:08:26-04:00",
+    "SoundexTag": null,
+    "Track": 8,
+    "MatchCount": 1
+  },
+  "Devo - 09. Don't You Know.mp3": {
+    "FileName": "Devo - 09. Don't You Know.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Freedom Of Choice\\Devo - 09. Don't You Know.mp3"
+    ],
+    "Title": "Don't You Know",
+    "Artist": "Devo",
+    "Album": "Freedom Of Choice",
+    "Genre": "Alternative",
+    "FileDate": "2022-07-04T19:08:26-04:00",
+    "SoundexTag": null,
+    "Track": 9,
+    "MatchCount": 1
+  },
+  "Devo - 11. Mr. B's Ballroom.mp3": {
+    "FileName": "Devo - 11. Mr. B's Ballroom.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Freedom Of Choice\\Devo - 11. Mr. B's Ballroom.mp3"
+    ],
+    "Title": "Mr. B's Ballroom",
+    "Artist": "Devo",
+    "Album": "Freedom Of Choice",
+    "Genre": "Alternative",
+    "FileDate": "2022-07-04T19:08:26-04:00",
+    "SoundexTag": null,
+    "Track": 11,
+    "MatchCount": 1
+  },
+  "Devo - Gates of Steel.mp3": {
+    "FileName": "Devo - Gates of Steel.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Freedom Of Choice\\Devo - Gates of Steel.mp3"
+    ],
+    "Title": "Gates of Steel",
+    "Artist": "Devo",
+    "Album": "Freedom of Choice",
+    "Genre": "Alt",
+    "FileDate": "2020-11-11T15:17:10.6863699-05:00",
+    "SoundexTag": null,
+    "Track": 0,
+    "MatchCount": 1
+  },
+  "Devo - 12. Planet Earth.mp3": {
+    "FileName": "Devo - 12. Planet Earth.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Freedom Of Choice\\Devo - 12. Planet Earth.mp3"
+    ],
+    "Title": "Planet Earth",
+    "Artist": "Devo",
+    "Album": "Freedom Of Choice",
+    "Genre": "Alternative",
+    "FileDate": "2022-07-04T19:08:26-04:00",
+    "SoundexTag": null,
+    "Track": 12,
+    "MatchCount": 1
+  },
+  "03 - Pity You (2010 Remaster).mp3": {
+    "FileName": "03 - Pity You (2010 Remaster).mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\New Traditionalists (2010 Remaster) [Deluxe Editio\\03 - Pity You (2010 Remaster).mp3"
+    ],
+    "Title": "Pity You (2010 Remaster)",
+    "Artist": "DEVO",
+    "Album": "New Traditionalists (2010 Remaster) [Deluxe Edition] [Explicit]",
+    "Genre": "Alternative Rock",
+    "FileDate": "2022-12-31T20:00:16-05:00",
+    "SoundexTag": null,
+    "Track": 3,
+    "MatchCount": 1
+  },
+  "01 - Through Being Cool (2010 Remaster).mp3": {
+    "FileName": "01 - Through Being Cool (2010 Remaster).mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\New Traditionalists (2010 Remaster) [Deluxe Editio\\01 - Through Being Cool (2010 Remaster).mp3"
+    ],
+    "Title": "Through Being Cool (2010 Remaster)",
+    "Artist": "DEVO",
+    "Album": "New Traditionalists (2010 Remaster) [Deluxe Edition] [Explicit]",
+    "Genre": "Alternative Rock",
+    "FileDate": "2022-12-31T20:00:14-05:00",
+    "SoundexTag": null,
+    "Track": 1,
+    "MatchCount": 1
+  },
+  "02 - Jerkin' Back 'N' Forth (2010 Remaster).mp3": {
+    "FileName": "02 - Jerkin' Back 'N' Forth (2010 Remaster).mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\New Traditionalists (2010 Remaster) [Deluxe Editio\\02 - Jerkin' Back 'N' Forth (2010 Remaster).mp3"
+    ],
+    "Title": "Jerkin' Back 'N' Forth (2010 Remaster)",
+    "Artist": "DEVO",
+    "Album": "New Traditionalists (2010 Remaster) [Deluxe Edition] [Explicit]",
+    "Genre": "Alternative Rock",
+    "FileDate": "2022-12-31T20:00:14-05:00",
+    "SoundexTag": null,
+    "Track": 2,
+    "MatchCount": 1
+  },
+  "06 - Race of Doom (2010 Remaster).mp3": {
+    "FileName": "06 - Race of Doom (2010 Remaster).mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\New Traditionalists (2010 Remaster) [Deluxe Editio\\06 - Race of Doom (2010 Remaster).mp3"
+    ],
+    "Title": "Race of Doom (2010 Remaster)",
+    "Artist": "DEVO",
+    "Album": "New Traditionalists (2010 Remaster) [Deluxe Edition] [Explicit]",
+    "Genre": "Alternative Rock",
+    "FileDate": "2022-12-31T20:00:16-05:00",
+    "SoundexTag": null,
+    "Track": 6,
+    "MatchCount": 1
+  },
+  "04 - Soft Things (2010 Remaster).mp3": {
+    "FileName": "04 - Soft Things (2010 Remaster).mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\New Traditionalists (2010 Remaster) [Deluxe Editio\\04 - Soft Things (2010 Remaster).mp3"
+    ],
+    "Title": "Soft Things (2010 Remaster)",
+    "Artist": "DEVO",
+    "Album": "New Traditionalists (2010 Remaster) [Deluxe Edition] [Explicit]",
+    "Genre": "Alternative Rock",
+    "FileDate": "2022-12-31T20:00:16-05:00",
+    "SoundexTag": null,
+    "Track": 4,
+    "MatchCount": 1
+  },
+  "05 - Going Under (2010 Remaster).mp3": {
+    "FileName": "05 - Going Under (2010 Remaster).mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\New Traditionalists (2010 Remaster) [Deluxe Editio\\05 - Going Under (2010 Remaster).mp3"
+    ],
+    "Title": "Going Under (2010 Remaster)",
+    "Artist": "DEVO",
+    "Album": "New Traditionalists (2010 Remaster) [Deluxe Edition] [Explicit]",
+    "Genre": "Alternative Rock",
+    "FileDate": "2022-12-31T20:00:16-05:00",
+    "SoundexTag": null,
+    "Track": 5,
+    "MatchCount": 1
+  },
+  "07 - Love without Anger (2010 Remaster).mp3": {
+    "FileName": "07 - Love without Anger (2010 Remaster).mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\New Traditionalists (2010 Remaster) [Deluxe Editio\\07 - Love without Anger (2010 Remaster).mp3"
+    ],
+    "Title": "Love without Anger (2010 Remaster)",
+    "Artist": "DEVO",
+    "Album": "New Traditionalists (2010 Remaster) [Deluxe Edition] [Explicit]",
+    "Genre": "Alternative Rock",
+    "FileDate": "2022-12-31T20:00:16-05:00",
+    "SoundexTag": null,
+    "Track": 7,
+    "MatchCount": 1
+  },
+  "09 - Beautiful World (2010 Remaster).mp3": {
+    "FileName": "09 - Beautiful World (2010 Remaster).mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\New Traditionalists (2010 Remaster) [Deluxe Editio\\09 - Beautiful World (2010 Remaster).mp3"
+    ],
+    "Title": "Beautiful World (2010 Remaster)",
+    "Artist": "DEVO",
+    "Album": "New Traditionalists (2010 Remaster) [Deluxe Edition] [Explicit]",
+    "Genre": "Alternative Rock",
+    "FileDate": "2022-12-31T20:00:18-05:00",
+    "SoundexTag": null,
+    "Track": 9,
+    "MatchCount": 1
+  },
+  "08 - The Super Thing (2010 Remaster).mp3": {
+    "FileName": "08 - The Super Thing (2010 Remaster).mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\New Traditionalists (2010 Remaster) [Deluxe Editio\\08 - The Super Thing (2010 Remaster).mp3"
+    ],
+    "Title": "The Super Thing (2010 Remaster)",
+    "Artist": "DEVO",
+    "Album": "New Traditionalists (2010 Remaster) [Deluxe Edition] [Explicit]",
+    "Genre": "Alternative Rock",
+    "FileDate": "2022-12-31T20:00:18-05:00",
+    "SoundexTag": null,
+    "Track": 8,
+    "MatchCount": 1
+  },
+  "16 - It's a Beautiful World (E-Z Listening Version).mp3": {
+    "FileName": "16 - It's a Beautiful World (E-Z Listening Version).mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\New Traditionalists (2010 Remaster) [Deluxe Editio\\16 - It's a Beautiful World (E-Z Listening Version).mp3"
+    ],
+    "Title": "It's a Beautiful World (E-Z Listening Version)",
+    "Artist": "DEVO",
+    "Album": "New Traditionalists (2010 Remaster) [Deluxe Edition] [Explicit]",
+    "Genre": "Alternative Rock",
+    "FileDate": "2022-12-31T20:00:22-05:00",
+    "SoundexTag": null,
+    "Track": 16,
+    "MatchCount": 1
+  },
+  "10 - Enough Said (2010 Remaster).mp3": {
+    "FileName": "10 - Enough Said (2010 Remaster).mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\New Traditionalists (2010 Remaster) [Deluxe Editio\\10 - Enough Said (2010 Remaster).mp3"
+    ],
+    "Title": "Enough Said (2010 Remaster)",
+    "Artist": "DEVO",
+    "Album": "New Traditionalists (2010 Remaster) [Deluxe Edition] [Explicit]",
+    "Genre": "Alternative Rock",
+    "FileDate": "2022-12-31T20:00:18-05:00",
+    "SoundexTag": null,
+    "Track": 10,
+    "MatchCount": 1
+  },
+  "11 - Nu-Tra Speaks (New Traditionalist Man) [Remastered Album Version].mp3": {
+    "FileName": "11 - Nu-Tra Speaks (New Traditionalist Man) [Remastered Album Version].mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\New Traditionalists (2010 Remaster) [Deluxe Editio\\11 - Nu-Tra Speaks (New Traditionalist Man) [Remastered Album Version].mp3"
+    ],
+    "Title": "Nu-Tra Speaks (New Traditionalist Man) [Remastered Album Version]",
+    "Artist": "DEVO",
+    "Album": "New Traditionalists (2010 Remaster) [Deluxe Edition] [Explicit]",
+    "Genre": "Alternative Rock",
+    "FileDate": "2022-12-31T20:00:18-05:00",
+    "SoundexTag": null,
+    "Track": 11,
+    "MatchCount": 1
+  },
+  "12 - One Dumb Thing (2010 Remaster).mp3": {
+    "FileName": "12 - One Dumb Thing (2010 Remaster).mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\New Traditionalists (Deluxe Remastered Edition) [E\\12 - One Dumb Thing (2010 Remaster).mp3"
+    ],
+    "Title": "One Dumb Thing (2010 Remaster)",
+    "Artist": "Devo",
+    "Album": "New Traditionalists (Deluxe Remastered Edition) [Explicit]",
+    "Genre": "Alternative Rock",
+    "FileDate": "2019-06-23T01:20:24-04:00",
+    "SoundexTag": null,
+    "Track": 12,
+    "MatchCount": 1
+  },
+  "13 - Modern Life (2010 Remaster) [Explicit].mp3": {
+    "FileName": "13 - Modern Life (2010 Remaster) [Explicit].mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\New Traditionalists (Deluxe Remastered Edition) [E\\13 - Modern Life (2010 Remaster) [Explicit].mp3"
+    ],
+    "Title": "Modern Life (2010 Remaster) [Explicit]",
+    "Artist": "Devo",
+    "Album": "New Traditionalists (Deluxe Remastered Edition) [Explicit]",
+    "Genre": "Alternative Rock",
+    "FileDate": "2019-06-23T01:20:24-04:00",
+    "SoundexTag": null,
+    "Track": 13,
+    "MatchCount": 1
+  },
+  "14 - Faster and Faster (2010 Remaster).mp3": {
+    "FileName": "14 - Faster and Faster (2010 Remaster).mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\New Traditionalists (Deluxe Remastered Edition) [E\\14 - Faster and Faster (2010 Remaster).mp3"
+    ],
+    "Title": "Faster and Faster (2010 Remaster)",
+    "Artist": "Devo",
+    "Album": "New Traditionalists (Deluxe Remastered Edition) [Explicit]",
+    "Genre": "Alternative Rock",
+    "FileDate": "2019-06-23T01:20:24-04:00",
+    "SoundexTag": null,
+    "Track": 14,
+    "MatchCount": 1
+  },
+  "01-06- Patterns.mp3": {
+    "FileName": "01-06- Patterns.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Oh No! Its Devo\\01-06- Patterns.mp3"
+    ],
+    "Title": "Patterns",
+    "Artist": "Devo",
+    "Album": "Oh No! It's Devo",
+    "Genre": "Alternative Rock",
+    "FileDate": "2017-12-08T10:01:58.812504-05:00",
+    "SoundexTag": null,
+    "Track": 6,
+    "MatchCount": 1
+  },
+  "15 - Psychology of Desire (Demo).mp3": {
+    "FileName": "15 - Psychology of Desire (Demo).mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\New Traditionalists (Deluxe Remastered Edition) [E\\15 - Psychology of Desire (Demo).mp3"
+    ],
+    "Title": "Psychology of Desire (Demo)",
+    "Artist": "Devo",
+    "Album": "New Traditionalists (Deluxe Remastered Edition) [Explicit]",
+    "Genre": "Alternative Rock",
+    "FileDate": "2019-06-23T01:20:26-04:00",
+    "SoundexTag": null,
+    "Track": 15,
+    "MatchCount": 1
+  },
+  "01-04- Explosions.mp3": {
+    "FileName": "01-04- Explosions.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Oh No! Its Devo\\01-04- Explosions.mp3"
+    ],
+    "Title": "Explosions",
+    "Artist": "Devo",
+    "Album": "Oh No! It's Devo",
+    "Genre": "Alternative Rock",
+    "FileDate": "2017-12-08T10:01:58.6063262-05:00",
+    "SoundexTag": null,
+    "Track": 4,
+    "MatchCount": 1
+  },
+  "01-07- Big Mess.mp3": {
+    "FileName": "01-07- Big Mess.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Oh No! Its Devo\\01-07- Big Mess.mp3"
+    ],
+    "Title": "Big Mess",
+    "Artist": "Devo",
+    "Album": "Oh No! It's Devo",
+    "Genre": "Alternative Rock",
+    "FileDate": "2017-12-08T10:01:59.0327315-05:00",
+    "SoundexTag": null,
+    "Track": 7,
+    "MatchCount": 1
+  },
+  "5 - That's Good.mp3": {
+    "FileName": "5 - That's Good.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Oh No! Its Devo\\5 - That's Good.mp3"
+    ],
+    "Title": "That's Good",
+    "Artist": "Devo",
+    "Album": "Oh No! It's Devo",
+    "Genre": "Alt",
+    "FileDate": "2017-12-08T10:03:18.2410458-05:00",
+    "SoundexTag": null,
+    "Track": 5,
+    "MatchCount": 1
+  },
+  "01-11- Deep Sleep.mp3": {
+    "FileName": "01-11- Deep Sleep.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Oh No! Its Devo\\01-11- Deep Sleep.mp3"
+    ],
+    "Title": "Deep Sleep",
+    "Artist": "Devo",
+    "Album": "Oh No! It's Devo",
+    "Genre": "Alternative Rock",
+    "FileDate": "2017-12-08T10:01:59.2277955-05:00",
+    "SoundexTag": null,
+    "Track": 11,
+    "MatchCount": 1
+  },
+  "Devo - 01. Uncontrollable Urge.mp3": {
+    "FileName": "Devo - 01. Uncontrollable Urge.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Q_ Are We Not Men_ A_ We Are Devo!\\Devo - 01. Uncontrollable Urge.mp3"
+    ],
+    "Title": "Uncontrollable Urge",
+    "Artist": "Devo",
+    "Album": "Q: Are We Not Men? A: We Are Devo!",
+    "Genre": "alternative",
+    "FileDate": "2022-07-04T19:08:38-04:00",
+    "SoundexTag": null,
+    "Track": 1,
+    "MatchCount": 1
+  },
+  "Devo - 02. (I Can't Get No) Satisfaction.mp3": {
+    "FileName": "Devo - 02. (I Can't Get No) Satisfaction.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Q_ Are We Not Men_ A_ We Are Devo!\\Devo - 02. (I Can't Get No) Satisfaction.mp3"
+    ],
+    "Title": "[I Can't Get No] Satisfaction",
+    "Artist": "Devo",
+    "Album": "Q: Are We Not Men? A: We Are Devo!",
+    "Genre": "alternative",
+    "FileDate": "2022-07-04T19:08:38-04:00",
+    "SoundexTag": null,
+    "Track": 2,
+    "MatchCount": 1
+  },
+  "Devo - 03. Praying Hands.mp3": {
+    "FileName": "Devo - 03. Praying Hands.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Q_ Are We Not Men_ A_ We Are Devo!\\Devo - 03. Praying Hands.mp3"
+    ],
+    "Title": "Praying Hands",
+    "Artist": "Devo",
+    "Album": "Q: Are We Not Men? A: We Are Devo!",
+    "Genre": "alternative",
+    "FileDate": "2022-07-04T19:08:40-04:00",
+    "SoundexTag": null,
+    "Track": 3,
+    "MatchCount": 1
+  },
+  "Devo - 04. Space Junk.mp3": {
+    "FileName": "Devo - 04. Space Junk.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Q_ Are We Not Men_ A_ We Are Devo!\\Devo - 04. Space Junk.mp3"
+    ],
+    "Title": "Space Junk",
+    "Artist": "Devo",
+    "Album": "Q: Are We Not Men? A: We Are Devo!",
+    "Genre": "alternative",
+    "FileDate": "2022-07-04T19:08:40-04:00",
+    "SoundexTag": null,
+    "Track": 4,
+    "MatchCount": 1
+  },
+  "Devo - 05. Mongoloid.mp3": {
+    "FileName": "Devo - 05. Mongoloid.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Q_ Are We Not Men_ A_ We Are Devo!\\Devo - 05. Mongoloid.mp3"
+    ],
+    "Title": "Mongoloid",
+    "Artist": "Devo",
+    "Album": "Q: Are We Not Men? A: We Are Devo!",
+    "Genre": "alternative",
+    "FileDate": "2022-07-04T19:08:40-04:00",
+    "SoundexTag": null,
+    "Track": 5,
+    "MatchCount": 1
+  },
+  "Devo - 06. Jocko Homo.mp3": {
+    "FileName": "Devo - 06. Jocko Homo.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Q_ Are We Not Men_ A_ We Are Devo!\\Devo - 06. Jocko Homo.mp3"
+    ],
+    "Title": "Jocko Homo",
+    "Artist": "Devo",
+    "Album": "Q: Are We Not Men? A: We Are Devo!",
+    "Genre": "alternative",
+    "FileDate": "2022-07-04T19:08:40-04:00",
+    "SoundexTag": null,
+    "Track": 6,
+    "MatchCount": 1
+  },
+  "Devo - 07. Too Much Paranoias.mp3": {
+    "FileName": "Devo - 07. Too Much Paranoias.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Q_ Are We Not Men_ A_ We Are Devo!\\Devo - 07. Too Much Paranoias.mp3"
+    ],
+    "Title": "Too Much Paranoias",
+    "Artist": "Devo",
+    "Album": "Q: Are We Not Men? A: We Are Devo!",
+    "Genre": "alternative",
+    "FileDate": "2022-07-04T19:08:40-04:00",
+    "SoundexTag": null,
+    "Track": 7,
+    "MatchCount": 1
+  },
+  "Devo - 08. Gut Feeling _ (Slap Your Mammy).mp3": {
+    "FileName": "Devo - 08. Gut Feeling _ (Slap Your Mammy).mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Q_ Are We Not Men_ A_ We Are Devo!\\Devo - 08. Gut Feeling _ (Slap Your Mammy).mp3"
+    ],
+    "Title": "Gut Feeling/ [Slap Your Mammy]",
+    "Artist": "Devo",
+    "Album": "Q: Are We Not Men? A: We Are Devo!",
+    "Genre": "alternative",
+    "FileDate": "2022-07-04T19:08:40-04:00",
+    "SoundexTag": null,
+    "Track": 8,
+    "MatchCount": 1
+  },
+  "Devo - 09. Come Back Jonee.mp3": {
+    "FileName": "Devo - 09. Come Back Jonee.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Q_ Are We Not Men_ A_ We Are Devo!\\Devo - 09. Come Back Jonee.mp3"
+    ],
+    "Title": "Come Back Jonee",
+    "Artist": "Devo",
+    "Album": "Q: Are We Not Men? A: We Are Devo!",
+    "Genre": "alternative",
+    "FileDate": "2022-07-04T19:08:42-04:00",
+    "SoundexTag": null,
+    "Track": 9,
+    "MatchCount": 1
+  },
+  "Devo - 10. Sloppy (I Saw My Baby Gettin').mp3": {
+    "FileName": "Devo - 10. Sloppy (I Saw My Baby Gettin').mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Q_ Are We Not Men_ A_ We Are Devo!\\Devo - 10. Sloppy (I Saw My Baby Gettin').mp3"
+    ],
+    "Title": "Sloppy [I Saw My Baby Gettin']",
+    "Artist": "Devo",
+    "Album": "Q: Are We Not Men? A: We Are Devo!",
+    "Genre": "alternative",
+    "FileDate": "2022-07-04T19:08:42-04:00",
+    "SoundexTag": null,
+    "Track": 10,
+    "MatchCount": 1
+  },
+  "Devo - 11. Shrivel-Up.mp3": {
+    "FileName": "Devo - 11. Shrivel-Up.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Q_ Are We Not Men_ A_ We Are Devo!\\Devo - 11. Shrivel-Up.mp3"
+    ],
+    "Title": "Shrivel-Up",
+    "Artist": "Devo",
+    "Album": "Q: Are We Not Men? A: We Are Devo!",
+    "Genre": "alternative",
+    "FileDate": "2022-07-04T19:08:42-04:00",
+    "SoundexTag": null,
+    "Track": 11,
+    "MatchCount": 1
+  },
+  "01-01- Monsterman.mp3": {
+    "FileName": "01-01- Monsterman.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Something Else For Everybody\\01-01- Monsterman.mp3"
+    ],
+    "Title": "Monsterman",
+    "Artist": "Devo",
+    "Album": "Something Else For Everybody",
+    "Genre": "Alternative Rock",
+    "FileDate": "2017-12-08T10:01:59.5248462-05:00",
+    "SoundexTag": null,
+    "Track": 1,
+    "MatchCount": 1
+  },
+  "01-01- Fresh.mp3": {
+    "FileName": "01-01- Fresh.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Something For Everybody\\01-01- Fresh.mp3"
+    ],
+    "Title": "Fresh",
+    "Artist": "Devo",
+    "Album": "Something For Everybody",
+    "Genre": "Alternative Rock",
+    "FileDate": "2017-12-08T10:01:59.7435002-05:00",
+    "SoundexTag": null,
+    "Track": 1,
+    "MatchCount": 1
+  },
+  "01-02- What We Do.mp3": {
+    "FileName": "01-02- What We Do.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Something For Everybody\\01-02- What We Do.mp3"
+    ],
+    "Title": "What We Do",
+    "Artist": "Devo",
+    "Album": "Something For Everybody",
+    "Genre": "Alternative Rock",
+    "FileDate": "2017-12-08T10:01:59.9623541-05:00",
+    "SoundexTag": null,
+    "Track": 2,
+    "MatchCount": 1
+  },
+  "01-03- Please Baby Please.mp3": {
+    "FileName": "01-03- Please Baby Please.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Something For Everybody\\01-03- Please Baby Please.mp3"
+    ],
+    "Title": "Please Baby Please",
+    "Artist": "Devo",
+    "Album": "Something For Everybody",
+    "Genre": "Alternative Rock",
+    "FileDate": "2017-12-08T10:02:00.1498748-05:00",
+    "SoundexTag": null,
+    "Track": 3,
+    "MatchCount": 1
+  },
+  "01-04- Dont Shoot (Im A Man).mp3": {
+    "FileName": "01-04- Dont Shoot (Im A Man).mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Something For Everybody\\01-04- Dont Shoot (Im A Man).mp3"
+    ],
+    "Title": "Don't Shoot (I'm A Man)",
+    "Artist": "Devo",
+    "Album": "Something For Everybody",
+    "Genre": "Alternative Rock",
+    "FileDate": "2017-12-08T10:02:00.3691466-05:00",
+    "SoundexTag": null,
+    "Track": 4,
+    "MatchCount": 1
+  },
+  "01-05- Mind Games.mp3": {
+    "FileName": "01-05- Mind Games.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Something For Everybody\\01-05- Mind Games.mp3"
+    ],
+    "Title": "Mind Games",
+    "Artist": "Devo",
+    "Album": "Something For Everybody",
+    "Genre": "Alternative Rock",
+    "FileDate": "2017-12-08T10:02:00.6055186-05:00",
+    "SoundexTag": null,
+    "Track": 5,
+    "MatchCount": 1
+  },
+  "01-06- Human Rocket.mp3": {
+    "FileName": "01-06- Human Rocket.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Something For Everybody\\01-06- Human Rocket.mp3"
+    ],
+    "Title": "Human Rocket",
+    "Artist": "Devo",
+    "Album": "Something For Everybody",
+    "Genre": "Alternative Rock",
+    "FileDate": "2017-12-08T10:02:00.7918189-05:00",
+    "SoundexTag": null,
+    "Track": 6,
+    "MatchCount": 1
+  },
+  "01-07- Sumthin.mp3": {
+    "FileName": "01-07- Sumthin.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Something For Everybody\\01-07- Sumthin.mp3"
+    ],
+    "Title": "Sumthin'",
+    "Artist": "Devo",
+    "Album": "Something For Everybody",
+    "Genre": "Alternative Rock",
+    "FileDate": "2017-12-08T10:02:01.0372948-05:00",
+    "SoundexTag": null,
+    "Track": 7,
+    "MatchCount": 1
+  },
+  "01-08- Step Up.mp3": {
+    "FileName": "01-08- Step Up.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Something For Everybody\\01-08- Step Up.mp3"
+    ],
+    "Title": "Step Up",
+    "Artist": "Devo",
+    "Album": "Something For Everybody",
+    "Genre": "Alternative Rock",
+    "FileDate": "2017-12-08T10:02:01.2303622-05:00",
+    "SoundexTag": null,
+    "Track": 8,
+    "MatchCount": 1
+  },
+  "01-09- Cameo.mp3": {
+    "FileName": "01-09- Cameo.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Something For Everybody\\01-09- Cameo.mp3"
+    ],
+    "Title": "Cameo",
+    "Artist": "Devo",
+    "Album": "Something For Everybody",
+    "Genre": "Alternative Rock",
+    "FileDate": "2017-12-08T10:02:01.4267066-05:00",
+    "SoundexTag": null,
+    "Track": 9,
+    "MatchCount": 1
+  },
+  "01-10- Later Is Now.mp3": {
+    "FileName": "01-10- Later Is Now.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Something For Everybody\\01-10- Later Is Now.mp3"
+    ],
+    "Title": "Later Is Now",
+    "Artist": "Devo",
+    "Album": "Something For Everybody",
+    "Genre": "Alternative Rock",
+    "FileDate": "2017-12-08T10:02:01.6144426-05:00",
+    "SoundexTag": null,
+    "Track": 10,
+    "MatchCount": 1
+  },
+  "01-11- No Place Like Home.mp3": {
+    "FileName": "01-11- No Place Like Home.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Something For Everybody\\01-11- No Place Like Home.mp3"
+    ],
+    "Title": "No Place Like Home",
+    "Artist": "Devo",
+    "Album": "Something For Everybody",
+    "Genre": "Alternative Rock",
+    "FileDate": "2017-12-08T10:02:01.8395085-05:00",
+    "SoundexTag": null,
+    "Track": 11,
+    "MatchCount": 1
+  },
+  "01-12- March On.mp3": {
+    "FileName": "01-12- March On.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Something For Everybody\\01-12- March On.mp3"
+    ],
+    "Title": "March On",
+    "Artist": "Devo",
+    "Album": "Something For Everybody",
+    "Genre": "Alternative Rock",
+    "FileDate": "2017-12-08T10:02:02.093655-05:00",
+    "SoundexTag": null,
+    "Track": 12,
+    "MatchCount": 1
+  },
+  "01-S.mp3": {
+    "FileName": "01-S.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Total Devo\\01-S.mp3"
+    ],
+    "Title": "Baby Doll",
+    "Artist": "Devo",
+    "Album": "Total Devo",
+    "Genre": "Alternative",
+    "FileDate": "2017-12-10T20:03:18.7498714-05:00",
+    "SoundexTag": null,
+    "Track": 1,
+    "MatchCount": 1
+  },
+  "01-13- Watch Us Work It.mp3": {
+    "FileName": "01-13- Watch Us Work It.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Something For Everybody (Deluxe)\\01-13- Watch Us Work It.mp3"
+    ],
+    "Title": "Watch Us Work It",
+    "Artist": "Devo",
+    "Album": "Something For Everybody (Deluxe)",
+    "Genre": "Alternative Rock",
+    "FileDate": "2017-12-08T10:02:02.5093366-05:00",
+    "SoundexTag": null,
+    "Track": 13,
+    "MatchCount": 1
+  },
+  "02-S.mp3": {
+    "FileName": "02-S.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Total Devo\\02-S.mp3"
+    ],
+    "Title": "Disco Dancer",
+    "Artist": "Devo",
+    "Album": "Total Devo",
+    "Genre": "Alternative",
+    "FileDate": "2017-12-10T20:03:24.4380491-05:00",
+    "SoundexTag": null,
+    "Track": 2,
+    "MatchCount": 1
+  },
+  "03-S.mp3": {
+    "FileName": "03-S.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Total Devo\\03-S.mp3"
+    ],
+    "Title": "Some Things Never Change",
+    "Artist": "Devo",
+    "Album": "Total Devo",
+    "Genre": "Alternative",
+    "FileDate": "2017-12-10T20:03:30.7660215-05:00",
+    "SoundexTag": null,
+    "Track": 3,
+    "MatchCount": 1
+  },
+  "04-S.mp3": {
+    "FileName": "04-S.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Total Devo\\04-S.mp3"
+    ],
+    "Title": "Plain Truth",
+    "Artist": "Devo",
+    "Album": "Total Devo",
+    "Genre": "Alternative",
+    "FileDate": "2017-12-10T20:03:37.0855731-05:00",
+    "SoundexTag": null,
+    "Track": 4,
+    "MatchCount": 1
+  },
+  "05-S.mp3": {
+    "FileName": "05-S.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Total Devo\\05-S.mp3"
+    ],
+    "Title": "Happy Guy",
+    "Artist": "Devo",
+    "Album": "Total Devo",
+    "Genre": "Alternative",
+    "FileDate": "2017-12-10T20:03:41.9154077-05:00",
+    "SoundexTag": null,
+    "Track": 5,
+    "MatchCount": 1
+  },
+  "06-S.mp3": {
+    "FileName": "06-S.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Total Devo\\06-S.mp3"
+    ],
+    "Title": "Don't Be Cruel",
+    "Artist": "Devo",
+    "Album": "Total Devo",
+    "Genre": "Alternative",
+    "FileDate": "2017-12-10T20:03:47.1222186-05:00",
+    "SoundexTag": null,
+    "Track": 6,
+    "MatchCount": 1
+  },
+  "08-S.mp3": {
+    "FileName": "08-S.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Total Devo\\08-S.mp3"
+    ],
+    "Title": "I'd Cry If You Died",
+    "Artist": "Devo",
+    "Album": "Total Devo",
+    "Genre": "Alternative",
+    "FileDate": "2017-12-10T20:03:55.4276312-05:00",
+    "SoundexTag": null,
+    "Track": 8,
+    "MatchCount": 1
+  },
+  "07-S.mp3": {
+    "FileName": "07-S.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Total Devo\\07-S.mp3"
+    ],
+    "Title": "The Shadow",
+    "Artist": "Devo",
+    "Album": "Total Devo",
+    "Genre": "Alternative",
+    "FileDate": "2017-12-10T20:03:50.4200771-05:00",
+    "SoundexTag": null,
+    "Track": 7,
+    "MatchCount": 1
+  },
+  "09-S.mp3": {
+    "FileName": "09-S.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Total Devo\\09-S.mp3"
+    ],
+    "Title": "Agitated",
+    "Artist": "Devo",
+    "Album": "Total Devo",
+    "Genre": "Alternative",
+    "FileDate": "2017-12-10T20:04:01.5237905-05:00",
+    "SoundexTag": null,
+    "Track": 9,
+    "MatchCount": 1
+  },
+  "10-S.mp3": {
+    "FileName": "10-S.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Total Devo\\10-S.mp3"
+    ],
+    "Title": "Man Turned Inside Out",
+    "Artist": "Devo",
+    "Album": "Total Devo",
+    "Genre": "Alternative",
+    "FileDate": "2017-12-10T20:04:07.3511396-05:00",
+    "SoundexTag": null,
+    "Track": 10,
+    "MatchCount": 1
+  },
+  "11-S.mp3": {
+    "FileName": "11-S.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Total Devo\\11-S.mp3"
+    ],
+    "Title": "Sexi Luv",
+    "Artist": "Devo",
+    "Album": "Total Devo",
+    "Genre": "Alternative",
+    "FileDate": "2017-12-10T20:04:13.6024175-05:00",
+    "SoundexTag": null,
+    "Track": 11,
+    "MatchCount": 1
+  },
+  "12-S.mp3": {
+    "FileName": "12-S.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Total Devo\\12-S.mp3"
+    ],
+    "Title": "Blow Up",
+    "Artist": "Devo",
+    "Album": "Total Devo",
+    "Genre": "Alternative",
+    "FileDate": "2017-12-10T20:04:18.5320021-05:00",
+    "SoundexTag": null,
+    "Track": 12,
+    "MatchCount": 1
+  },
+  "02 - Turn Around.mp3": {
+    "FileName": "02 - Turn Around.mp3",
+    "Paths": [
+      "C:\\Users\\rngku\\Music\\Devo\\Whip It _ Turn Around [Digital 45]\\02 - Turn Around.mp3"
+    ],
+    "Title": "Turn Around",
+    "Artist": "Devo",
+    "Album": "Whip It / Turn Around [Digital 45]",
+    "Genre": "Rock",
+    "FileDate": "2017-12-08T10:02:02.6973019-05:00",
+    "SoundexTag": null,
+    "Track": 2,
+    "MatchCount": 1
+  }
+}

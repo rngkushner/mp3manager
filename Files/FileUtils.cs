@@ -134,15 +134,7 @@ namespace MP3Manager.Files
             }
             return null;
         }
-        /// <summary>
-        /// Saves the JSON result from Spotify by ALBUM
-        /// </summary>
-        /// <param name="albumId"></param>
-        /// <param name="json"></param>
-        public static void SaveSpotifyMeta(string albumId, string json)
-        {
-            Write("spotify_" + ConvertToBase64(albumId) + ".json", json);
-        }
+
         public static byte[] GetResource(string name)
         {
             ComponentResourceManager componentResourceManager = new ComponentResourceManager(typeof(WebServerResources));
@@ -187,9 +179,9 @@ namespace MP3Manager.Files
             return null;
         }
 
-        public static void SaveCrawl(string name, Dictionary<string, File> crawlResults)
+        public static void SaveCrawl(string name, string fileContent)
         {
-            Write("lib_" + name + ".json", JsonSerializer.Serialize(crawlResults));
+            Write("lib_" + name + ".json", fileContent);
         }
         public static void SavePlaylist(string playlistName, Playlist playlist)
         {

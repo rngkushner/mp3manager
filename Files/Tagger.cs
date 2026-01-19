@@ -1,27 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace MP3Manager.Files
 {
     public class Tagger
     {
+        private int i = 0;
+
         public List<string> Exceptions { get; set; }
+
 
         private Dictionary<string, File> musicList;
         private Dictionary<string, string> secondaryKey;
+
+        private StringBuilder taskInfo = new StringBuilder();
+        private bool captureStats = false;
+        private int parallelCount = 0;
 
         public delegate void JobDoneDelegate(Dictionary<string, File> completeList);
 
         private JobDoneDelegate myJobIsDone;
 
-        public Tagger(Dictionary<string, File> MP3List)
+        public Tagger(Dictionary<string, File> MP3List, bool CaptureStats = false, int ParallelCount = 3)
         {
             musicList = MP3List;
             secondaryKey = new Dictionary<string, string>();
             Exceptions = new List<string>();
+            captureStats = CaptureStats;
+            parallelCount = ParallelCount;
         }
         public void RunTagJob(List<string> paths, JobDoneDelegate jobDone)
         {
@@ -34,11 +43,29 @@ namespace MP3Manager.Files
         }
         private bool Process(Queue<string> paths)
         {
+            if (captureStats)
+            {
+                taskInfo.AppendLine($"Starting. Parallel Counter: {parallelCount}");
+            }
+
             while(paths.Count > 0)
             {
-                ProcessNPaths(paths, 3);
+                ProcessNPaths(paths, parallelCount);
             }
+
             myJobIsDone(musicList);
+
+            if (captureStats)
+            {
+                using (StreamWriter sw = new StreamWriter("tasklog.txt", false, Encoding.UTF8))
+                {
+                    sw.Write(taskInfo.ToString());
+                    sw.Flush();
+                    sw.Close();
+                }
+                
+            }
+
             return true;
         }
 
@@ -52,6 +79,13 @@ namespace MP3Manager.Files
                 if (paths.Count > 0)
                 {
                     var val = paths.Dequeue();
+
+                    if (captureStats)
+                    {
+                        taskInfo.AppendLine($"Start: {DateTime.Now} - ProcessNTasks {i}. Path: {Path.GetFileName(val)}");
+                    }
+
+                    // This kicks off task or builds the batch (?)
                     jobList.Add(
                         Task.Run(() => { SetMP3Properties(val); })
                     );
@@ -60,12 +94,19 @@ namespace MP3Manager.Files
 
             Task.WaitAll(jobList.ToArray());
             jobList.Clear();
+
+            if (captureStats)
+            {
+                taskInfo.AppendLine();
+            }
         }
 
         private void SetMP3Properties(string filePath)
         {
             try
             {
+                System.Diagnostics.Debug.WriteLine($"{++i} {filePath}");
+                
                 var fileNameOnly = Path.GetFileName(filePath);
 
                 var mp3 = TagLib.File.Create(filePath);
@@ -120,8 +161,15 @@ namespace MP3Manager.Files
             }
             catch(Exception e)
             {
-                Exceptions.Add(e.Message);
-            }          
+                Exceptions.Add($"{filePath} - {e.Message}");
+            }
+            finally
+            {
+                if (captureStats)
+                {
+                    taskInfo.AppendLine($"End: {DateTime.Now} - SetMP3Properties. Path: {Path.GetFileName(filePath)} ");
+                }
+            }
         }   
 
         private void AddFile(TagLib.File mp3, string filePath, string fileNameOnly, bool addTitle = false)
@@ -168,7 +216,7 @@ namespace MP3Manager.Files
             }
         }
 
-        private Boolean FileHasPath(File file, string filePath)
+        private bool FileHasPath(File file, string filePath)
         {
             var retn = false;
 

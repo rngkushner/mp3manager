@@ -1,19 +1,29 @@
 ﻿using MP3Manager.Files;
 using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace MP3Manager
 {
     public partial class FormUpdate : Form
     {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Title { get; set; }
-        public string Artist { get; set; }
-        public string Album { get; set; }
-        public string Genre { get; set; }
-        public Int32 Track { get; set; }
-        public bool IgnoreBlanks { get; set; }
 
-        private string FileKey;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string Artist { get; set; }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string Album { get; set; }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string Genre { get; set; }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public int Track { get; set; }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool IgnoreBlanks { get; set; }
 
         public FormUpdate()
         {
@@ -21,7 +31,7 @@ namespace MP3Manager
             buttonGetSpotify.Visible = false;
         }
 
-        public FormUpdate(string Title, string Artist, string Album, string Genre, string FileKey) : this()
+        public FormUpdate(string Title, string Artist, string Album, string Genre) : this()
         {
             buttonGetSpotify.Visible = true;
 
@@ -29,7 +39,6 @@ namespace MP3Manager
             this.Artist = Artist;
             this.Album = Album;
             this.Genre = Genre;
-            this.FileKey = FileKey;
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
@@ -58,18 +67,6 @@ namespace MP3Manager
                 comboBoxGenre.Text = Genre;
                 textBoxTrackNumber.Value = Track;
             }
-        }
-
-        private async void buttonGetSpotify_ClickAsync(object sender, EventArgs e)
-        {
-            var spotify = new JSONClient.JSONClient();
-
-            string result = await spotify.Search(textBoxArtist.Text);
-
-            FileUtils.SaveSpotifyMeta(textBoxArtist.Text, result);
-
-            MessageBox.Show("Done!");
-
         }
     }
 }

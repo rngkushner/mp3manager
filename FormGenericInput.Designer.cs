@@ -37,6 +37,7 @@
             // 
             // textBoxInput
             // 
+            this.textBoxInput.Enabled = false;
             this.textBoxInput.Location = new System.Drawing.Point(30, 72);
             this.textBoxInput.MaxLength = 25;
             this.textBoxInput.Name = "textBoxInput";
@@ -75,6 +76,8 @@
             // checkBoxBooleanOption
             // 
             this.checkBoxBooleanOption.AutoSize = true;
+            this.checkBoxBooleanOption.Checked = true;
+            this.checkBoxBooleanOption.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxBooleanOption.Location = new System.Drawing.Point(30, 118);
             this.checkBoxBooleanOption.Name = "checkBoxBooleanOption";
             this.checkBoxBooleanOption.Size = new System.Drawing.Size(18, 17);
