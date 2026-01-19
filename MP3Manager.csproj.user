@@ -3,6 +3,10 @@
   <PropertyGroup>
     <_LastSelectedProfileId>C:\Users\rngku\source\repos\MP3Manager\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
     <ShowAllFiles>true</ShowAllFiles>
+    <ActiveDebugProfile>MP3Manager</ActiveDebugProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <ItemGroup>
     <Compile Update="FormAbout.cs">
@@ -26,5 +30,10 @@
     <Compile Update="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="FormAbout.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

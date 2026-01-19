@@ -306,16 +306,6 @@
             this.checkBoxIgnoreBlank.Text = "Ignore if Blank";
             this.checkBoxIgnoreBlank.UseVisualStyleBackColor = true;
             // 
-            // buttonGetSpotify
-            // 
-            this.buttonGetSpotify.Location = new System.Drawing.Point(134, 12);
-            this.buttonGetSpotify.Name = "buttonGetSpotify";
-            this.buttonGetSpotify.Size = new System.Drawing.Size(226, 29);
-            this.buttonGetSpotify.TabIndex = 8;
-            this.buttonGetSpotify.Text = "Get Spotify Data";
-            this.buttonGetSpotify.UseVisualStyleBackColor = true;
-            this.buttonGetSpotify.Click += new System.EventHandler(this.buttonGetSpotify_ClickAsync);
-            // 
             // label5
             // 
             this.label5.AutoSize = true;

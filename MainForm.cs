@@ -3,12 +3,12 @@ using MP3Manager.WebServer;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Windows.Forms;
 using System.Text.Json;
+using System.Windows.Forms;
+using File = MP3Manager.Files.File;
 
 namespace MP3Manager
-{    
-
+{
     public partial class MainForm : Form
     {
         private readonly Crawler crawler = new Crawler();       
@@ -16,11 +16,29 @@ namespace MP3Manager
         private delegate void SetGridDataDelegate(Dictionary<string, File> completeList);
         private delegate void WebServerErrorDelegate();
 
+        private bool captureStats;
+        private int parallelTasks = 3;
+
         private Dictionary<string, File> completeList = null;        
 
         public MainForm()
         {
             InitializeComponent();
+
+            string [] args = Environment.GetCommandLineArgs();
+
+            if (args != null)
+            {
+                if (args.Length > 1)
+                {
+                    bool.TryParse(args[1], out captureStats);
+
+                    if(args.Length > 2)
+                    {
+                        int.TryParse(args[2], out parallelTasks);
+                    }
+                }
+            }
         }
 
         private void InitGrid()
@@ -80,8 +98,7 @@ namespace MP3Manager
                         rows[0].Cells["Title"].Value?.ToString(),
                         rows[0].Cells["Artist"].Value?.ToString(),
                         rows[0].Cells["Album"].Value?.ToString(),
-                        rows[0].Cells["Genre"].Value?.ToString(),
-                        FileUtils.ConvertToBase64(rows[0].Cells[0].Value.ToString())
+                        rows[0].Cells["Genre"].Value?.ToString()
                     );
                 }
                 else
@@ -100,22 +117,22 @@ namespace MP3Manager
                     {
                         bool isDirty = false;
 
-                        if ((modal.Title == "" && !modal.IgnoreBlanks) || !String.IsNullOrEmpty(modal.Title))
+                        if ((modal.Title == "" && !modal.IgnoreBlanks) || !string.IsNullOrEmpty(modal.Title))
                         {
                             row.Cells["Title"].Value = modal.Title;
                             isDirty = true;
                         }
-                        if ((modal.Artist == "" && !modal.IgnoreBlanks) || !String.IsNullOrEmpty(modal.Artist))
+                        if ((modal.Artist == "" && !modal.IgnoreBlanks) || !string.IsNullOrEmpty(modal.Artist))
                         {
                             row.Cells["Artist"].Value = modal.Artist;
                             isDirty = true;
                         }
-                        if ((modal.Album == "" && !modal.IgnoreBlanks) || !String.IsNullOrEmpty(modal.Album))
+                        if ((modal.Album == "" && !modal.IgnoreBlanks) || !string.IsNullOrEmpty(modal.Album))
                         {
                             row.Cells["Album"].Value = modal.Album;
                             isDirty = true;
                         }
-                        if ((modal.Genre == "" && !modal.IgnoreBlanks) || !String.IsNullOrEmpty(modal.Genre))
+                        if ((modal.Genre == "" && !modal.IgnoreBlanks) || !string.IsNullOrEmpty(modal.Genre))
                         {
                             row.Cells["Genre"].Value = modal.Genre;
                             isDirty = true;
@@ -183,10 +200,10 @@ namespace MP3Manager
 
             mp3File.Tag.Album = fileData.Album;
 
-            mp3File.Tag.Performers = new[] { fileData.Artist ?? String.Empty };
+            mp3File.Tag.Performers = new[] { fileData.Artist ?? string.Empty };
             mp3File.Tag.AlbumArtists = mp3File.Tag.Performers;
             mp3File.Tag.Title = fileData.Title;
-            mp3File.Tag.Genres = new[] { fileData.Genre ?? String.Empty };
+            mp3File.Tag.Genres = new[] { fileData.Genre ?? string.Empty };
 
             mp3File.Save();
         }
@@ -211,7 +228,7 @@ namespace MP3Manager
 
         private void ErrorLogger_ErrorHappenedEvent(object sender, EventArgs e)
         {
-            WebServerErrorDelegate d= new WebServerErrorDelegate(WebServerError);
+            WebServerErrorDelegate d = new WebServerErrorDelegate(WebServerError);
             buttonErrors.Invoke(d);
             
         }
@@ -281,7 +298,7 @@ namespace MP3Manager
 
             try
             {
-                if (startingPath != String.Empty)
+                if (startingPath != string.Empty)
                 {
                     crawler.Crawl(startingPath);
                 }
@@ -291,9 +308,9 @@ namespace MP3Manager
                 {
                     textBoxMessages.Text = "Tagging all the files. Hang on.";
 
-                    var resultFiles = new Dictionary<string, File>();
+                    var resultFiles = new Dictionary<string, Files.File>();
 
-                    tagger = new Tagger(resultFiles);
+                    tagger = new Tagger(resultFiles, captureStats, parallelTasks);
                     tagger.RunTagJob(crawler.GetFiles(), (list) =>
                     {
                         SetGridDataDelegate d = new SetGridDataDelegate(SetGridData);
@@ -320,8 +337,12 @@ namespace MP3Manager
             {
                 //if default, ignore provide name
                 string fileName = dlg.BooleanResult ? "default_" : dlg.ReturnValue;
+                string musicFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic).Replace(@"\", @"\\") + @"\\";
+ 
+                var fileContent = JsonSerializer.Serialize(completeList);
+                fileContent = fileContent.Replace(musicFolderPath, string.Empty);
 
-                FileUtils.SaveCrawl(fileName, completeList);
+                FileUtils.SaveCrawl(fileName, fileContent);
             }
 
             dlg.Close();

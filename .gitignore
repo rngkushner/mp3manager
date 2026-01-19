@@ -1,2 +1,4 @@
 /bin/
-/spotifyauthorization.txt
+.vs/
+.git/
+obj/

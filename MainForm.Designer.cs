@@ -47,7 +47,7 @@
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.checkBoxRunWeb = new System.Windows.Forms.CheckBox();
-            this.buttonErrors = new System.Windows.Forms.Button();            
+            this.buttonErrors = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.songGrid)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip.SuspendLayout();
@@ -193,7 +193,7 @@
             // 
             this.checkBoxRunWeb.AutoSize = true;
             this.checkBoxRunWeb.Enabled = false;
-            this.checkBoxRunWeb.Location = new System.Drawing.Point(411, 39);
+            this.checkBoxRunWeb.Location = new System.Drawing.Point(404, 44);
             this.checkBoxRunWeb.Name = "checkBoxRunWeb";
             this.checkBoxRunWeb.Size = new System.Drawing.Size(153, 24);
             this.checkBoxRunWeb.TabIndex = 2;
@@ -203,7 +203,7 @@
             // 
             // buttonErrors
             // 
-            this.buttonErrors.Location = new System.Drawing.Point(575, 36);
+            this.buttonErrors.Location = new System.Drawing.Point(575, 41);
             this.buttonErrors.Name = "buttonErrors";
             this.buttonErrors.Size = new System.Drawing.Size(213, 29);
             this.buttonErrors.TabIndex = 7;

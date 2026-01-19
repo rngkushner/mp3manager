@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "MP3Manager": {
+      "commandName": "Project"
+    },
+    "MP3Manager Command Line": {
+      "commandName": "Project",
+      "commandLineArgs": "true 3"
+    }
+  }
+}

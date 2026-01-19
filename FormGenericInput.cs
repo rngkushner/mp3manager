@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace MP3Manager
 {
@@ -12,7 +8,11 @@ namespace MP3Manager
     {
         private string instructions;
         private string booleanOption;
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ReturnValue { get; set; }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool BooleanResult { get; set; }
         public FormGenericInput(string caption, string instructions, string booleanOption = "") : this()
         {
@@ -38,6 +38,7 @@ namespace MP3Manager
             {
                 checkBoxBooleanOption.Visible = true;
                 checkBoxBooleanOption.Text = booleanOption;
+                BooleanResult = checkBoxBooleanOption.Checked;
             }
         }
 
@@ -57,7 +58,7 @@ namespace MP3Manager
         private void FormGenericInput_FormClosing(object sender, FormClosingEventArgs e)
         {
             if(DialogResult == DialogResult.OK && 
-                textBoxInput.Text == String.Empty && 
+                textBoxInput.Text == string.Empty && 
                 checkBoxBooleanOption.Checked == false)
             {
                 MessageBox.Show("Please either name this library, check default or choose cancel.");
